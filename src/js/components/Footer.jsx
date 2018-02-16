@@ -7,7 +7,7 @@ export default class AppFooter extends React.Component {
 
     return (
       <Footer style={{ textAlign: 'center' }}>
-        Ghost ©2018
+        Ghost © 2018
       </Footer>
     );
   }

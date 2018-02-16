@@ -4,7 +4,7 @@ export function loginUser() {
     payload: {
       username: 'will',
       name: "Will",
-      accountType: 'normal user',
+      usertype: 'normal user',
     }
   }
 }
