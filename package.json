@@ -1,6 +1,6 @@
 {
-  "name": "react-tutorials",
-  "version": "0.0.0",
+  "name": "mmdb",
+  "version": "1.0.0",
   "description": "",
   "main": "webpack.config.js",
   "dependencies": {

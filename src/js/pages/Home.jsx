@@ -1,29 +1,40 @@
-import { Button } from 'antd';
-import { connect } from 'react-redux';
+import { Row, Col, Card } from 'antd';
 import React from 'react';
 
-import { loginUser } from '../actions/userAction';
+import MyProgressBox from '../components/Home/MyProgressBox';
 
-@connect((store) => {
-  return {
-    user: store.user.user,
-  };
-})
-export default class About extends React.Component {
-  loginUser() {
-    this.props.dispatch(loginUser());
+export default class Home extends React.Component {
+  formatDigit(digit) {
+    return digit > 9 ? "" + digit: "0" + digit;
   }
 
   render() {
-    const { user } = this.props;
+    const myProgress = {
+      planning: this.formatDigit(19),
+      watching: this.formatDigit(2),
+      completed: this.formatDigit(45),
+      dropped: this.formatDigit(2),
+    }
 
     return (
       <div>
-        <h1>Home</h1>
-        <Button type="primary" onClick={ this.loginUser.bind(this) }>Login</Button>
-        <h4>Name: { user.name }</h4>
-        <h4>Username: { user.username }</h4>
-        <h4>User type: { user.usertype }</h4>
+        <Row>
+          <h1>MMDB</h1>
+        </Row>
+
+        <Row gutter={16}>
+          <Col span={8}>
+            <MyProgressBox myProgress={ myProgress } />
+          </Col>
+
+          <Col span={8}>
+            <Card title="Card title" bordered={false}>Card content</Card>
+          </Col>
+
+          <Col span={8}>
+            <Card title="Card title" bordered={false}>Card content</Card>
+          </Col>
+        </Row>
       </div>
     );
   }

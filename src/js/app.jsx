@@ -6,6 +6,7 @@ import ReactDOM from 'react-dom';
 
 import About from './pages/About';
 import AppLayout from './components/Layout';
+import Calendar from './pages/Calendar';
 import Home from './pages/Home';
 import store from './store';
 
@@ -15,6 +16,7 @@ const App = () => (
       <AppLayout>
         <Switch>
           <Route exact path='/' component={ Home } />
+          <Route path='/calendar' component={ Calendar } />
           <Route path='/about' component={ About } />
         </Switch>
       </AppLayout>
