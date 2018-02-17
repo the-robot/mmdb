@@ -1,8 +1,8 @@
 My Movie Database
 ===
 
-> npm install
-> npm run dev
-> `http://localhost:8080`
+> npm install  
+> npm run dev  
+> `http://localhost:8080`  
 
-> Movie DB API: https://www.omdbapi.com/?i=tt3896198&apikey=e96c76
+> Movie DB API: https://www.omdbapi.com/?i=tt3896198&apikey=e96c76  
