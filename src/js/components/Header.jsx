@@ -1,4 +1,4 @@
-import { Button, Input, Layout, Popover } from 'antd';
+import { Button, Input, Layout, Popover, message } from 'antd';
 import React from 'react';
 
 export default class AppHeader extends React.Component {
@@ -6,15 +6,13 @@ export default class AppHeader extends React.Component {
     visible: false,
   }
 
-  hide = () => {
-    this.setState({
-      visible: false,
-    });
-  }
-
   handleVisibleChange = (visible) => {
     this.setState({ visible });
   }
+
+  successLogin = () => {
+    message.success('This is a message of success');
+  };
   
   render() {
     const { Header } = Layout;
@@ -46,8 +44,8 @@ export default class AppHeader extends React.Component {
               <Input placeholder='password' style={ inputStyle } type='password' />
 
               <div style={{ marginTop: '15px' }}>
-                <a onClick={this.hide} style={ popOverButton }>Login</a>
-                <a onClick={this.hide} style={ popOverButton }>Register</a>
+                <a onClick={ this.successLogin } style={ popOverButton }>Login</a>
+                <a onClick={ this.successLogin } style={ popOverButton }>Register</a>
               </div>
             </div>
           }
@@ -56,6 +54,7 @@ export default class AppHeader extends React.Component {
           trigger='click'
           visible={ this.state.visible }
           onVisibleChange={ this.handleVisibleChange }
+          placement="topRight"
         >
           <Button type="primary" icon="login">LOGIN</Button>
         </Popover>
