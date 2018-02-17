@@ -18,7 +18,7 @@ export default class Home extends React.Component {
 
     return (
       <div>
-        <Row>
+        <Row gutter={16}>
           <h1>MMDB</h1>
         </Row>
 
