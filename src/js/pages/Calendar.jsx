@@ -7,7 +7,7 @@ export default class Calendar extends React.Component {
   render() {
     const Search = Input.Search;
 
-    const mockMovieInfos = [
+    const movies = [
       {
         title: 'Murder on the Orient Express',
         poster: 'https://image.tmdb.org/t/p/w342/iBlfxlw8qwtUS0R8YjIU7JtM6LM.jpg',
@@ -38,7 +38,7 @@ export default class Calendar extends React.Component {
         summary: 'Fueled by his restored faith in humanity and inspired by Superman\'s selfless act, Bruce Wayne and Diana Prince assemble a team of metahumans consisting of Barry Allen, Arthur Curry, and Victor Stone to face the catastrophic threat of Steppenwolf and the Parademons who are on the hunt for three Mother Boxes on Earth.',
         rating: '5.8 / 10',
       },
-    ];
+    ].map(movieInfo => <MovieCard movieInfo={ movieInfo }/>);
 
     return (
       <div>
@@ -65,11 +65,7 @@ export default class Calendar extends React.Component {
           </Row>
 
           <Row gutter={16} style={{ textAlign: 'center' }} type="flex" justify="space-around">
-            <MovieCard movieInfo={ mockMovieInfos[0] }/>
-            <MovieCard movieInfo={ mockMovieInfos[1] }/>
-            <MovieCard movieInfo={ mockMovieInfos[2] }/>
-            <MovieCard movieInfo={ mockMovieInfos[3] }/>
-            <MovieCard movieInfo={ mockMovieInfos[4] }/>
+            { movies }
           </Row>
         </Row>
       </div>
