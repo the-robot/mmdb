@@ -3,25 +3,32 @@ import { connect } from 'react-redux';
 import React from 'react';
 
 import { fetchMovies } from '../actions/calendarAction';
-import MovieCard from '../components/Calendar/MovieCard';
+import MoviesView from '../components/Calendar/MoviesView';
 
 @connect((store) => {
   return {
-    movies: store.movies.movies,
+    movies: store.calendar.movies,
+    year: store.calendar.year,
+    skip: store.calendar.skip,
   };
 })
 export default class Calendar extends React.Component {
   componentWillMount() {
-    this.props.dispatch(fetchMovies(2016));
+    this.getMovieData();
+  }
+
+  getMovieData() {
+    const year = this.props.year;
+    const stop = this.props.skip;
+
+    for(let i=0; i<stop; i++) {
+      this.props.dispatch(fetchMovies(year - i, 1, 4));
+    }
   }
 
   render() {
     const Search = Input.Search;
-
-    const { movies } = this.props;
-    const movieCards = movies.results.map(
-      (movie, i) => <MovieCard key={ i } movieInfo={ movie } />
-    );
+    const movies = this.props.movies;
 
     return (
       <div>
@@ -42,15 +49,7 @@ export default class Calendar extends React.Component {
           </Col>
         </Row>
 
-        <Row gutter={16} >
-          <Row>
-            <Col><h3>2017</h3></Col>
-          </Row>
-
-          <Row gutter={16} style={{ textAlign: 'center' }} type="flex" justify="space-around">
-            { movieCards }
-          </Row>
-        </Row>
+        <MoviesView movies={ movies } />
       </div>
     );
   }

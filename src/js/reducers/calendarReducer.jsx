@@ -1,7 +1,7 @@
 export default function reducer(state={
-  movies: {
-    results: [],
-  },
+  movies: [],
+  year: new Date().getFullYear(),
+  skip: 6, // year to be skip when load more
   fetching: false,
   fetched: false,
   error: null,
@@ -19,7 +19,7 @@ export default function reducer(state={
         ...state,
         fetching: false,
         fetched: true,
-        movies: action.payload,
+        movies: [...state.movies, action.payload],
       }
     }
   }
