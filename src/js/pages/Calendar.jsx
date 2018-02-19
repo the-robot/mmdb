@@ -1,4 +1,4 @@
-import { Row, Col, Input, Card } from 'antd';
+import { Row, Col, Input } from 'antd';
 import { connect } from 'react-redux';
 import React from 'react';
 
@@ -21,7 +21,7 @@ export default class Calendar extends React.Component {
     const year = this.props.year;
     const stop = this.props.skip;
 
-    for(let i=0; i<stop; i++) {
+    for (let i=0; i<stop; i++) {
       this.props.dispatch(fetchMovies(year - i, 1, 4));
     }
   }
