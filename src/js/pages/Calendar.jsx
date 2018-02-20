@@ -19,8 +19,20 @@ export default class Calendar extends React.Component {
 
   getMovieData(year=this.props.year, stop=this.props.skip) {
     for (let i=0; i<stop; i++) {
-      this.props.dispatch(fetchMovies(year - i, 1, 4));
+      let tofetch = year - i;
+
+      // prevent sending request for already fetched data
+      if (!this.alreadyFetched(tofetch.toString()))
+        this.props.dispatch(fetchMovies(tofetch, 1, 4));
     }
+  }
+
+  alreadyFetched(year) {
+    for (let i=0; i<this.props.movies.length; i++) {
+      if (Object.keys(this.props.movies[i])[0] === year)
+        return true;
+    }
+    return false;
   }
 
   loadMoreMovies() {
@@ -31,9 +43,7 @@ export default class Calendar extends React.Component {
     try {
       lastYear = Object.keys(this.props.movies[lastIndex])[0];
       lastYear = parseInt(lastYear);
-
     } catch (err) {
-      console.log(err);
       return;
     }
 
