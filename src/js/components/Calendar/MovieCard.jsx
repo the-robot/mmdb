@@ -6,28 +6,35 @@ export default class MovieCard extends React.Component {
     if (rating === 0) {
       return {
         value: 'none',
-        color: '#f50',
+        color: '#000000',  // black
       }
     }
 
     if (rating < 3) {
       return {
         value: rating + '/10',
-        color: '#f70404',
+        color: '#ff5400',  // orange
       }
     }
 
-    else if (rating > 3 && rating < 6) {
+    else if (rating >= 3 && rating < 6) {
       return {
         value: rating + '/10',
-        color: '#26f256',
+        color: '#0ecc34',  // green
+      }
+    }
+
+    else if (rating >= 6 && rating < 8) {
+      return {
+        value: rating + '/10',
+        color: '#1f50f2',  // blue
       }
     }
 
     else {
       return {
         value: rating + '/10',
-        color: '#108ee9',
+        color: '#e20f0f',  // red
       }
     }
   }
