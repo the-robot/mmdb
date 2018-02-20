@@ -11,21 +11,39 @@ export default function reducer(state={
     case "FETCH_MOVIES": {
       return {...state, fetching: true}
     }
+
     case "FETCH_MOVIES_REJECTED": {
       return {...state, fetching: false, error: action.payload}
     }
+
     case "FETCH_MOVIES_FULFILLED": {
-      const a = [...state.movies, action.payload];
-      console.log(a);
+      var movies;
+
+      // Prevent duplicated movie years
+      if (!isExist(state.movies, Object.keys(action.payload)[0])) {
+        movies = [...state.movies, action.payload]
+      } else {
+        movies = [...state.movies];
+      }
 
       return {
         ...state,
         fetching: false,
         fetched: true,
-        movies: [...state.movies, action.payload],
+        movies: movies,
       }
     }
   }
 
   return state
+}
+
+function isExist(array, item) {
+  for (let i=0; i<array.length; i++) {
+    if (Object.keys(array[i])[0] === item) {
+      return true;
+    }
+  }
+
+  return false;
 }
