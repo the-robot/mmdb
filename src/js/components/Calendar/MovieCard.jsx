@@ -1,4 +1,4 @@
-import { Col, Card, Tag } from 'antd';
+import { Row, Col, Card, Tag } from 'antd';
 import React from 'react';
 
 export default class MovieCard extends React.Component {
@@ -40,7 +40,7 @@ export default class MovieCard extends React.Component {
       <Col span={6}>
         <Card title={ movieInfo.title } extra={<a href="#">More</a>} style={{ width: 260, textAlign: 'justify' }}
         cover={<img alt="poster" src={ movieInfo.poster } />}>
-          <p>{ movieInfo.summary }</p>
+          <p style={{overflow: 'hidden', height: '210px' }}>{ movieInfo.summary }</p>
           <Tag color={ rating.color }>Rating: { rating.value }</Tag>
         </Card>   
       </Col>

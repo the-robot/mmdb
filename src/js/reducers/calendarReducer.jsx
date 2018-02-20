@@ -15,6 +15,9 @@ export default function reducer(state={
       return {...state, fetching: false, error: action.payload}
     }
     case "FETCH_MOVIES_FULFILLED": {
+      const a = [...state.movies, action.payload];
+      console.log(a);
+
       return {
         ...state,
         fetching: false,

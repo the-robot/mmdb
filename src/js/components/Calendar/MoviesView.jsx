@@ -1,14 +1,16 @@
-import { Row, Col } from 'antd';
+import { Row, Col, Button, Icon } from 'antd';
 import React from 'react';
 
 import MovieCard from './MovieCard';
 
-export default class CalenderMoviesView extends React.Component {
+export default class MoviesView extends React.Component {
   render() {
     const movies = this.props.movies;
+    // show footer or not in each row
+    const showFooter = this.props.showFooter;
 
     const moviesRow = movies.map(
-      (movie, i) => <MoviesRow key={ i } movies={ movie } />
+      (movie, i) => <MoviesRow key={ i } movies={ movie } showFooter={ showFooter } />
     );
 
     return(
@@ -23,6 +25,15 @@ export default class CalenderMoviesView extends React.Component {
 class MoviesRow extends React.Component {
   render() {
     const movies = this.props.movies;
+    const showFooter = this.props.showFooter;
+
+    // Header Button CSS
+    const headerButton = {
+      fontSize: 28,
+      border: 'None',
+      marginBottom: 8,
+    }
+
     var year = null;
     var movieCards = '';
     
@@ -41,15 +52,15 @@ class MoviesRow extends React.Component {
     }
 
     return(
-      <Row gutter={16} >
-        <Row>
-          <Col><h3> { year } </h3></Col>
+      <div style={{ marginBottom: 32 }} >
+        <Row gutter={16} type="flex" justify="start">
+          <Col><Button size='large' style={ headerButton } > { year } </Button></Col>
         </Row>
 
-        <Row gutter={16} style={{ textAlign: 'center' }} type="flex" justify="space-around">
+        <Row gutter={24} type="flex" justify="center">
           { movieCards }
         </Row>
-      </Row>
+      </div>
     );
   }
 }

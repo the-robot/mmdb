@@ -1,4 +1,4 @@
-import { Row, Col, Input } from 'antd';
+import { Row, Col, Input, Button, Icon } from 'antd';
 import { connect } from 'react-redux';
 import React from 'react';
 
@@ -17,13 +17,27 @@ export default class Calendar extends React.Component {
     this.getMovieData();
   }
 
-  getMovieData() {
-    const year = this.props.year;
-    const stop = this.props.skip;
-
+  getMovieData(year=this.props.year, stop=this.props.skip) {
     for (let i=0; i<stop; i++) {
       this.props.dispatch(fetchMovies(year - i, 1, 4));
     }
+  }
+
+  loadMoreMovies() {
+    // get last fetched movie year
+    var lastIndex = this.props.movies.length - 1;
+    var lastYear;
+
+    try {
+      lastYear = Object.keys(this.props.movies[lastIndex])[0];
+      lastYear = parseInt(lastYear);
+
+    } catch (err) {
+      console.log(err);
+      return;
+    }
+
+    this.getMovieData(lastYear-1);
   }
 
   render() {
@@ -32,13 +46,13 @@ export default class Calendar extends React.Component {
 
     return (
       <div>
-        <Row gutter={16}>
+        <Row type="flex" justify="start">
           <Col>
             <h1>Movie Calendar</h1>
           </Col>
         </Row>
 
-        <Row gutter={16} style={{ textAlign: 'right' }}>
+        <Row type="flex" justify="end" >
           <Col>
             <Search
               placeholder="search movie"
@@ -50,6 +64,12 @@ export default class Calendar extends React.Component {
         </Row>
 
         <MoviesView movies={ movies } />
+
+        <Row type="flex" justify="center">
+          <Col>
+            <Button type="primary" onClick={this.loadMoreMovies.bind(this)} >Load More</Button>
+          </Col>
+        </Row>
       </div>
     );
   }
