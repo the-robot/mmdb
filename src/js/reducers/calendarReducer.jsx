@@ -40,10 +40,8 @@ export default function reducer(state={
 
 function isExist(array, item) {
   for (let i=0; i<array.length; i++) {
-    if (Object.keys(array[i])[0] === item) {
+    if (Object.keys(array[i])[0] === item)
       return true;
-    }
   }
-
   return false;
 }
