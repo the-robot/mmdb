@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import React from 'react';
 
 import { fetchMovies } from '../actions/calendarAction';
-import MoviesView from '../components/Calendar/MoviesView';
+import MoviesView from '../components/Movie/MoviesView';
 
 @connect((store) => {
   return {

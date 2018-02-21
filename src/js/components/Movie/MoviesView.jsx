@@ -6,11 +6,9 @@ import MovieCard from './MovieCard';
 export default class MoviesView extends React.Component {
   render() {
     const movies = this.props.movies;
-    // show footer or not in each row
-    const showFooter = this.props.showFooter;
 
     const moviesRow = movies.map(
-      (movie, i) => <MoviesRow key={ i } movies={ movie } showFooter={ showFooter } />
+      (movie, i) => <MoviesRow key={ i } movies={ movie } />
     );
 
     return(
@@ -25,7 +23,6 @@ export default class MoviesView extends React.Component {
 class MoviesRow extends React.Component {
   render() {
     const movies = this.props.movies;
-    const showFooter = this.props.showFooter;
 
     // Header Button CSS
     const headerButton = {
