@@ -21,10 +21,22 @@ export default function reducer(state={
         ...state,
         fetching: false,
         fetched: true,
-        movies: [...state.movies, action.payload],
+        movies: sortMovies([...state.movies, action.payload]),
       }
     }
   }
 
-  return state
+  return state;
+}
+
+function sortMovies(movies) {
+  // sort movies from current to the past
+  return movies.sort((x, y) => {
+    let current = parseInt(Object.keys(x)[0]); 
+    let next = parseInt(Object.keys(y)[0]);
+    
+    return next > current ? 1
+         : next < current ? -1
+         : 0;
+  });
 }
