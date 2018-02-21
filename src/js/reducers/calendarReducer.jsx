@@ -1,7 +1,7 @@
 export default function reducer(state={
   movies: [],
   year: new Date().getFullYear(),
-  skip: 6, // year to be skip when load more
+  skip: 10, // year to be skip when load more
   fetching: false,
   fetched: false,
   error: null,
