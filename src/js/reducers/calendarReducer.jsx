@@ -8,15 +8,15 @@ export default function reducer(state={
 }, action) {
 
   switch (action.type) {
-    case "FETCH_MOVIES": {
+    case "FETCH_CALENDAR": {
       return {...state, fetching: true}
     }
 
-    case "FETCH_MOVIES_REJECTED": {
+    case "FETCH_CALENDAR_REJECTED": {
       return {...state, fetching: false, error: action.payload}
     }
 
-    case "FETCH_MOVIES_FULFILLED": {
+    case "FETCH_CALENDAR_FULFILLED": {
       return {
         ...state,
         fetching: false,
