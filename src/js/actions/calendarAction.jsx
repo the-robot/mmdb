@@ -4,7 +4,7 @@ import getTmdbAPIKey from '../api';
 
 export function fetchMovies(year, page, limit=20) {
   return function(dispatch) {
-    dispatch({type: "FETCH_MOVIES"});
+    dispatch({type: "FETCH_CALENDAR"});
 
     const domain = 'https://api.themoviedb.org/3/discover/movie?primary_release_year=';
     const url = domain + year + '&api_key=' + getTmdbAPIKey() + '&page=' + page;
