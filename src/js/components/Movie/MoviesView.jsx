@@ -1,4 +1,5 @@
 import { Row, Col, Button, Icon } from 'antd';
+import { NavLink } from 'react-router-dom';
 import React from 'react';
 
 import MovieCard from './MovieCard';
@@ -32,6 +33,7 @@ class MoviesRow extends React.Component {
     }
 
     var year = null;
+    var moviesLink = null;
     var movieCards = '';
     
     // make movie card on each movie objects from json
@@ -43,6 +45,8 @@ class MoviesRow extends React.Component {
     }
 
     if (success) {
+      moviesLink = '/calendar/' + year;
+      
       movieCards = movies[year].map(
         (movie, i) => <MovieCard key={ i } movieInfo={ movie } />
       );
@@ -51,7 +55,11 @@ class MoviesRow extends React.Component {
     return(
       <div style={{ marginBottom: 32 }} >
         <Row gutter={16} type="flex" justify="start">
-          <Col><Button size='large' style={ headerButton } > { year } </Button></Col>
+          <Col>
+            <NavLink to={ moviesLink } >
+              <Button size='large' style={ headerButton }> { year } </Button>
+            </NavLink>
+          </Col>
         </Row>
 
         <Row gutter={24} type="flex" justify="center">
