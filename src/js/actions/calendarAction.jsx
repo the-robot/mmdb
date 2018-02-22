@@ -1,6 +1,7 @@
 import axios from "axios";
 
 import getTmdbAPIKey from '../api';
+import validate from './dataValidator';
 
 export function fetchCalendar(year, page, limit=20) {
   return (dispatch) => {
@@ -46,6 +47,10 @@ function cleanData(data, year, limit) {
   results[year] = [];
 
   for (let i=0; i<limit; i++) {
+    // filter and remove invalid data
+    if (!validate(data[i]))
+      continue;
+
     results[year].push({
       id: data[i].id,
       title: data[i].title,

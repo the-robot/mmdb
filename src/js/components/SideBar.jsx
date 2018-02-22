@@ -32,24 +32,22 @@ export default class SideBar extends React.Component {
             </NavLink>
           </Menu.Item>
 
-          <Menu.Item key="2">
-            <NavLink to='/calendar'>
-              <Icon type="calendar" />
-              <span>Calendar</span>
-            </NavLink>
-          </Menu.Item>
+          <SubMenu
+            key="sub1"
+            title={<span><Icon type="calendar" /><span>Calendar</span></span>}>
+            <Menu.Item key="2"><NavLink to='/calendar'>Movies</NavLink></Menu.Item>
+            <Menu.Item key="3">TV Shows</Menu.Item>
+          </SubMenu>
 
-          <Menu.Item key="3">
+          <Menu.Item key="4">
             <Icon type="heart" />
             <span>Library</span>
           </Menu.Item>
 
-          <SubMenu
-            key="sub2"
-            title={<span><Icon type="question-circle" /><span>FAQ</span></span>}>
-            <Menu.Item key="4">Menu 1</Menu.Item>
-            <Menu.Item key="5">Menu 2</Menu.Item>
-          </SubMenu>
+          <Menu.Item key="5">
+            <Icon type="question-circle" />
+            <span>FAQ</span>
+          </Menu.Item>
 
           <Menu.Item key="6">
             <Icon type="mail" />
