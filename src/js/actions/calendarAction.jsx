@@ -3,7 +3,7 @@ import axios from "axios";
 import getTmdbAPIKey from '../api';
 
 export function fetchCalendar(year, page, limit=20) {
-  return function(dispatch) {
+  return (dispatch) => {
     dispatch({type: "FETCH_CALENDAR"});
 
     const domain = 'https://api.themoviedb.org/3/discover/movie?primary_release_year=';
@@ -14,10 +14,10 @@ export function fetchCalendar(year, page, limit=20) {
         dispatch({
           type: "FETCH_CALENDAR_FULFILLED",
           payload: cleanData(response.data.results, year.toString(), limit)
-        })
+        });
       })
       .catch((err) => {
-        dispatch({type: "FETCH_CALENDAR_REJECTED", payload: err})
+        dispatch({type: "FETCH_CALENDAR_REJECTED", payload: err});
       })
   }
 }
