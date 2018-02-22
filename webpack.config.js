@@ -27,6 +27,9 @@ const config = {
     new webpack.optimize.DedupePlugin(),
     new webpack.optimize.OccurenceOrderPlugin(),
     new webpack.optimize.UglifyJsPlugin({ mangle: false, sourcemap: false }),
+    new JavaScriptObfuscator ({
+      rotateUnicodeArray: true
+    }, ['excluded_bundle_name.js'])
   ],
   resolve: {
     extensions: ['*', '.js', '.jsx'],
