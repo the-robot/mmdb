@@ -1,5 +1,5 @@
 import { Layout, Menu, Icon } from 'antd';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import React from 'react';
 
 export default class SideBar extends React.Component {
@@ -26,17 +26,17 @@ export default class SideBar extends React.Component {
 
         <Menu theme="dark" defaultSelectedKeys={[ '1' ]} mode="inline">
           <Menu.Item key="1">
-            <Link to='/'>
+            <NavLink to='/'>
               <Icon type="home" />
               <span>Home</span>
-            </Link>
+            </NavLink>
           </Menu.Item>
 
           <Menu.Item key="2">
-            <Link to='/calendar'>
+            <NavLink to='/calendar'>
               <Icon type="calendar" />
               <span>Calendar</span>
-            </Link>
+            </NavLink>
           </Menu.Item>
 
           <Menu.Item key="3">
@@ -57,10 +57,10 @@ export default class SideBar extends React.Component {
           </Menu.Item>
 
           <Menu.Item key="7">
-            <Link to='/about' className="nav-text">
+            <NavLink to='/about' className="nav-text">
               <Icon type="team" />
               <span>About</span>
-            </Link>
+            </NavLink>
           </Menu.Item>
         </Menu>
 
