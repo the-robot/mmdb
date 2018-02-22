@@ -2,7 +2,7 @@ import { Row, Col, Input, Button, Icon } from 'antd';
 import { connect } from 'react-redux';
 import React from 'react';
 
-import { fetchMovies } from '../actions/calendarAction';
+import { fetchCalendar } from '../actions/calendarAction';
 import MoviesView from '../components/Movie/MoviesView';
 
 @connect((store) => {
@@ -23,7 +23,7 @@ export default class Calendar extends React.Component {
 
       // prevent sending request for already fetched data
       if (!this.alreadyFetched(tofetch.toString()))
-        this.props.dispatch(fetchMovies(tofetch, 1, 4));
+        this.props.dispatch(fetchCalendar(tofetch, 1, 4));
     }
   }
 

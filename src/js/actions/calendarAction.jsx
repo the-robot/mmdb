@@ -2,7 +2,7 @@ import axios from "axios";
 
 import getTmdbAPIKey from '../api';
 
-export function fetchMovies(year, page, limit=20) {
+export function fetchCalendar(year, page, limit=20) {
   return function(dispatch) {
     dispatch({type: "FETCH_CALENDAR"});
 
