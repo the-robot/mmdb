@@ -1,11 +1,13 @@
-export default function reducer(state={
+const initialState = {
   movies: [],
   page: 1,  // page to be fetched in next call
+  tofetch: 4,  // number of pages to be fetched
   fetching: false,
   fetched: false,
   error: null,
-}, action) {
+}
 
+export default function reducer(state=initialState, action) {
   switch (action.type) {
     case "FETCH_MOVIES": {
       return {...state, fetching: true}
@@ -20,7 +22,7 @@ export default function reducer(state={
         ...state,
         fetching: false,
         fetched: true,
-        movies: [...state.movies, action.payload],
+        movies: state.movies.concat(action.payload),
       }
     }
 
@@ -28,8 +30,14 @@ export default function reducer(state={
     case "UPDATE_MOVIES_PAGE": {
       return {
         ...state,
-        page: state.page + action.payload
+        page: state.page + state.tofetch
       }
+    }
+
+    // reset all data
+    case "RESET_MOVIES_DATA": {
+      console.log('RESET CALLED');
+      return initialState;
     }
   }
 

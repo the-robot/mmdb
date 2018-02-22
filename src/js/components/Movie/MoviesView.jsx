@@ -53,7 +53,7 @@ class MoviesRow extends React.Component {
     }
 
     return(
-      <div style={{ marginBottom: 32 }} >
+      <div>
         <Row gutter={16} type="flex" justify="start">
           <Col>
             <NavLink to={ moviesLink } >

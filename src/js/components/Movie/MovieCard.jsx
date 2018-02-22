@@ -44,7 +44,7 @@ export default class MovieCard extends React.Component {
     const rating = this.ratingScale(movieInfo.rating);
 
     return(
-      <Col span={6}>
+      <Col span={6} style={{ marginBottom: '32px' }}>
         <Card title={ movieInfo.title } extra={<a href="#">More</a>} style={{ width: 260, textAlign: 'justify' }}
         cover={<img alt="poster" src={ movieInfo.poster } />}>
           <p style={{overflow: 'hidden', height: '210px' }}>{ movieInfo.summary }</p>
