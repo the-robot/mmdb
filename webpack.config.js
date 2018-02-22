@@ -1,4 +1,5 @@
 var debug = process.env.NODE_ENV !== "production";
+var JavaScriptObfuscator = require('webpack-obfuscator');
 var webpack = require('webpack');
 var path = require('path');
 
