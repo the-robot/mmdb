@@ -1,4 +1,5 @@
 import { connect } from 'react-redux';
+import { Row, Col, Button } from 'antd';
 import React from 'react';
 
 import { fetchMovies, updateMoviePage, resetMoviesData } from '../actions/movieAction';
@@ -41,6 +42,12 @@ export default class Movies extends React.Component {
     return (
       <div>
         <MoviesView movies={ movies } />
+
+        <Row type="flex" justify="center">
+          <Col>
+            <Button type="primary" onClick={this.getMovieData.bind(this)} >Load More</Button>
+          </Col>
+        </Row>
       </div>
     );
   }
