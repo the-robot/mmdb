@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import { Row, Col, Button } from 'antd';
 import React from 'react';
 
-import { fetchMovies, updateMoviePage, resetMoviesData } from '../actions/movieAction';
+import { fetch, reset } from '../actions/movieAction';
 import MoviesView from '../components/Movie/MoviesView';
 
 @connect((store) => {
@@ -14,22 +14,20 @@ import MoviesView from '../components/Movie/MoviesView';
 })
 export default class Movies extends React.Component {
   componentWillMount() {
-    this.getMovieData();
+    this.getMovies();
   }
 
   componentWillUnmount() {
-    this.props.dispatch(resetMoviesData());
+    this.props.dispatch(reset());
   }
 
-  getMovieData(year=this.props.match.params.year) {
+  getMovies(year=this.props.match.params.year) {
     // get the number of page to be fetched
     const page = this.props.page;
     const tofetch = this.props.tofetch;
 
-    for (let i=0; i<tofetch; i++) {
-      this.props.dispatch(fetchMovies(year, page+i));
-      this.props.dispatch(updateMoviePage())
-    }
+    for (let i=0; i<tofetch; i++)
+      this.props.dispatch(fetch(year, page+i));
   }
 
   render() {
@@ -45,7 +43,7 @@ export default class Movies extends React.Component {
 
         <Row type="flex" justify="center">
           <Col>
-            <Button type="primary" onClick={this.getMovieData.bind(this)} >Load More</Button>
+            <Button type="primary" onClick={this.getMovies.bind(this)} >Load More</Button>
           </Col>
         </Row>
       </div>

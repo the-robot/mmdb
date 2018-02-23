@@ -3,7 +3,7 @@ import axios from "axios";
 import getTmdbAPIKey from '../api';
 import validate from './dataValidator';
 
-export const fetchMovies = (year, page) => {
+export const fetch = (year, page) => {
   return (dispatch) => {
     dispatch({type: "FETCH_MOVIES"});
 
@@ -14,9 +14,11 @@ export const fetchMovies = (year, page) => {
       .then((response) => {
         dispatch({
           type: "FETCH_MOVIES_FULFILLED",
-          payload: cleanData(response.data.results)
+          payload: clean(response.data.results)
         });
 
+        // update page if successful
+        dispatch({type: 'UPDATE_MOVIES_PAGE'});
       })
       .catch((err) => {
         dispatch({type: "FETCH_MOVIES_REJECTED", payload: err});
@@ -24,19 +26,13 @@ export const fetchMovies = (year, page) => {
   }
 }
 
-export const updateMoviePage = () => {
-  return (dispatch) => {
-    dispatch({type: 'UPDATE_MOVIES_PAGE'});
-  }
-}
-
-export const resetMoviesData = () => {
+export const reset = () => {
   return (dispatch) => {
     dispatch({type: 'RESET_MOVIES_DATA'});
   }
 }
 
-function cleanData(data) {
+function clean(data) {
   const POSTER_SIZES = [
     "w92",
     "w154",
