@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import React from 'react';
 
-import { fetchMovies, resetMoviesData } from '../actions/movieAction';
+import { fetchMovies, updateMoviePage, resetMoviesData } from '../actions/movieAction';
 import MoviesView from '../components/Movie/MoviesView';
 
 @connect((store) => {
@@ -17,7 +17,7 @@ export default class Movies extends React.Component {
   }
 
   componentWillUnmount() {
-    resetMoviesData();
+    this.props.dispatch(resetMoviesData());
   }
 
   getMovieData(year=this.props.match.params.year) {
@@ -27,6 +27,7 @@ export default class Movies extends React.Component {
 
     for (let i=0; i<tofetch; i++)
       this.props.dispatch(fetchMovies(year, page+i));
+      this.props.dispatch(updateMoviePage());
   }
 
   render() {
@@ -38,7 +39,6 @@ export default class Movies extends React.Component {
 
     return (
       <div>
-        <h3> { movies[0][year + ''].length } </h3>
         <MoviesView movies={ movies } />
       </div>
     );

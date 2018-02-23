@@ -36,7 +36,7 @@ export default function reducer(state=initialState, action) {
 
     // reset all data
     case "RESET_MOVIES_DATA": {
-      console.log('RESET CALLED');
+      console.log('RESET REDUCER');
       return initialState;
     }
   }

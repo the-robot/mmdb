@@ -17,7 +17,6 @@ export const fetchMovies = (year, page) => {
           payload: cleanData(response.data.results)
         });
 
-        dispatch({type: 'UPDATE_MOVIES_PAGE'});
       })
       .catch((err) => {
         dispatch({type: "FETCH_MOVIES_REJECTED", payload: err});
@@ -25,9 +24,14 @@ export const fetchMovies = (year, page) => {
   }
 }
 
+export const updateMoviePage = () => {
+  return (dispatch) => {
+    dispatch({type: 'UPDATE_MOVIES_PAGE'});
+  }
+}
+
 export const resetMoviesData = () => {
   return (dispatch) => {
-    dispatch({type: "FETCH_MOVIES"});
     dispatch({type: 'RESET_MOVIES_DATA'});
   }
 }
