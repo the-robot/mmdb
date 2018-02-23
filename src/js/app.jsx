@@ -5,9 +5,9 @@ import ReactDOM from 'react-dom';
 
 import About from './pages/About';
 import AppLayout from './components/Layout';
-import Calendar from './pages/Calendar';
 import Home from './pages/Home';
 import Movies from './pages/Movies';
+import MovieCalendar from './pages/MovieCalendar';
 import NotFound from './pages/NotFound';
 import store from './store';
 
@@ -17,8 +17,8 @@ const App = () => (
       <AppLayout>
         <Switch>
           <Route exact path='/' component={ Home } />
-          <Route path='/calendar/:year' component={ Movies }/>
-          <Route path='/calendar' component={ Calendar } />
+          <Route path='/calendar/movies/:year' component={ Movies }/>
+          <Route path='/calendar/movies' component={ MovieCalendar } />
           <Route path='/about' component={ About } />
           <Route path="*" component={ NotFound }/>
         </Switch>

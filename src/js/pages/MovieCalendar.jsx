@@ -12,7 +12,7 @@ import MoviesView from '../components/Movie/MoviesView';
     skip: store.calendar.skip,
   };
 })
-export default class Calendar extends React.Component {
+export default class MovieCalendar extends React.Component {
   componentWillMount() {
     this.getMovies();
   }
