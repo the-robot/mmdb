@@ -23,8 +23,6 @@ export default class Movies extends React.Component {
 
   getMovies(year=this.props.match.params.year) {
     // get the number of page to be fetched
-    console.log('YEAR: ', year);
-
     const page = this.props.page;
     const tofetch = this.props.tofetch;
 
