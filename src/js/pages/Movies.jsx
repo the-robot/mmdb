@@ -40,8 +40,6 @@ export default class Movies extends React.Component {
 
     return (
       <div>
-        <h3> page = { this.props.page } </h3>
-        <h3> movies length = { movies[0][year + ''].length } </h3>
         <MoviesView movies={ movies } />
       </div>
     );
