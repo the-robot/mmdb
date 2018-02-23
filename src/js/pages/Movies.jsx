@@ -25,9 +25,10 @@ export default class Movies extends React.Component {
     const page = this.props.page;
     const tofetch = this.props.tofetch;
 
-    for (let i=0; i<tofetch; i++)
+    for (let i=0; i<tofetch; i++) {
       this.props.dispatch(fetchMovies(year, page+i));
-      this.props.dispatch(updateMoviePage());
+      this.props.dispatch(updateMoviePage())
+    }
   }
 
   render() {
@@ -39,6 +40,8 @@ export default class Movies extends React.Component {
 
     return (
       <div>
+        <h3> page = { this.props.page } </h3>
+        <h3> movies length = { movies[0][year + ''].length } </h3>
         <MoviesView movies={ movies } />
       </div>
     );
