@@ -2,7 +2,7 @@ import { Row, Col, Input, Button } from 'antd';
 import { connect } from 'react-redux';
 import React from 'react';
 
-import { fetchCalendar } from '../actions/calendarAction';
+import { fetch } from '../actions/calendarAction';
 import MoviesView from '../components/Movie/MoviesView';
 
 @connect((store) => {
@@ -14,20 +14,20 @@ import MoviesView from '../components/Movie/MoviesView';
 })
 export default class Calendar extends React.Component {
   componentWillMount() {
-    this.getMovieData();
+    this.getMovies();
   }
 
-  getMovieData(year=this.props.year, stop=this.props.skip) {
+  getMovies(year=this.props.year, stop=this.props.skip) {
     for (let i=0; i<stop; i++) {
       let tofetch = year - i;
 
       // prevent sending request for already fetched data
-      if (!this.alreadyFetched(tofetch.toString()))
-        this.props.dispatch(fetchCalendar(tofetch, 1, 4));
+      if (!this.isFetched(tofetch.toString()))
+        this.props.dispatch(fetch(tofetch, 1, 4));
     }
   }
 
-  alreadyFetched(year) {
+  isFetched(year) {
     for (let i=0; i<this.props.movies.length; i++) {
       if (Object.keys(this.props.movies[i])[0] === year)
         return true;
@@ -35,7 +35,7 @@ export default class Calendar extends React.Component {
     return false;
   }
 
-  loadMoreMovies() {
+  getNewMovies() {
     // get last fetched movie year
     var lastIndex = this.props.movies.length - 1;
     var lastYear;
@@ -47,7 +47,7 @@ export default class Calendar extends React.Component {
       return;
     }
 
-    this.getMovieData(lastYear-1);
+    this.getMovies(lastYear-1);
   }
 
   render() {
@@ -77,7 +77,7 @@ export default class Calendar extends React.Component {
 
         <Row type="flex" justify="center">
           <Col>
-            <Button type="primary" onClick={this.loadMoreMovies.bind(this)} >Load More</Button>
+            <Button type="primary" onClick={this.getNewMovies.bind(this)} >Load More</Button>
           </Col>
         </Row>
       </div>

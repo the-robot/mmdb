@@ -3,7 +3,7 @@ import axios from "axios";
 import getTmdbAPIKey from '../api';
 import validate from './dataValidator';
 
-export function fetchCalendar(year, page, limit=20) {
+export function fetch(year, page, limit=20) {
   return (dispatch) => {
     dispatch({type: "FETCH_CALENDAR"});
 
@@ -14,7 +14,7 @@ export function fetchCalendar(year, page, limit=20) {
       .then((response) => {
         dispatch({
           type: "FETCH_CALENDAR_FULFILLED",
-          payload: cleanData(response.data.results, year.toString(), limit)
+          payload: clean(response.data.results, year.toString(), limit)
         });
       })
       .catch((err) => {
@@ -23,7 +23,7 @@ export function fetchCalendar(year, page, limit=20) {
   }
 }
 
-function cleanData(data, year, limit) {
+function clean(data, year, limit) {
   const POSTER_SIZES = [
     "w92",
     "w154",
