@@ -45,11 +45,11 @@ export default class MovieCard extends React.Component {
 
     return(
       <Col span={6} style={{ marginBottom: '32px' }}>
-        <Card title={ movieInfo.title } extra={<a href="#">More</a>} style={{ width: 260, textAlign: 'justify' }}
+        <Card title={ movieInfo.title } extra={<a href="#">More Info</a>} style={{ width: 260, textAlign: 'justify' }}
         cover={<img alt="poster" src={ movieInfo.poster } />}>
           <p style={{overflow: 'hidden', height: '210px' }}>{ movieInfo.summary }</p>
           <Tag color={ rating.color }>Rating: { rating.value }</Tag>
-        </Card>   
+        </Card>
       </Col>
     );
   }
