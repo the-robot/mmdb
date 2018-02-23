@@ -23,11 +23,17 @@ export default class Movies extends React.Component {
 
   getMovies(year=this.props.match.params.year) {
     // get the number of page to be fetched
+    console.log('YEAR: ', year);
+
     const page = this.props.page;
     const tofetch = this.props.tofetch;
 
     for (let i=0; i<tofetch; i++)
       this.props.dispatch(fetch(year, page+i));
+  }
+
+  getNewMovies() {
+    this.getMovies();
   }
 
   render() {
@@ -43,7 +49,7 @@ export default class Movies extends React.Component {
 
         <Row type="flex" justify="center">
           <Col>
-            <Button type="primary" onClick={this.getMovies.bind(this)} >Load More</Button>
+            <Button type="primary" onClick={this.getNewMovies.bind(this)} >Load More</Button>
           </Col>
         </Row>
       </div>
