@@ -28,7 +28,7 @@
     "webpack-dev-server": "^2.11.1"
   },
   "scripts": {
-    "dev": "./node_modules/.bin/webpack-dev-server --content-base src --inline --hot --history-api-fallback",
+    "dev": "./node_modules/.bin/webpack-dev-server --content-base src --inline --hot --history-api-fallback --host 0.0.0.0",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",

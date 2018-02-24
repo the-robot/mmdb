@@ -36,7 +36,8 @@ const config = {
     extensions: ['*', '.js', '.jsx'],
   },
   devServer: {
-    historyApiFallback: true
+    historyApiFallback: true,
+    disableHostCheck: true
   },
 };
 
