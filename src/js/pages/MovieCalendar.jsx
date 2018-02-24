@@ -1,4 +1,4 @@
-import { Row, Col, Input, Button } from 'antd';
+import { Row, Col, Input, Button, Spin } from 'antd';
 import { connect } from 'react-redux';
 import React from 'react';
 
@@ -10,6 +10,7 @@ import MoviesView from '../components/Movie/MoviesView';
     movies: store.calendar.movies,
     year: store.calendar.year,
     skip: store.calendar.skip,
+    fetching: store.calendar.fetching,
   };
 })
 export default class MovieCalendar extends React.Component {
@@ -77,7 +78,11 @@ export default class MovieCalendar extends React.Component {
 
         <Row type="flex" justify="center">
           <Col>
-            <Button type="primary" onClick={this.getNewMovies.bind(this)} >Load More</Button>
+            { this.props.fetching ? (
+              <Spin size="large" />
+            ) : (
+              <Button type="primary" onClick={this.getNewMovies.bind(this)} >Load More</Button>
+            )}
           </Col>
         </Row>
       </div>

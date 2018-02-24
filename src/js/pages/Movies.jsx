@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { Row, Col, Button } from 'antd';
+import { Row, Col, Button, Spin } from 'antd';
 import React from 'react';
 
 import { fetch, reset } from '../actions/movieAction';
@@ -10,6 +10,7 @@ import MoviesView from '../components/Movie/MoviesView';
     movies: store.movies.movies,
     page: store.movies.page,
     tofetch: store.movies.tofetch,
+    fetching: store.movies.fetching,
   };
 })
 export default class Movies extends React.Component {
@@ -47,7 +48,11 @@ export default class Movies extends React.Component {
 
         <Row type="flex" justify="center">
           <Col>
-            <Button type="primary" onClick={this.getNewMovies.bind(this)} >Load More</Button>
+            { this.props.fetching ? (
+              <Spin size="large" />
+            ) : (
+              <Button type="primary" onClick={this.getNewMovies.bind(this)} >Load More</Button>
+            )}
           </Col>
         </Row>
       </div>
