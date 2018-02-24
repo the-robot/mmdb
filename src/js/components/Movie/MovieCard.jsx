@@ -47,7 +47,13 @@ export default class MovieCard extends React.Component {
     const link = '/calendar/movies/' + this.props.year + '/' + movieInfo.id;
 
     return(
-      <Col span={6} style={{ marginBottom: '32px' }}>
+      <Col xs={{ span: 24, offset: 0}} 
+           sm={{ span: 12, offset: 0}}
+           md={{ span: 12, offset: 0}}
+           lg={{ span: 8, offset: 0}}
+           xl={{ span: 6, offset: 0}}
+
+           style={{ marginBottom: '32px' }}>
         <Card title={ movieInfo.title } extra={
           <a href="#"><NavLink to={ link } >More Info</NavLink></a>
         } style={{ width: 260, textAlign: 'justify' }}
