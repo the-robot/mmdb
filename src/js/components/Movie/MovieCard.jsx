@@ -1,4 +1,5 @@
 import { Row, Col, Card, Tag } from 'antd';
+import { NavLink } from 'react-router-dom';
 import React from 'react';
 
 export default class MovieCard extends React.Component {
@@ -43,9 +44,13 @@ export default class MovieCard extends React.Component {
     const { movieInfo } = this.props;
     const rating = this.ratingScale(movieInfo.rating);
 
+    const link = '/calendar/movies/' + this.props.year + '/' + movieInfo.id;
+
     return(
       <Col span={6} style={{ marginBottom: '32px' }}>
-        <Card title={ movieInfo.title } extra={<a href="#">More Info</a>} style={{ width: 260, textAlign: 'justify' }}
+        <Card title={ movieInfo.title } extra={
+          <a href="#"><NavLink to={ link } >More Info</NavLink></a>
+        } style={{ width: 260, textAlign: 'justify' }}
         cover={<img alt="poster" src={ movieInfo.poster } />}>
           <p style={{overflow: 'hidden', height: '210px' }}>{ movieInfo.summary }</p>
           <Tag color={ rating.color }>Rating: { rating.value }</Tag>

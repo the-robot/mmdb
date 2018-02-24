@@ -48,7 +48,7 @@ class MoviesRow extends React.Component {
       moviesLink = '/calendar/movies/' + year;
       
       movieCards = movies[year].map(
-        (movie, i) => <MovieCard key={ i } movieInfo={ movie } />
+        (movie, i) => <MovieCard key={ i } movieInfo={ movie } year={ year } />
       );
     }
 
