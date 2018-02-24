@@ -1,4 +1,4 @@
-import { Row, Col, Input, Button, Spin } from 'antd';
+import { Row, Col, Input, Button, BackTop, Spin } from 'antd';
 import { connect } from 'react-redux';
 import React from 'react';
 
@@ -85,6 +85,9 @@ export default class MovieCalendar extends React.Component {
             )}
           </Col>
         </Row>
+
+        {/* Button to go back to top */}
+        <BackTop />
       </div>
     );
   }

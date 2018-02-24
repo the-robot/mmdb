@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { Row, Col, Button, Spin } from 'antd';
+import { Row, Col, Button, BackTop, Spin } from 'antd';
 import React from 'react';
 
 import { fetch, reset } from '../actions/moviesAction';
@@ -55,6 +55,9 @@ export default class Movies extends React.Component {
             )}
           </Col>
         </Row>
+
+        {/* Button to go back to top */}
+        <BackTop />
       </div>
     );
   }
