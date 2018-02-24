@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import { Row, Col, Button, Spin } from 'antd';
 import React from 'react';
 
-import { fetch, reset } from '../actions/movieAction';
+import { fetch, reset } from '../actions/moviesAction';
 import MoviesView from '../components/Movie/MoviesView';
 
 @connect((store) => {
