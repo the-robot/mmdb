@@ -1,3 +1,5 @@
+// store information of featured movie from different years
+
 export default function reducer(state={
   movies: [],
   year: new Date().getFullYear(),

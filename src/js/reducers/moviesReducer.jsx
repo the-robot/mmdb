@@ -1,3 +1,5 @@
+// store many movies information from given year
+
 const initialState = {
   movies: [],
   page: 1,  // page to be fetched in next call
