@@ -29,6 +29,10 @@ export default class Movie extends React.Component {
     window.history.back();
   }
 
+  visitMoviePage() {
+    window.open(this.props.general.homepage, "_blank");
+  }
+
   render() {
     const id = this.props.match.params.id;
 
@@ -59,9 +63,12 @@ export default class Movie extends React.Component {
             {/* Movie website and share button */}
             <Row type="flex" justify="center">
               <Button.Group>
-                <Button>
+                {/* Disable button if homepage is not found */}
+                <Button onClick={ this.visitMoviePage.bind(this) }
+                  disabled={this.props.general.homepage === ''}>
                   <Icon type="link" />Homepage
                 </Button>
+
                 <Button>
                   <Icon type="share-alt" />Share
                 </Button>
