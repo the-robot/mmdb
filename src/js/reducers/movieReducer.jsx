@@ -16,8 +16,8 @@ const initialState = {
     poster: '',
   },
 
+  trailerId: '',
   cast: {},
-  trailers: [],
 
   // states
   fetching: false,
