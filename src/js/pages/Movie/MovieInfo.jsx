@@ -8,6 +8,10 @@ export default class MovieInfo extends React.Component {
   render() {
     const movie = this.props.movie;
 
+    const genreTags = movie.genres.map(
+      (genre, i) => <Tag key={ i }>{ genre }</Tag>
+    );
+
     // Dropdown menu to add movie to plan and etc.
     const trackerMenu = (
       <Menu>
@@ -32,15 +36,17 @@ export default class MovieInfo extends React.Component {
         {/* Rating, User tracker info, Watch trailer button */}
         <Row type="flex" justify="start" align="middle" gutter={16}
           style={{ marginBottom: 10 }}>
+
+          {/* Rating */}
           <Col span={2}>
               <Progress type="dashboard" percent={ movie.rating }
               width={60} />
           </Col>
-
           <Col span={2} style={{ paddingLeft: 15 }}>
             <p>User Rating</p>
           </Col>
 
+          {/* Add to user library */}
           <Col span={3} offset={1}>
             <Dropdown overlay={trackerMenu} trigger={['click']}>
               <a className="ant-dropdown-link" href="#">
@@ -49,6 +55,7 @@ export default class MovieInfo extends React.Component {
             </Dropdown>
           </Col>
 
+          {/* Watch trailer button */}
           <Col span={2}>
             <Tooltip placement="right" title="Watch Trailer">
               <Button type="primary" shape="circle" icon="caret-right" size="large" />
@@ -64,8 +71,7 @@ export default class MovieInfo extends React.Component {
           </Col>
 
           <Col span={18}>
-            <Tag>Comedy</Tag>
-            <Tag>Drama</Tag>
+            { genreTags }
           </Col>
         </Row>
 
@@ -84,13 +90,13 @@ export default class MovieInfo extends React.Component {
 
         {/* Movie Summary */}
         <Row type="flex" justify="start">
-          <Row type="flex">
-            <b>Movie Summary</b>
-          </Row>
+          <Col span={24}>
+            <h6><b>Movie Summary</b></h6>
+          </Col>
 
-          <Row type="flex">
+          <Col span={24}>
             { movie.summary }
-          </Row>
+          </Col>
         </Row>
       </Col>
     );
