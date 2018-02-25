@@ -1,15 +1,21 @@
 // store movie information in details
 
 const initialState = {
-  id: null,
-  title: '',
-  year: null,
-  release_date: '',
-  language: '',
-  summary: '',
-  rating: null,
-  poster: '',
-  backcover: '',
+  general: {
+    id: null,
+    title: '',
+    release_date: '',
+    status: '',        // whether movie released or not
+    language: '',
+    runtime: '',       // movie duration
+    pg: '',            // parental guide
+    homepage: '',
+    summary: '',
+    rating: 0,
+    genres: [],
+    poster: '',
+  },
+
   cast: {},
   trailers: [],
 
@@ -34,7 +40,7 @@ export default function reducer(state=initialState, action) {
         ...state,
         fetching: false,
         fetched: true,
-        movies: state.movies.concat(action.payload),
+        general: action.payload,
       }
     }
 
