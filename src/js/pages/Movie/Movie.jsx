@@ -10,7 +10,7 @@ import MovieInfo from './MovieInfo';
   return {
     general: store.movie.general,
     cast: store.movie.cast,
-    trailers: store.movie.trailers,
+    trailerId: store.movie.trailerId,
 
     // states
     fetching: store.movie.fetching,
