@@ -10,7 +10,7 @@ import Home from './pages/Home';
 // Movie         : Movie description in details
 // Movies        : Show movie cards
 // MovieCalender : Show featured movies from different years
-import Movie from './pages/Movie';
+import Movie from './pages/Movie/Movie';
 import Movies from './pages/Movies';
 import MovieCalendar from './pages/MovieCalendar';
 
