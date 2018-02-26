@@ -2,6 +2,7 @@ import { Row, Col, Button, Icon } from 'antd';
 import { connect } from 'react-redux';
 import React from 'react';
 
+import { getCast } from '../../actions/movie/castAction';
 import { fetch, reset } from '../../actions/movie/movieAction';
 import { getTrailer } from '../../actions/movie/trailerAction';
 import Loading from './Loading';
@@ -10,8 +11,8 @@ import MovieInfo from './MovieInfo';
 @connect((store) => {
   return {
     general: store.movie.general,
-    cast: store.movie.cast,
     trailerId: store.movie.trailerId,
+    cast: store.movie.cast,
 
     // states
     fetching: store.movie.fetching,
@@ -21,6 +22,7 @@ export default class Movie extends React.Component {
   componentWillMount() {
     this.props.dispatch(fetch(this.props.match.params.id));
     this.props.dispatch(getTrailer(this.props.match.params.id));
+    this.props.dispatch(getCast(this.props.match.params.id));
   }
 
   componentWillUnmount() {
@@ -49,7 +51,7 @@ export default class Movie extends React.Component {
       <div>
         {/* Back button */}
         <Row type="flex" justify="start" style={{ marginBottom: 20 }}>
-          <Button type="primary" icon="left" onClick={this.goBack.bind(this)}>
+          <Button type="primary" icon="left" onClick={ this.goBack.bind(this) }>
             Back
           </Button>
         </Row>
@@ -67,7 +69,7 @@ export default class Movie extends React.Component {
               <Button.Group>
                 {/* Disable button if homepage is not found */}
                 <Button onClick={ this.visitMoviePage.bind(this) }
-                  disabled={this.props.general.homepage === ''}>
+                  disabled={ this.props.general.homepage === '' }>
                   <Icon type="link" />Homepage
                 </Button>
 

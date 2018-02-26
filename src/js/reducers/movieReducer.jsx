@@ -53,6 +53,15 @@ export default function reducer(state=initialState, action) {
       }
     }
 
+    case "FETCH_MOVIE_CAST_FULFILLED": {
+      return {
+        ...state,
+        fetching: false,
+        fetched: true,
+        cast: action.payload,
+      }
+    }
+
     // reset all data
     case "RESET_MOVIE_DATA": {
       return initialState;
