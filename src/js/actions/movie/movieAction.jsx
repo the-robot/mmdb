@@ -69,8 +69,6 @@ function dateFormat(date) {
   ];
 
   date = date.split("-");
-
-  console.log('DATE: ', date);
   
   var year = date[0];
   var month = months[parseInt(date[1])];
