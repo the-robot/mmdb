@@ -5,6 +5,7 @@ import React from 'react';
 import { getCast } from '../../actions/movie/castAction';
 import { fetch, reset } from '../../actions/movie/movieAction';
 import { getTrailer } from '../../actions/movie/trailerAction';
+import Cast from './Cast';
 import Loading from './Loading';
 import MovieInfo from './MovieInfo';
 
@@ -56,7 +57,7 @@ export default class Movie extends React.Component {
           </Button>
         </Row>
 
-        <Row type="flex" justify="center" gutter={16}>
+        <Row type="flex" justify="center" gutter={16} style={{ marginBottom: 20 }}>
           <Col span={8}>
             {/* Movie poster */}
             <Row type="flex" justify="center" style={{ marginBottom: 10 }}>
@@ -82,6 +83,18 @@ export default class Movie extends React.Component {
 
           {/* Movie general information */}
           <MovieInfo movie={ this.props.general } trailer={ this.props.trailerId } />
+        </Row>
+
+        <Row type="flex" justify="start" gutter={16}
+          style={{ marginLeft: 15, marginRight: 15 }}>
+          {/* Movie cast */}
+          <Col span={24}>
+            <h5> Cast </h5>
+          </Col>
+
+          <Col span={24}>
+            <Cast cast={ this.props.cast } />
+          </Col>
         </Row>
 
       </div>
