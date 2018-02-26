@@ -71,7 +71,7 @@ function dateFormat(date) {
   date = date.split("-");
   
   var year = date[0];
-  var month = months[parseInt(date[1])];
+  var month = months[parseInt(date[1]) - 1];
   var day = date[2];
 
   return month + " " + day + " " + year;
