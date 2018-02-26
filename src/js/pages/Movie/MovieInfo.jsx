@@ -2,11 +2,25 @@
 // such as title, rating, genre, summary
 
 import { Row, Col, Button, Icon, Tag, Tooltip, Dropdown, Menu, Progress } from 'antd';
+import ModalVideo from 'react-modal-video'
 import React from 'react';
 
 export default class MovieInfo extends React.Component {
+  constructor () {
+    super()
+    this.state = {
+      isTrailerOpen: false
+    }
+    this.openTrailer = this.openTrailer.bind(this)
+  }
+
+  openTrailer() {
+    this.setState({isTrailerOpen: true})
+  }
+
   render() {
     const movie = this.props.movie;
+    const trailer = this.props.trailer;
 
     const genreTags = movie.genres.map(
       (genre, i) => <Tag key={ i }>{ genre }</Tag>
@@ -57,8 +71,13 @@ export default class MovieInfo extends React.Component {
 
           {/* Watch trailer button */}
           <Col span={2}>
+            <ModalVideo channel='youtube' isOpen={this.state.isTrailerOpen} 
+              videoId={ trailer } onClose={() => this.setState({isTrailerOpen: false})} />
+            
             <Tooltip placement="right" title="Watch Trailer">
-              <Button type="primary" shape="circle" icon="caret-right" size="large" />
+              <Button type="primary" shape="circle" icon="caret-right" size="large" 
+                onClick={this.openTrailer} 
+                disabled={ trailer === '' }/>
             </Tooltip>
           </Col>
         </Row>
@@ -79,11 +98,11 @@ export default class MovieInfo extends React.Component {
         <Row type="flex" justify="start" align="middle" gutter={16}
           style={{ marginBottom: 25 }}>
         
-          <Col span={7}>
+          <Col span={8}>
             Release Date: { movie.release_date }
           </Col>
 
-          <Col span={5}>
+          <Col span={6}>
             Runtime: { movie.runtime }
           </Col>
         </Row>

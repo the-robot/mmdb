@@ -2,9 +2,6 @@ import axios from "axios";
 
 import getTmdbAPIKey from '../../api';
 
-// Example
-// https://api.themoviedb.org/3/movie/433310?api_key=c2e52c8843976552b7b2a62976977c3f
-
 export const fetch = (id) => {
   return (dispatch) => {
     dispatch({type: "FETCH_MOVIE"});
@@ -38,7 +35,7 @@ function clean(data) {
   var result = {
     id: data.id,
     title: data.title,
-    release_date: data.release_date,
+    release_date: dateFormat(data.release_date),
     status: data.status,
     language: data.spoken_languages[0]['name'],
     runtime: timeFormat(data.runtime),
@@ -66,9 +63,29 @@ function getGenres(data) {
   return genres;
 }
 
+function dateFormat(date) {
+  const months = ["January", "February", "March", "April", "May", "June",
+    "July", "August", "September", "October", "November", "December"
+  ];
+
+  date = date.split("-");
+
+  console.log('DATE: ', date);
+  
+  var year = date[0];
+  var month = months[parseInt(date[1])];
+  var day = date[2];
+
+  return month + " " + day + " " + year;
+}
+
 function timeFormat(minute) {
   var hour = Math.floor(minute / 60);
   var min = minute % 60;
+
+  if (hour === 0 && min === 0) {
+    return 'N/A';
+  }
 
   return hour + "h " + min + "min";
 }

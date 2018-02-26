@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import React from 'react';
 
 import { fetch, reset } from '../../actions/movie/movieAction';
+import { getTrailer } from '../../actions/movie/trailerAction';
 import Loading from './Loading';
 import MovieInfo from './MovieInfo';
 
@@ -19,6 +20,7 @@ import MovieInfo from './MovieInfo';
 export default class Movie extends React.Component {
   componentWillMount() {
     this.props.dispatch(fetch(this.props.match.params.id));
+    this.props.dispatch(getTrailer(this.props.match.params.id));
   }
 
   componentWillUnmount() {
@@ -77,7 +79,7 @@ export default class Movie extends React.Component {
           </Col>
 
           {/* Movie general information */}
-          <MovieInfo movie={ this.props.general } />
+          <MovieInfo movie={ this.props.general } trailer={ this.props.trailerId } />
         </Row>
 
       </div>

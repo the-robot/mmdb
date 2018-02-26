@@ -17,7 +17,7 @@ const initialState = {
   },
 
   trailerId: '',
-  cast: {},
+  cast: [],
 
   // states
   fetching: false,
@@ -41,6 +41,15 @@ export default function reducer(state=initialState, action) {
         fetching: false,
         fetched: true,
         general: action.payload,
+      }
+    }
+
+    case "FETCH_MOVIE_TRAILER_FULFILLED": {
+      return {
+        ...state,
+        fetching: false,
+        fetched: true,
+        trailerId: action.payload,
       }
     }
 
