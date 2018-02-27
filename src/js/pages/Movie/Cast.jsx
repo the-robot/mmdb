@@ -1,27 +1,20 @@
 import { Row, List } from 'antd';
-import InfiniteScroll from 'react-infinite-scroller';
 import React from 'react';
 
 import CastCard from '../../components/Movie/CastCard';
 import { getCast } from '../../actions/movie/castAction';
 
 export default class Cast extends React.Component {
-  divideCasts(array) {
-    // divide the casts informations into two dimentional array
-    // with 6 casts per each array
-    var data = [];
-
-    for (let i=0; i<array.length; i+=6) {
-      data.push(array.slice(i, i+6));
-    }
-
-    return data;
-  }
-
-  getCastCards(cast) {
-    // convert the cast data into CastCard react component
+  getCastCards(data) {
+    // divide the data into two dimentioanl array with 6 elements each
+    var cast = [];
     var castCards = [];
 
+    for (let i=0; i<data.length; i+=6) {
+      cast.push(data.slice(i, i+6));
+    }
+
+  // convert the cast data into CastCard react component
     for (let i=0; i<cast.length; i++) {
       let temp = cast[i].map(
         (person) => <CastCard key={ person.cast_id } 
@@ -36,20 +29,19 @@ export default class Cast extends React.Component {
   }
 
   render() {
-    const cast = this.divideCasts(this.props.cast);
-    const castCards = this.getCastCards(cast);
+    const cast = this.getCastCards(this.props.cast);
 
     return (
       <List
         itemLayout="vertical"
-        dataSource={ castCards }
+        dataSource={ cast }
         renderItem={item => (
           <List.Item>
             <Row type="flex" justify="center" gutter={24}>
               { item }
             </Row>
           </List.Item>
-        )} 
+        )}
       />
     );
   }
