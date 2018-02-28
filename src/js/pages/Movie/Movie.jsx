@@ -5,9 +5,11 @@ import React from 'react';
 import { getCast } from '../../actions/movie/castAction';
 import { fetch, reset } from '../../actions/movie/movieAction';
 import { getTrailer } from '../../actions/movie/trailerAction';
-import Cast from './Cast';
+//import Cast from './Cast';
+import CastCard from '../../components/Movie/CastCard';
 import Loading from './Loading';
 import MovieInfo from './MovieInfo';
+import TopCast from '../../components/Movie/TopCast';
 
 @connect((store) => {
   return {
@@ -38,8 +40,34 @@ export default class Movie extends React.Component {
     window.open(this.props.general.homepage, "_blank");
   }
 
+  getCastCards(data) {
+    // divide the data into two dimentioanl array with 6 elements each
+    var cast = [];
+    var castCards = [];
+
+    for (let i=0; i<data.length; i+=6) {
+      cast.push(data.slice(i, i+6));
+    }
+
+  // convert the cast data into CastCard react component
+    for (let i=0; i<cast.length; i++) {
+      let temp = cast[i].map(
+        (person) => <CastCard key={ person.cast_id } 
+                              name={ person.name }
+                              character={ person.character }
+                              picture={ person.profile_path } />
+      );
+      castCards.push(temp);
+    }
+
+    return castCards;
+  }
+
   render() {
     const id = this.props.match.params.id;
+
+    // format casts into two dimentional array
+    const cast = this.getCastCards(this.props.cast);
 
     // if fetching return loading screen
     if ( this.props.fetching ) {
@@ -89,11 +117,12 @@ export default class Movie extends React.Component {
           style={{ marginLeft: 15, marginRight: 15 }}>
           {/* Movie cast */}
           <Col span={24}>
-            <h5> Cast </h5>
+            <h4> Cast </h4>
           </Col>
 
           <Col span={24}>
-            <Cast cast={ this.props.cast } />
+            {/* only show first row as top cast */}
+            <TopCast cast={ cast[0] } />
           </Col>
         </Row>
 
