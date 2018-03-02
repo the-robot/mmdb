@@ -11,7 +11,11 @@ export default class CastCard extends React.Component {
     const picture = this.props.picture;
 
     return (
-      <Col span={4}>
+      <Col xs={{ span: 24, offset: 0}} 
+           sm={{ span: 12, offset: 0}}
+           md={{ span: 12, offset: 0}}
+           lg={{ span: 8, offset: 0}}
+           xl={{ span: 4, offset: 0}}>
         <Card
           hoverable
           style={{ width: 160 }}
