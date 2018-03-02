@@ -13,12 +13,12 @@ export function fetch(year, page, limit=20) {
     axios.get(url)
       .then((response) => {
         dispatch({
-          type: "FETCH_CALENDAR_FULFILLED",
+          type: "FETCH_CALENDAR_MOVIES_FULFILLED",
           payload: clean(response.data.results, year.toString(), limit)
         });
       })
       .catch((err) => {
-        dispatch({type: "FETCH_CALENDAR_REJECTED", payload: err});
+        dispatch({type: "FETCH_CALENDAR_MOVIES_REJECTED", payload: err});
       })
   }
 }

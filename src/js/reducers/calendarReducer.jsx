@@ -2,6 +2,7 @@
 
 export default function reducer(state={
   movies: [],
+  tv: [],
   year: new Date().getFullYear() + 1,  // get movies a year ahead
   skip: 8, // year to be skip when load more
   fetching: false,
@@ -14,11 +15,11 @@ export default function reducer(state={
       return {...state, fetching: true}
     }
 
-    case "FETCH_CALENDAR_REJECTED": {
+    case "FETCH_CALENDAR_MOVIES_REJECTED": {
       return {...state, fetching: false, error: action.payload}
     }
 
-    case "FETCH_CALENDAR_FULFILLED": {
+    case "FETCH_CALENDAR_MOVIES_FULFILLED": {
       return {
         ...state,
         fetching: false,

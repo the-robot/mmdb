@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
 
-import calendar from './movieCalendarReducer';
+import calendar from './calendarReducer';
 import movie from './movieReducer';
 import movies from './moviesReducer';
 import user from './userReducer';
