@@ -26,9 +26,9 @@ export const getTrailer = (id) => {
 }
 
 function getYoutubeId(data) {
-  for (let i=0; i<data.length; i++) {
-    if (data[i].type === 'Trailer')
-      return data[i].key;
+  for (let trailer of data) {
+    if (trailer.type === 'Trailer')
+      return trailer.key;
   }
   return '';
 }
