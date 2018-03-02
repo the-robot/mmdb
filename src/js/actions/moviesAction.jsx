@@ -1,7 +1,7 @@
 import axios from "axios";
 
 import getTmdbAPIKey from '../api';
-import validate from './dataValidator';
+import { cleanMovieData as clean } from './dataProcess';
 
 export const fetch = (year, page) => {
   return (dispatch) => {
@@ -30,46 +30,4 @@ export const reset = () => {
   return (dispatch) => {
     dispatch({type: 'RESET_MOVIES_DATA'});
   }
-}
-
-function clean(data) {
-  const POSTER_SIZES = [
-    "w92",
-    "w154",
-    "w185",
-    "w342",
-    "w500",
-    "w780",
-    "original"
-  ]
-  const POSTER_PATH = 'https://image.tmdb.org/t/p/' + POSTER_SIZES[3];
-
-  const BACKCOVER_SIZES = [
-    "w300",
-    "w780",
-    "w1280",
-    "original"
-  ]
-  const BACKCOVER_PATH = 'https://image.tmdb.org/t/p/' + BACKCOVER_SIZES[3];
-
-  var results = [];
-
-  for (let i=0; i<data.length; i++) {
-    // filter and remove invalid data
-    if (!validate(data[i]))
-      continue;
-
-    results.push({
-      id: data[i].id,
-      title: data[i].title,
-      release_date: data[i].release_date,
-      language: data[i].original_language,
-      summary: data[i].overview,
-      rating: data[i].vote_average,
-      poster: POSTER_PATH + data[i].poster_path,
-      backcover: BACKCOVER_PATH + data[i].backdrop_path,
-    });
-  }
-
-  return results;
 }

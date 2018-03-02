@@ -1,21 +1,23 @@
-// store information of featured movie from different years
+const FUTURE = 1;
 
-export default function reducer(state={
+// store information of featured movie from different years
+const INITIAL_STATE = {
   movies: [],
+  year: new Date().getFullYear() + FUTURE,
   series: [],
-  year: new Date().getFullYear() + 1,  // get movies a year ahead
   skip: 8, // year to be skip when load more
   fetching: false,
   fetched: false,
   error: null,
-}, action) {
+}
 
+export default function reducer(state=INITIAL_STATE, action) {
   switch (action.type) {
     case "FETCH_CALENDAR": {
       return {...state, fetching: true}
     }
 
-    case "FETCH_CALENDAR_MOVIES_REJECTED": {
+    case "FETCH_CALENDAR_REJECTED": {
       return {...state, fetching: false, error: action.payload}
     }
 
@@ -26,6 +28,20 @@ export default function reducer(state={
         fetched: true,
         movies: sort([...state.movies, action.payload]),
       }
+    }
+
+    case "FETCH_CALENDAR_SERIES_FULFILLED": {
+      return {
+        ...state,
+        fetching: false,
+        fetched: true,
+        series: sort([...state.series, action.payload]),
+      }
+    }
+
+    // reset all data
+    case "RESET_CALENDAR_DATA": {
+      return INITIAL_STATE;
     }
   }
 

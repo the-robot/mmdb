@@ -2,7 +2,7 @@ import { Row, Col, Input, Button, BackTop, Spin } from 'antd';
 import { connect } from 'react-redux';
 import React from 'react';
 
-import { fetch } from '../actions/movieCalendarAction';
+import { fetchMovies as fetch, reset } from '../actions/calendarAction';
 import MoviesView from '../components/Movie/MoviesView';
 
 @connect((store) => {
@@ -17,6 +17,10 @@ export default class MovieCalendar extends React.Component {
   componentWillMount() {
     this.getMovies();
   }
+
+  // componentWillUnmount() {
+  //   this.props.dispatch(reset());
+  // }
 
   getMovies(year=this.props.year, stop=this.props.skip) {
     for (let i=0; i<stop; i++) {
