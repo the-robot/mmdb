@@ -124,8 +124,11 @@ export default class Movie extends React.Component {
             {/* only show first row as top cast */}
             <TopCast cast={ cast[0] } />
           </Col>
-        </Row>
 
+          <Col span={24}>
+            <Button style={{ border: 0, paddingTop: 15, paddingLeft: 0 }}>View Full Cast</Button>
+          </Col>
+        </Row>
       </div>
     );
   }
