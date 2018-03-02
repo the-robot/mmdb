@@ -2,7 +2,7 @@
 
 export default function reducer(state={
   movies: [],
-  tv: [],
+  series: [],
   year: new Date().getFullYear() + 1,  // get movies a year ahead
   skip: 8, // year to be skip when load more
   fetching: false,
@@ -24,7 +24,7 @@ export default function reducer(state={
         ...state,
         fetching: false,
         fetched: true,
-        movies: sortMovies([...state.movies, action.payload]),
+        movies: sort([...state.movies, action.payload]),
       }
     }
   }
@@ -32,9 +32,9 @@ export default function reducer(state={
   return state;
 }
 
-function sortMovies(movies) {
-  // sort movies from current to the past
-  return movies.sort((x, y) => {
+function sort(data) {
+  // sort data from current to the past
+  return data.sort((x, y) => {
     let current = parseInt(Object.keys(x)[0]); 
     let next = parseInt(Object.keys(y)[0]);
     
