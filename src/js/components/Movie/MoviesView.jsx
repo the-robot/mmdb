@@ -28,7 +28,7 @@ class MoviesRow extends React.Component {
     // Header Button CSS
     const headerButton = {
       fontSize: 28,
-      border: 'None',
+      border: 0,
       marginBottom: 8,
     }
 
