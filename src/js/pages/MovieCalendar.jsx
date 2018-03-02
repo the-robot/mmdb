@@ -12,7 +12,6 @@ import MoviesView from '../components/Movie/MoviesView';
     skip: store.calendar.skip,
     fetching: store.calendar.fetching,
   };
-
 })
 export default class MovieCalendar extends React.Component {
   componentWillMount() {
