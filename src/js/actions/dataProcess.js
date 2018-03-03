@@ -52,7 +52,7 @@ export const cleanMovieData = (data) => {
 
   for (let each of data) {
     // filter and remove invalid data
-    if (!validate(data[i]))
+    if (!validate(each))
       continue;
 
     results.push({
