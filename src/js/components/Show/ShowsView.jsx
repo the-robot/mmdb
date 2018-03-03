@@ -4,6 +4,9 @@ import React from 'react';
 
 import ShowCard from './ShowCard';
 
+// PROPS
+// shows = { shows }
+// path = 'path/'
 export default class ShowsView extends React.Component {
   render() {
     const shows = this.props.shows;
