@@ -70,7 +70,7 @@ export default class SeriesCalendar extends React.Component {
         <Row type="flex" justify="end" >
           <Col>
             <Search
-              placeholder="search series"
+              placeholder="search tv series"
               style={{ width: 300 }}
               onSearch={value => console.log(value)}
               enterButton
