@@ -85,9 +85,11 @@ export default class MovieInfo extends React.Component {
         {/* Movie Language and Genres */}
         <Row type="flex" justify="start" align="middle" gutter={16}
           style={{ marginBottom: 10 }}>
+          {/*
           <Col span={6}>
             Language: { movie.language }
           </Col>
+          */}
 
           <Col span={18}>
             { genreTags }
