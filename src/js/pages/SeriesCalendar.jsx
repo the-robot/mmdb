@@ -59,8 +59,6 @@ export default class SeriesCalendar extends React.Component {
     const Search = Input.Search;
     const series = this.props.series;
 
-    console.log(series);
-
     return (
       <div>
         <Row type="flex" justify="start">
