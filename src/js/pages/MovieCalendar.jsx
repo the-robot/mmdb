@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import React from 'react';
 
 import { fetchMovies as fetch, reset } from '../actions/calendarAction';
-import MoviesView from '../components/Movie/MoviesView';
+import ShowsView from '../components/Show/ShowsView';
 
 @connect((store) => {
   return {
@@ -78,7 +78,7 @@ export default class MovieCalendar extends React.Component {
           </Col>
         </Row>
 
-        <MoviesView movies={ movies } />
+        <ShowsView shows={ movies } path='movies/' />
 
         <Row type="flex" justify="center">
           <Col>

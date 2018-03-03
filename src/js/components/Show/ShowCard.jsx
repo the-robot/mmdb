@@ -2,7 +2,7 @@ import { Row, Col, Card, Tag } from 'antd';
 import { NavLink } from 'react-router-dom';
 import React from 'react';
 
-export default class MovieCard extends React.Component {
+export default class ShowCard extends React.Component {
   ratingScale(rating) {
     if (rating === 0) {
       return {
@@ -41,10 +41,10 @@ export default class MovieCard extends React.Component {
   }
 
   render() {
-    const { movieInfo } = this.props;
-    const rating = this.ratingScale(movieInfo.rating);
+    const { showInfo } = this.props;
+    const rating = this.ratingScale(showInfo.rating);
 
-    const link = '/calendar/movies/' + this.props.year + '/' + movieInfo.id;
+    const link = '/calendar/' + this.props.path + this.props.year + '/' + showInfo.id;
 
     return(
       <Col xs={{ span: 24, offset: 0}} 
@@ -52,15 +52,17 @@ export default class MovieCard extends React.Component {
            md={{ span: 12, offset: 0}}
            lg={{ span: 8, offset: 0}}
            xl={{ span: 6, offset: 0}}
-
            style={{ marginBottom: '32px' }}>
-        <Card title={ movieInfo.title } extra={
-          <a href="#"><NavLink to={ link } >More Info</NavLink></a>
-        } style={{ width: 260, textAlign: 'justify' }}
-        cover={<img alt="poster" src={ movieInfo.poster } />}>
-          <p style={{overflow: 'hidden', height: '210px' }}>{ movieInfo.summary }</p>
+
+        <Card title={ showInfo.title }
+              extra={ <a href="#"><NavLink to={ link } >More Info</NavLink></a> }
+              style={{ width: 260, textAlign: 'justify' }}
+              cover={<img alt="poster" src={ showInfo.poster } />
+        }>
+          <p style={{overflow: 'hidden', height: '210px' }}>{ showInfo.summary }</p>
           <Tag color={ rating.color }>Rating: { rating.value }</Tag>
         </Card>
+
       </Col>
     );
   }

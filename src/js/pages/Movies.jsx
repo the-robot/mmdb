@@ -3,7 +3,7 @@ import { Row, Col, Button, BackTop, Spin } from 'antd';
 import React from 'react';
 
 import { fetch, reset } from '../actions/moviesAction';
-import MoviesView from '../components/Movie/MoviesView';
+import ShowsView from '../components/Show/ShowsView';
 
 @connect((store) => {
   return {
@@ -44,7 +44,7 @@ export default class Movies extends React.Component {
 
     return (
       <div>
-        <MoviesView movies={ movies } />
+        <ShowsView shows={ movies } path='movies/' />
 
         <Row type="flex" justify="center">
           <Col>
