@@ -37,6 +37,6 @@ const App = () => (
   </Provider>
 );
 
-const app = document.getElementById('app')
+const app = document.getElementById('app');
 
 ReactDOM.render(<App />, app);
