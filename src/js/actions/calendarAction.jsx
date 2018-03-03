@@ -18,6 +18,7 @@ export const fetchSeries = (year, page, limit=20) => {
   const domain = 'https://api.themoviedb.org/3/discover/tv';
   const url = domain + '?api_key=' + getTmdbAPIKey() + '&page=' + page +
               '&sort_by=popularity.desc&first_air_date_year=' + year;
+
   return fetch(event, url, year, limit);
 }
 

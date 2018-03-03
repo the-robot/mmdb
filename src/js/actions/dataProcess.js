@@ -15,21 +15,26 @@ const BACKCOVER_SIZES = [
   "original"
 ]
 
-export const cleanCalendarData = (data, year, limit) => {
-  const POSTER_PATH = 'https://image.tmdb.org/t/p/' + POSTER_SIZES[3];
-  const BACKCOVER_PATH = 'https://image.tmdb.org/t/p/' + BACKCOVER_SIZES[3];
+const POSTER_PATH = 'https://image.tmdb.org/t/p/' + POSTER_SIZES[3];
+const BACKCOVER_PATH = 'https://image.tmdb.org/t/p/' + BACKCOVER_SIZES[3];
 
+export const cleanCalendarData = (data, year, limit) => {
   var results = {};
   results[year] = [];
 
-  for (let each of data.slice(0, limit)) {
+  for (let each of data) {
     // filter and remove invalid data
     if (!validate(each))
       continue;
 
+    // break if already array length reach limit
+    if (results[year].length === limit)
+      break;
+
     results[year].push({
       id: each.id,
-      title: each.title,
+      // Movies use 'title' & Series use 'name'
+      title: (each.title != undefined ? each.title : each.name),
       release_date: each.release_date,
       language: each.original_language,
       summary: each.overview,
@@ -43,9 +48,6 @@ export const cleanCalendarData = (data, year, limit) => {
 }
 
 export const cleanMovieData = (data) => {
-  const POSTER_PATH = 'https://image.tmdb.org/t/p/' + POSTER_SIZES[3];
-  const BACKCOVER_PATH = 'https://image.tmdb.org/t/p/' + BACKCOVER_SIZES[3];
-
   var results = [];
 
   for (let each of data) {
@@ -67,7 +69,6 @@ export const cleanMovieData = (data) => {
 
   return results;
 }
-
 
 const validate = (data) => {
   // if movie data does not have summary or poster image
