@@ -14,7 +14,7 @@ export const fetch = (id, season_number) => {
     axios.get(url)
       .then((response) => {
         dispatch({
-          type: "FETCH_SERIES_SEASON_DETAIL_FULFILLED",
+          type: "FETCH_SERIES_SEASON_INFO_FULFILLED",
           payload: clean(response.data)
         });
       })
@@ -27,7 +27,7 @@ export const fetch = (id, season_number) => {
 
 export const reset = () => {
   return (dispatch) => {
-    dispatch({type: 'RESET_SEASON_DETAILS_DATA'});
+    dispatch({type: 'RESET_SEASON_INFO_DATA'});
   }
 }
 

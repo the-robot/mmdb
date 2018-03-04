@@ -16,7 +16,7 @@ const initialState = {
     seasons: [],
   },
 
-  seasonsDetails: {
+  seasonInfo: {
     id: '',
     season_number: '',
     title: '',
@@ -54,12 +54,12 @@ export default function reducer(state=initialState, action) {
       }
     }
 
-    case "FETCH_SERIES_SEASON_DETAIL_FULFILLED": {
+    case "FETCH_SERIES_SEASON_INFO_FULFILLED": {
       return {
         ...state,
         fetching: false,
         fetched: true,
-        seasonsDetails: action.payload,
+        seasonInfo: action.payload,
       }
     }
 
@@ -86,11 +86,11 @@ export default function reducer(state=initialState, action) {
       return initialState;
     }
 
-    // reset season deatails data
-    case "RESET_SEASON_DETAILS_DATA": {
+    // reset season deatail information
+    case "RESET_SEASON_INFO_DATA": {
       return {
         ...state,
-        seasonsDetails: initialState.seasonsDetails,
+        seasonInfo: initialState.seasonInfo,
       }
     }
   }

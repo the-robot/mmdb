@@ -12,6 +12,8 @@ import Loading from './Loading';
 @connect((store) => {
   return {
     general: store.series.general,
+    season_info : store.series.seasonInfo,
+    trailerId: store.series.trailerId,
 
     // states
     fetching: store.series.fetching,
