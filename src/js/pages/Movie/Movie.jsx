@@ -64,8 +64,6 @@ export default class Movie extends React.Component {
   }
 
   render() {
-    const id = this.props.match.params.id;
-
     // format casts into two dimentional array
     const cast = this.getCastCards(this.props.cast);
 
