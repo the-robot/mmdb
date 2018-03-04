@@ -13,7 +13,7 @@ import ShowsView from '../components/Show/ShowsView';
     fetching: store.shows.fetching,
   };
 })
-export default class Series extends React.Component {
+export default class TVShows extends React.Component {
   componentWillMount() {
     this.getShows();
   }

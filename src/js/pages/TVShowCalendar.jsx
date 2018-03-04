@@ -13,7 +13,7 @@ import ShowsView from '../components/Show/ShowsView';
     fetching: store.calendar.fetching,
   };
 })
-export default class SeriesCalendar extends React.Component {
+export default class TVShowCalendar extends React.Component {
   componentWillMount() {
     this.getSeries();
   }
