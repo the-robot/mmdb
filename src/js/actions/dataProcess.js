@@ -47,7 +47,7 @@ export const cleanCalendarData = (data, year, limit) => {
   return results;
 }
 
-export const cleanMovieData = (data) => {
+export const cleanShowData = (data) => {
   var results = [];
 
   for (let each of data) {
@@ -57,7 +57,8 @@ export const cleanMovieData = (data) => {
 
     results.push({
       id: each.id,
-      title: each.title,
+      // Movies uses 'title' & Series use 'name'
+      title: (each.title != undefined ? each.title : each.name),
       release_date: each.release_date,
       language: each.original_language,
       summary: each.overview,

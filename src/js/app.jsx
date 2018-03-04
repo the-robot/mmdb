@@ -14,6 +14,7 @@ import Home from './pages/Home';
 import Movie from './pages/Movie/Movie';
 import Movies from './pages/Movies';
 import MovieCalendar from './pages/MovieCalendar';
+import Series from './pages/Series';
 import SeriesCalendar from './pages/SeriesCalendar';
 
 import NotFound from './pages/NotFound';
@@ -25,10 +26,16 @@ const App = () => (
       <AppLayout>
         <Switch>
           <Route exact path='/' component={ Home } />
+          
+          {/* Movies */}
           <Route path='/calendar/movies/:year(\d+)/:id(\d+)' component={ Movie }/>
           <Route path='/calendar/movies/:year(\d+)' component={ Movies }/>
           <Route path='/calendar/movies' component={ MovieCalendar } />
+          
+          {/* TV Series */}
+          <Route path='/calendar/series/:year(\d+)' component={ Series }/>
           <Route path='/calendar/series' component={ SeriesCalendar } />
+          
           <Route path='/about' component={ About } />
           <Route path="*" component={ NotFound }/>
         </Switch>

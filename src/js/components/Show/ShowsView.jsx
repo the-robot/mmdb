@@ -29,7 +29,7 @@ class ShowsInRow extends React.Component {
   render() {
     const shows = this.props.shows;
     const path = this.props.path;
-
+    
     // Header Button CSS
     const headerButton = {
       fontSize: 28,

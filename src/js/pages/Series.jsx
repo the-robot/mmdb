@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import { Row, Col, Button, BackTop, Spin } from 'antd';
 import React from 'react';
 
-import { fetchMovies as fetch, reset } from '../actions/showsAction';
+import { fetchSeries as fetch, reset } from '../actions/showsAction';
 import ShowsView from '../components/Show/ShowsView';
 
 @connect((store) => {
@@ -13,7 +13,7 @@ import ShowsView from '../components/Show/ShowsView';
     fetching: store.shows.fetching,
   };
 })
-export default class Movies extends React.Component {
+export default class Series extends React.Component {
   componentWillMount() {
     this.getShows();
   }
@@ -38,13 +38,13 @@ export default class Movies extends React.Component {
   render() {
     const year = this.props.match.params.year;
 
-    // MoviesView only accept array of json objects
-    var movies = [{}];
-    movies[0][year + ''] = this.props.shows;
+    // SeriesView only accept array of json objects
+    var series = [{}];
+    series[0][year + ''] = this.props.shows;
 
     return (
       <div>
-        <ShowsView shows={ movies } path='movies/' />
+        <ShowsView shows={ series } path='series/' />
 
         <Row type="flex" justify="center">
           <Col>

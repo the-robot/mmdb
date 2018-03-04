@@ -6,10 +6,10 @@ import { getCast } from '../../actions/movie/castAction';
 import { fetch, reset } from '../../actions/movie/movieAction';
 import { getTrailer } from '../../actions/movie/trailerAction';
 //import Cast from './Cast';
-import CastCard from '../../components/Movie/CastCard';
+import CastCard from '../../components/Show/Movie/CastCard';
 import Loading from './Loading';
 import MovieInfo from './MovieInfo';
-import TopCast from '../../components/Movie/TopCast';
+import TopCast from '../../components/Show/Movie/TopCast';
 
 @connect((store) => {
   return {

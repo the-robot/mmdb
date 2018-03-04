@@ -78,7 +78,7 @@ export default class SeriesCalendar extends React.Component {
           </Col>
         </Row>
 
-        <ShowsView shows={ series } path='movies/' />
+        <ShowsView shows={ series } path='series/' />
 
         <Row type="flex" justify="center">
           <Col>
