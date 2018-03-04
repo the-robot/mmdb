@@ -1,19 +1,20 @@
 import axios from "axios";
 
 import getTmdbAPIKey from '../../api';
-import { getDate, getGenres, getLanguages, getTime, toPercentage } from '../dataProcess';
+import getDate from '../dataProcess';
 
-export const fetch = (id) => {
+export const fetch = (id, season_number) => {
   return (dispatch) => {
     dispatch({type: "FETCH_SERIES"});
 
     const domain = 'https://api.themoviedb.org/3/tv/';
-    const url = domain + id + '?api_key=' + getTmdbAPIKey();
+    const url = domain + id + 'season/' + season_number
+                + '?api_key=' + getTmdbAPIKey();
 
     axios.get(url)
       .then((response) => {
         dispatch({
-          type: "FETCH_SERIES_FULFILLED",
+          type: "FETCH_SERIES_SEASON_DETAIL_FULFILLED",
           payload: clean(response.data)
         });
       })
@@ -26,7 +27,7 @@ export const fetch = (id) => {
 
 export const reset = () => {
   return (dispatch) => {
-    dispatch({type: 'RESET_SERIES_DATA'});
+    dispatch({type: 'RESET_SEASON_DETAILS_DATA'});
   }
 }
 
@@ -35,18 +36,14 @@ function clean(data) {
 
   var result = {
     id: data.id,
-    title: data.original_name,
-    first_air_date: getDate(data.first_air_date),
-    last_air_date: getDate(data.last_air_date),
-    runtime: getTime(data.episode_run_time),
-    homepage: data.homepage,
+    season_number: data.season_number,
+    title: data.name,
+    air_date: getDate(data.air_date),
     summary: data.overview,
-    rating: toPercentage(data.vote_average, 10),
-    genres: getGenres(data.genres),
     poster: POSTER_PATH + data.poster_path,
-    number_of_season: data.number_of_seasons,
-    seasons: data.seasons,
+    episodes: data.episodes,
   };
 
   return result;
 }
+

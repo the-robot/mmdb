@@ -4,15 +4,26 @@ const initialState = {
   general: {
     id: null,
     title: '',
-    release_date: '',
-    language: '',
+    first_air_date: '',
+    last_air_date: '',
     runtime: '',       // series duration
-    pg: '',            // parental guide
     homepage: '',
     summary: '',
     rating: 0,
     genres: [],
     poster: '',
+    number_of_seasons: 0,
+    seasons: [],
+  },
+
+  seasonsDetails: {
+    id: '',
+    season_number: '',
+    title: '',
+    air_date: '',
+    summary: '',
+    poster: '',
+    episodes: [],
   },
 
   trailerId: '',
@@ -43,6 +54,15 @@ export default function reducer(state=initialState, action) {
       }
     }
 
+    case "FETCH_SERIES_SEASON_DETAIL_FULFILLED": {
+      return {
+        ...state,
+        fetching: false,
+        fetched: true,
+        seasonsDetails: action.payload,
+      }
+    }
+
     case "FETCH_SERIES_TRAILER_FULFILLED": {
       return {
         ...state,
@@ -64,6 +84,14 @@ export default function reducer(state=initialState, action) {
     // reset all data
     case "RESET_SERIES_DATA": {
       return initialState;
+    }
+
+    // reset season deatails data
+    case "RESET_SEASON_DETAILS_DATA": {
+      return {
+        ...state,
+        seasonsDetails: initialState.seasonsDetails,
+      }
     }
   }
 
