@@ -3,6 +3,9 @@ import { connect } from 'react-redux';
 import React from 'react';
 
 import { fetch, reset } from '../../actions/series/seriesAction';
+import { fetch as fetchSeason, reset as resetSeason } from
+  '../../actions/series/seriesSeasonAction';
+import { getTrailer } from '../../actions/series/trailerAction';
 
 import Loading from './Loading';
 
