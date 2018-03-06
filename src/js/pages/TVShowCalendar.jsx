@@ -63,7 +63,7 @@ export default class TVShowCalendar extends React.Component {
       <div>
         <Row type="flex" justify="start">
           <Col>
-            <h1>TV Series Calendar</h1>
+            <h1>TV Shows Calendar</h1>
           </Col>
         </Row>
 
