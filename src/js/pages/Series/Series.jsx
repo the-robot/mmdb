@@ -1,4 +1,4 @@
-import { Row, Col, Button, Icon } from 'antd';
+import { Row, Col, Button, Icon, List, Card } from 'antd';
 import { connect } from 'react-redux';
 import React from 'react';
 
@@ -26,6 +26,10 @@ export default class Movie extends React.Component {
     this.props.dispatch(getTrailer(SERIES_ID));
   }
 
+  componentWillUnmount() {
+    this.props.dispatch(reset());
+  }
+
   goBack() {
     window.history.back();
   }
@@ -37,6 +41,7 @@ export default class Movie extends React.Component {
   render() {
     const general_info = this.props.general;
     const trailer = this.props.trailerId;
+    const seasons = this.props.seasons;
 
     // if fetching return loading screen
     if ( this.props.fetching ) {
@@ -54,7 +59,7 @@ export default class Movie extends React.Component {
           </Button>
         </Row>
 
-        <Row type="flex" justify="center" gutter={16} style={{ marginBottom: 20 }}>
+        <Row type="flex" justify="center" gutter={16} style={{ marginBottom: 30 }}>
           <Col span={8}>
             {/* Movie poster */}
             <Row type="flex" justify="center" style={{ marginBottom: 10 }}>
@@ -79,7 +84,41 @@ export default class Movie extends React.Component {
           </Col>
 
           {/* Movie general information */}
-          <SeriesInfo series={ general_info } trailer= { trailer } />
+          <SeriesInfo series={ general_info } trailer= { trailer }/>
+        </Row>
+
+        {/* List of series seasons */}
+        <Row type="flex" justify="start">
+          <Col span={24} style={{ marginLeft: 20 }}>
+            <h4> Seasons </h4>
+          </Col>
+
+          <Col span={24}>
+            <List
+              grid={{ gutter:12, column: 6 }}
+              dataSource={ seasons }
+              renderItem={season => (
+                <List.Item>
+                  <Card bordered={false} hoverable
+                    onClick={() => { alert('SHOW DETAILS') }}>
+                    <img src={ season.poster } style={{ width: 120, paddingBottom: 10 }} />
+                    <h6> { season.title } </h6>
+                    <p> { season.air_date } </p>
+                  </Card>
+                </List.Item>
+              )}
+            />
+          </Col>
+        </Row>
+
+        {/* View casts button */}
+        <Row type="flex" justify="start" gutter={16}
+          style={{ marginLeft: 15, marginRight: 15 }}>
+          {/* Movie cast */}
+          <Col span={24}>
+            <h4> Cast </h4>
+          </Col>
+          
         </Row>
       </div>
     );

@@ -50,7 +50,7 @@ export default function reducer(state=initialState, action) {
         ...state,
         fetching: false,
         fetched: true,
-        seasonInfo: state.seasons.push(action.payload),
+        seasons: sort([...state.seasons, action.payload]),
       }
     }
 
@@ -79,4 +79,16 @@ export default function reducer(state=initialState, action) {
   }
 
   return state;
+}
+
+function sort(data) {
+  // sort data from current to the past
+  return data.sort((x, y) => {
+    let current = parseInt(x['season_number']); 
+    let next = parseInt(y['season_number']);
+    
+    return next < current ? 1
+         : next > current ? -1
+         : 0;
+  });
 }

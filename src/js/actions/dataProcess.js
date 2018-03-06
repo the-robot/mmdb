@@ -71,6 +71,27 @@ export const cleanShowData = (data) => {
   return results;
 }
 
+export const cleanSeasonData = (data) => {
+  const POSTER_PATH = 'https://image.tmdb.org/t/p/w300_and_h450_bestv2';
+
+  // return nothing, if data is invalid
+  if (data.poster_path === null || data.title === null)
+    return {};
+
+  var result = {
+    id: data.id,
+    season_number: data.season_number,
+    title: data.name,
+    air_date: (data.air_date != null ? getDate(data.air_date) : ''),
+    summary: data.overview,
+    poster: POSTER_PATH + data.poster_path,
+    episodes: data.episodes,
+  };
+
+  return result;
+}
+
+
 export const getLanguages = (languages) => {
   var langs = '';
 

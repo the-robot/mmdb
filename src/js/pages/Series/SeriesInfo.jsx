@@ -1,7 +1,7 @@
 // Movie General Informations
 // such as title, rating, genre, summary
 
-import { Row, Col, Button, Icon, Tag, Tooltip, Progress } from 'antd';
+import { Row, Col, Button, Icon, Tag, Tooltip, Dropdown, Menu, Progress } from 'antd';
 import ModalVideo from 'react-modal-video'
 import React from 'react';
 
@@ -24,6 +24,17 @@ export default class SeriesInfo extends React.Component {
 
     const genreTags = series.genres.map(
       (genre, i) => <Tag key={ i }>{ genre }</Tag>
+    );
+
+    // Dropdown menu to add movie to plan and etc.
+    const trackerMenu = (
+      <Menu>
+        <Menu.Item key="0">Watching</Menu.Item>
+        <Menu.Item key="1">Planning</Menu.Item>
+        <Menu.Item key="2">Completed</Menu.Item>
+        <Menu.Item key="3">Dropped</Menu.Item>
+        <Menu.Item key="4" style={{ color: 'red' }}>Remove from Library</Menu.Item>
+      </Menu>
     );
 
     return (
@@ -49,8 +60,17 @@ export default class SeriesInfo extends React.Component {
             <p>User Rating</p>
           </Col>
 
+          {/* Add to user library */}
+          <Col span={3} offset={1}>
+            <Dropdown overlay={trackerMenu} trigger={['click']}>
+              <a className="ant-dropdown-link" href="#">
+                Tracker <Icon type="down" />
+              </a>
+            </Dropdown>
+          </Col>
+
           {/* Watch trailer button */}
-          <Col span={2} offset={1}>
+          <Col span={2}>
             <ModalVideo channel='youtube' isOpen={this.state.isTrailerOpen} 
               videoId={ trailer } onClose={() => this.setState({isTrailerOpen: false})} />
             
