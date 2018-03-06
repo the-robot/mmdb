@@ -1,14 +1,12 @@
 import axios from "axios";
 
 import getTmdbAPIKey from '../../api';
-import getDate from '../dataProcess';
+import { getDate } from '../dataProcess';
 
 export const fetch = (id, season_number) => {
   return (dispatch) => {
-    dispatch({type: "FETCH_SERIES"});
-
     const domain = 'https://api.themoviedb.org/3/tv/';
-    const url = domain + id + 'season/' + season_number
+    const url = domain + id + '/season/' + season_number
                 + '?api_key=' + getTmdbAPIKey();
 
     axios.get(url)
@@ -25,12 +23,6 @@ export const fetch = (id, season_number) => {
   }
 }
 
-export const reset = () => {
-  return (dispatch) => {
-    dispatch({type: 'RESET_SEASON_INFO_DATA'});
-  }
-}
-
 function clean(data) {
   const POSTER_PATH = 'https://image.tmdb.org/t/p/w300_and_h450_bestv2';
 
@@ -38,7 +30,7 @@ function clean(data) {
     id: data.id,
     season_number: data.season_number,
     title: data.name,
-    air_date: getDate(data.air_date),
+    air_date: (data.air_date != null ? getDate(data.air_date) : ''),
     summary: data.overview,
     poster: POSTER_PATH + data.poster_path,
     episodes: data.episodes,
@@ -46,4 +38,3 @@ function clean(data) {
 
   return result;
 }
-

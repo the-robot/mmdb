@@ -13,20 +13,11 @@ const initialState = {
     genres: [],
     poster: '',
     number_of_seasons: 0,
-    seasons: [],
-  },
-
-  seasonInfo: {
-    id: '',
-    season_number: '',
-    title: '',
-    air_date: '',
-    summary: '',
-    poster: '',
-    episodes: [],
+    seasons_info: [],
   },
 
   trailerId: '',
+  seasons: [],
   cast: [],
 
   // states
@@ -59,7 +50,7 @@ export default function reducer(state=initialState, action) {
         ...state,
         fetching: false,
         fetched: true,
-        seasonInfo: action.payload,
+        seasonInfo: state.seasons.push(action.payload),
       }
     }
 
@@ -84,14 +75,6 @@ export default function reducer(state=initialState, action) {
     // reset all data
     case "RESET_SERIES_DATA": {
       return initialState;
-    }
-
-    // reset season deatail information
-    case "RESET_SEASON_INFO_DATA": {
-      return {
-        ...state,
-        seasonInfo: initialState.seasonInfo,
-      }
     }
   }
 

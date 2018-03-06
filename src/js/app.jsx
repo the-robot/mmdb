@@ -1,5 +1,5 @@
 import { Provider } from 'react-redux';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { HashRouter as Router, Route, Switch } from 'react-router-dom';
 import React from 'react';
 import ReactDOM from 'react-dom';
 
@@ -26,7 +26,7 @@ import store from './store';
 
 const App = () => (
   <Provider store={ store }>
-    <BrowserRouter>
+    <Router>
       <AppLayout>
         <Switch>
           <Route exact path='/' component={ Home } />
@@ -45,7 +45,7 @@ const App = () => (
           <Route path="*" component={ NotFound }/>
         </Switch>
       </AppLayout>
-    </BrowserRouter>
+    </Router>
   </Provider>
 );
 

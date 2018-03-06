@@ -2,6 +2,7 @@ import axios from "axios";
 
 import getTmdbAPIKey from '../../api';
 import { getDate, getGenres, getLanguages, getTime, toPercentage } from '../dataProcess';
+import { fetch as fetchSeason } from './seasonAction';
 
 export const fetch = (id) => {
   return (dispatch) => {
@@ -11,11 +12,23 @@ export const fetch = (id) => {
     const url = domain + id + '?api_key=' + getTmdbAPIKey();
 
     axios.get(url)
+      // fetch series overall information
       .then((response) => {
+        let data = clean(response.data);
+
         dispatch({
           type: "FETCH_SERIES_FULFILLED",
-          payload: clean(response.data)
+          payload: data,
         });
+
+        return data;
+      })
+
+      // fetch information of individual seasons
+      .then((data) => {
+        for (let i=1; i<=data.number_of_season; i++) {
+          dispatch(fetchSeason(data.id, i));
+        }
       })
 
       .catch((err) => {
