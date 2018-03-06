@@ -10,6 +10,10 @@ import { loginUser } from '../actions/userAction';
   };
 })
 export default class About extends React.Component {
+  componentDidMount() {
+    document.title = "About MMDB";
+  }
+
   loginUser() {
     this.props.dispatch(loginUser());
   }

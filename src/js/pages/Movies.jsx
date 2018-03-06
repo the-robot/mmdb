@@ -18,6 +18,10 @@ export default class Movies extends React.Component {
     this.getShows();
   }
 
+  componentDidMount() {
+    document.title = "Calendar - Movies (" + this.props.match.params.year + ")";
+  }
+
   componentWillUnmount() {
     this.props.dispatch(reset());
   }

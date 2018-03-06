@@ -18,6 +18,10 @@ export default class TVShows extends React.Component {
     this.getShows();
   }
 
+  componentDidMount() {
+    document.title = "Calendar - TV Shows (" + this.props.match.params.year + ")";
+  }
+
   componentWillUnmount() {
     this.props.dispatch(reset());
   }

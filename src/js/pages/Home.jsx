@@ -4,6 +4,10 @@ import React from 'react';
 import MyProgressBox from '../components/Home/MyProgressBox';
 
 export default class Home extends React.Component {
+  componentDidMount() {
+    document.title = "MMDB - Home";
+  }
+
   formatDigit(digit) {
     return digit > 9 ? "" + digit: "0" + digit;
   }
