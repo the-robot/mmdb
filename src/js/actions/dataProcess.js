@@ -85,12 +85,11 @@ export const cleanSeasonData = (data) => {
     air_date: (data.air_date != null ? getDate(data.air_date) : ''),
     summary: data.overview,
     poster: POSTER_PATH + data.poster_path,
-    episodes: data.episodes,
+    episodes: cleanEpisodeData(data.episodes),
   };
 
   return result;
 }
-
 
 export const getLanguages = (languages) => {
   var langs = '';
@@ -165,4 +164,18 @@ const validate = (data) => {
 
   // valid
   return true
+}
+
+// clean individual episode data
+const cleanEpisodeData = (episodes) => {
+  const STILL_PATH = 'https://image.tmdb.org/t/p/w300';
+
+  for (let i=0; i<episodes.length; i++) {
+    episodes[i].still_path = ( episodes[i].still_path !== null ?
+        STILL_PATH + episodes[i].still_path :
+        null
+    );
+  }
+
+  return episodes;
 }
