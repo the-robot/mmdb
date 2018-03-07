@@ -84,9 +84,8 @@ export default class Movie extends React.Component {
                 <List.Item
                   key={ episode.episode_number }
                   extra={
-                    episode.still_path !== null &&
-                      <img width={280} alt="preview" 
-                      src={ episode.still_path }/>
+                    <img width={280} alt="preview" 
+                    src={ episode.still_path }/>
                   }
                 >
                   <List.Item.Meta
@@ -106,13 +105,15 @@ export default class Movie extends React.Component {
             />
           </TabPane>
 
-          <TabPane tab={<span><Icon type="message" />Reviews</span>} key="3">
+          <TabPane tab={<span><Icon type="star" />Casts</span>} key="3">
             Tab 3 - Reviews
           </TabPane>
 
-          <TabPane tab={<span><Icon type="picture" />Pictures</span>} key="4">
-            Tab 4 - Pictures
+          {/*
+          <TabPane tab={<span><Icon type="message" />Reviews</span>} key="4">
+            Tab 4 - Reviews
           </TabPane>
+          */}
         </Tabs>
       </div>
     )

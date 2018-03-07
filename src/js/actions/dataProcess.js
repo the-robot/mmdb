@@ -173,7 +173,7 @@ const cleanEpisodeData = (episodes) => {
   for (let i=0; i<episodes.length; i++) {
     episodes[i].still_path = ( episodes[i].still_path !== null ?
         STILL_PATH + episodes[i].still_path :
-        null
+        '../../images/white_image.jpg'
     );
   }
 
