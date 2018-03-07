@@ -4,9 +4,13 @@ import React from 'react';
 import CastCard from './CastCard';
 
 export default class CastView extends React.Component {
-  getCastCards(cast) {
+  getCast(data) {
+    var cast = [];
     var castCards = [];
 
+    for (let i=0; i<data.length; i+=6)
+      cast.push(data.slice(i, i+6));
+    
     // convert the cast data into CastCard react component
     for (let i=0; i<cast.length; i++) {
       let temp = cast[i].map(
@@ -22,7 +26,7 @@ export default class CastView extends React.Component {
   }
 
   render() {
-    const cast = this.getCastCards(this.props.cast);
+    const cast = this.getCast(this.props.cast);
 
     return (
       <Row type="flex" justify="center" gutter={24}>

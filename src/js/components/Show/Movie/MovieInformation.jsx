@@ -5,7 +5,7 @@ import { Row, Col, Button, Icon, Tag, Tooltip, Dropdown, Menu, Progress } from '
 import ModalVideo from 'react-modal-video'
 import React from 'react';
 
-export default class MovieInfo extends React.Component {
+export default class MovieInformation extends React.Component {
   constructor () {
     super()
     this.state = {

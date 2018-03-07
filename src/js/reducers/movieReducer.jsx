@@ -1,7 +1,7 @@
 // store movie information in details
 
 const initialState = {
-  general: {
+  overview: {
     id: null,
     title: '',
     release_date: '',
@@ -16,8 +16,12 @@ const initialState = {
     poster: '',
   },
 
-  trailerId: '',
+  trailer: '',      // Youtube ID
   cast: [],
+  reviews: {
+    results: [],
+    next: 1,        // page num to fetch when tried to get reviews
+  },
 
   // states
   fetching: false,
@@ -40,7 +44,7 @@ export default function reducer(state=initialState, action) {
         ...state,
         fetching: false,
         fetched: true,
-        general: action.payload,
+        overview: action.payload,
       }
     }
 
@@ -49,7 +53,7 @@ export default function reducer(state=initialState, action) {
         ...state,
         fetching: false,
         fetched: true,
-        trailerId: action.payload,
+        trailer: action.payload,
       }
     }
 
@@ -59,6 +63,18 @@ export default function reducer(state=initialState, action) {
         fetching: false,
         fetched: true,
         cast: action.payload,
+      }
+    }
+
+    case "FETCH_MOVIE_REVIEWS_FULFILLED": {
+      return {
+        ...state,
+        fetching: false,
+        fetched: true,
+        reviews: {
+          results: state.reviews.results.concat(action.payload),
+          next: state.reviews.next + 1,
+        }
       }
     }
 
