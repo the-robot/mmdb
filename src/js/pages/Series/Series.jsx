@@ -1,4 +1,5 @@
 import { Row, Col, Button, Icon, List, Card } from 'antd';
+import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
 import React from 'react';
 
@@ -39,6 +40,8 @@ export default class Movie extends React.Component {
   }
 
   render() {
+    const SERIES_ID = this.props.match.params.id;
+
     const general_info = this.props.general;
     const trailer = this.props.trailerId;
     const seasons = this.props.seasons;
@@ -99,12 +102,15 @@ export default class Movie extends React.Component {
               dataSource={ seasons }
               renderItem={season => (
                 <List.Item>
-                  <Card bordered={false} hoverable
-                    onClick={() => { alert('SHOW DETAILS') }}>
-                    <img src={ season.poster } style={{ width: 120, paddingBottom: 10 }} />
-                    <h6> { season.title } </h6>
-                    <p> { season.air_date } </p>
-                  </Card>
+                  <NavLink to={
+                    this.props.location.pathname + '/' + season.season_number
+                  }>
+                    <Card bordered={false} hoverable>
+                      <img src={ season.poster } style={{ width: 120, paddingBottom: 10 }} />
+                      <h6> { season.title } </h6>
+                      <p> { season.air_date } </p>
+                    </Card>
+                  </NavLink>
                 </List.Item>
               )}
             />
