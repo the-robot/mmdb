@@ -19,7 +19,7 @@ import SeriesInfo from './SeriesInfo';
     fetching: store.series.fetching,
   };
 })
-export default class Movie extends React.Component {
+export default class Series extends React.Component {
   componentWillMount() {
     const SERIES_ID = this.props.match.params.id;
 
