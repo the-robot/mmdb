@@ -116,16 +116,6 @@ export default class Movie extends React.Component {
             />
           </Col>
         </Row>
-
-        {/* View casts button */}
-        <Row type="flex" justify="start" gutter={16}
-          style={{ marginLeft: 15, marginRight: 15 }}>
-          {/* Movie cast */}
-          <Col span={24}>
-            <h4> Cast </h4>
-          </Col>
-          
-        </Row>
       </div>
     );
   }
