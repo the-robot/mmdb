@@ -15,11 +15,12 @@ export default class CastCard extends React.Component {
            sm={{ span: 12, offset: 0}}
            md={{ span: 12, offset: 0}}
            lg={{ span: 8, offset: 0}}
-           xl={{ span: 4, offset: 0}}>
+           xl={{ span: 4, offset: 0}}
+           style={{ marginBottom: 25 }} >
         <Card
           hoverable
-          style={{ width: 160 }}
-          cover={<img alt="profile picture" src={ picture } style={{ height: 230 }} />}
+          style={{ width: 140 }}
+          cover={<img alt="profile picture" src={ picture } style={{ height: 200 }} />}
           >
           <Meta
             title={ name }

@@ -38,7 +38,7 @@ export default class MovieInfo extends React.Component {
     );
 
     return (
-      <Col span={16}>
+      <Col offset={1} span={15}>
 
         {/* Movie Title */}
         <Row type="flex" justify="start">
@@ -56,12 +56,12 @@ export default class MovieInfo extends React.Component {
               <Progress type="dashboard" percent={ movie.rating }
               width={60} />
           </Col>
-          <Col span={2} style={{ paddingLeft: 15 }}>
+          <Col span={2} style={{ paddingLeft: 25 }}>
             <p>User Rating</p>
           </Col>
 
           {/* Add to user library */}
-          <Col span={3} offset={1}>
+          <Col span={5} offset={1}>
             <Dropdown overlay={trackerMenu} trigger={['click']}>
               <a className="ant-dropdown-link" href="#">
                 Tracker <Icon type="down" />
@@ -100,7 +100,7 @@ export default class MovieInfo extends React.Component {
         <Row type="flex" justify="start" align="middle" gutter={16}
           style={{ marginBottom: 25 }}>
         
-          <Col span={8}>
+          <Col span={10}>
             Release Date: { movie.release_date }
           </Col>
 
@@ -115,8 +115,10 @@ export default class MovieInfo extends React.Component {
             <h6><b>Movie Summary</b></h6>
           </Col>
 
-          <Col span={24}>
-            { movie.summary }
+          <Col span={23}>
+            <p style={{ textAlign: 'justify'}}>
+              { movie.summary }
+            </p>
           </Col>
         </Row>
       </Col>
