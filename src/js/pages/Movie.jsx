@@ -2,7 +2,6 @@ import { Row, Button, Icon, Tabs } from 'antd';
 import { connect } from 'react-redux';
 import React from 'react';
 
-import { getCast } from '../actions/movie/castAction';
 import { fetch, reset } from '../actions/movie/movieAction';
 import { getTrailer } from '../actions/movie/trailerAction';
 
