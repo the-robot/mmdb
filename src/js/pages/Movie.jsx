@@ -37,7 +37,6 @@ export default class Movie extends React.Component {
   }
 
   render() {
-    // React Component
     const TabPane = Tabs.TabPane;
     const ID = this.props.match.params.id;
 
