@@ -73,6 +73,17 @@ export default function reducer(state=initialState, action) {
       }
     }
 
+    // no more reviews to fetch
+    case "FETCH_MOVIE_REVIEWS_NOMORE": {
+      return {
+        ...state,
+        reviews: {
+          results: state.reviews.results,
+          next: null,
+        }
+      }
+    }
+
     // reset all data
     case "RESET_MOVIE_DATA": {
       return initialState;

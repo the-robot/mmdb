@@ -72,6 +72,7 @@ export default class Reviews extends React.Component {
         <List
           itemLayout="horizontal"
           dataSource={ reviews }
+
           renderItem={review => (
             <List.Item>
               <List.Item.Meta
@@ -107,13 +108,15 @@ export default class Reviews extends React.Component {
           </p>
         </Modal>
 
-        <div style={{ textAlign: 'center' }}>
-          <Button style={{ border: 0 }}
-            onClick={ this.loadReviews.bind(this) }
-          >
-            Load More
-          </Button>
-        </div>
+        { this.props.reviews.next !== null &&
+          <div style={{ textAlign: 'center' }}>
+            <Button style={{ border: 0 }}
+              onClick={ this.loadReviews.bind(this) }
+            >
+              Load More
+            </Button>
+          </div>
+        }
 
         <div style={{ textAlign: 'right', marginTop: 15, fontSize: 12 }}>
           <p> Reviews from
