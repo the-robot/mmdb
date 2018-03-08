@@ -1,17 +1,16 @@
-import { Row, Col, Tabs, Icon, Button, List, Rate, Card, Avatar } from 'antd';
+import { Row, Col, Tabs, Icon, Button, Rate, List } from 'antd';
 import { connect } from 'react-redux';
 import React from 'react';
 
 import { fetch } from '../../actions/series/seasonAction';
-import { getCast } from '../../actions/series/castAction';
 import { reset } from '../../actions/series/seriesAction';
 
 import Loading from '../../components/Show/Series/Loading';
+import Casts from '../../components/Show/Series/Casts';
 
 @connect((store) => {
   return {
     seasons : store.series.seasons,
-    cast: store.series.cast,
 
     // states
     fetching: store.series.fetching,
@@ -23,7 +22,6 @@ export default class Seasons extends React.Component {
     const SEASON = this.props.match.params.season;
 
     this.props.dispatch(fetch(ID, SEASON));
-    this.props.dispatch(getCast(ID, SEASON));
   }
 
   componentWillUnmount() {
@@ -35,10 +33,11 @@ export default class Seasons extends React.Component {
   }
 
   render() {
-    const season = (this.props.seasons.length !== 0 ? this.props.seasons[0] : []);
-    const casts = this.props.cast;
+    const ID = this.props.match.params.id;
+    const SEASON = this.props.match.params.season;
 
-    const { Meta } = Card;    
+    const season = (this.props.seasons.length !== 0 ? this.props.seasons[0] : []);
+
     const TabPane = Tabs.TabPane;
 
     // if fetching return loading screen
@@ -112,21 +111,7 @@ export default class Seasons extends React.Component {
 
           {/* Cast list */}
           <TabPane tab={<span><Icon type="star" />Casts</span>} key="3">
-            <List
-              itemLayout="horizontal"
-              dataSource={ casts }
-              renderItem={cast => (
-                <List.Item>
-                  <List.Item.Meta
-                    avatar={<Avatar style={{ width: 120, height: 175 }} 
-                      shape="square" src={ cast.profile_path } />
-                    }
-                    title={<a href="#">{ cast.name }</a>}
-                    description={ cast.character }
-                  />
-                </List.Item>
-              )}
-            />
+            <Casts id={ ID } season={ SEASON } />
           </TabPane>
 
           {/*
