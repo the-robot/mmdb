@@ -1,7 +1,7 @@
 // store tv show information in details
 
 const initialState = {
-  general: {
+  overview: {
     id: null,
     title: '',
     first_air_date: '',
@@ -16,7 +16,7 @@ const initialState = {
     seasons_info: [],
   },
 
-  trailerId: '',
+  trailer: '',
   seasons: [],
   cast: [],
 
@@ -41,7 +41,7 @@ export default function reducer(state=initialState, action) {
         ...state,
         fetching: false,
         fetched: true,
-        general: action.payload,
+        overview: action.payload,
       }
     }
 
@@ -59,7 +59,7 @@ export default function reducer(state=initialState, action) {
         ...state,
         fetching: false,
         fetched: true,
-        trailerId: action.payload,
+        trailer: action.payload,
       }
     }
 

@@ -6,7 +6,7 @@ import { fetch } from '../../actions/series/seasonAction';
 import { getCast } from '../../actions/series/castAction';
 import { reset } from '../../actions/series/seriesAction';
 
-import Loading from './Loading';
+import Loading from '../../components/Show/Series/Loading';
 
 @connect((store) => {
   return {

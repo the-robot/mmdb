@@ -7,22 +7,22 @@ export default class Poster extends React.Component {
   }
 
   render() {
-    const movie = this.props.movie;
+    const series = this.props.series;
 
     return (
       <Col span={8}>
-        {/* Movie poster */}
+        {/* Poster */}
         <Row type="flex" justify="center" style={{ marginBottom: 10 }}>
-          <img src={ movie.poster } 
+          <img src={ series.poster } 
           alt="poster"/>
         </Row>
 
-        {/* Movie website and share button */}
+        {/* TV series website and share button */}
         <Row type="flex" justify="center">
           <Button.Group>
             {/* Disable button if homepage is not found */}
             <Button onClick={ this.visitMoviePage.bind(this) }
-              disabled={ movie.homepage === '' }>
+              disabled={ series.homepage === '' }>
               <Icon type="link" />Homepage
             </Button>
 

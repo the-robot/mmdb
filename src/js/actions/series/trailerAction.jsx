@@ -6,8 +6,6 @@ import getTmdbAPIKey from '../../api';
 
 export const getTrailer = (id, season=null) => {
   return (dispatch) => {
-    dispatch({type: "FETCH_SERIES"});
-
     const domain = 'https://api.themoviedb.org/3/tv/';
     var url;
     
