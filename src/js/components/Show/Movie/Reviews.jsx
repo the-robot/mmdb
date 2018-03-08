@@ -1,9 +1,15 @@
-import { List, Modal } from 'antd';
+import { List, Modal, Button } from 'antd';
+import { connect } from 'react-redux';
 import React from 'react';
 
-import CastCard from './CastCard';
+import { getReviews } from '../../../actions/movie/reviewsAction';
 
-export default class ReviewList extends React.Component {
+@connect((store) => {
+  return {
+    reviews: store.movie.reviews,
+  };
+})
+export default class Reviews extends React.Component {
   constructor(props) {
     super(props);
 
@@ -12,6 +18,11 @@ export default class ReviewList extends React.Component {
       content: null,
       modalVisible: false,
     }
+  }
+
+  componentWillMount() {
+    const ID = this.props.id;
+    this.props.dispatch(getReviews(ID, this.props.reviews.next));
   }
 
   showModal = () => {
@@ -26,6 +37,14 @@ export default class ReviewList extends React.Component {
     });
   }
 
+  showReviewModal(author, content) {
+    this.setState({
+      author: author,
+      content: content,
+      modalVisible: true,
+    })
+  }
+
   getReviewList(reviews) {
     var reviewList = [];
 
@@ -38,16 +57,15 @@ export default class ReviewList extends React.Component {
     return reviewList;
   }
 
-  showReviewModal(author, content) {
-    this.setState({
-      author: author,
-      content: content,
-      modalVisible: true,
-    })
+  loadReviews() {
+    const ID = this.props.id;
+    const NEXT = this.props.reviews.next;
+
+    this.props.dispatch(getReviews(ID, NEXT));
   }
 
   render() {
-    const reviews = this.props.reviews;
+    const reviews = this.props.reviews.results;
 
     return (
       <div>
@@ -88,6 +106,20 @@ export default class ReviewList extends React.Component {
             { this.state.content }
           </p>
         </Modal>
+
+        <div style={{ textAlign: 'center' }}>
+          <Button style={{ border: 0 }}
+            onClick={ this.loadReviews.bind(this) }
+          >
+            Load More
+          </Button>
+        </div>
+
+        <div style={{ textAlign: 'right', marginTop: 15, fontSize: 12 }}>
+          <p> Reviews from
+            <a href="https://www.themoviedb.org/" target="_blank"> The Movie Database </a>
+          </p>
+        </div>
       </div>
     );
   }

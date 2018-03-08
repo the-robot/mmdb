@@ -6,8 +6,6 @@ import getTmdbAPIKey from '../../api';
 
 export const getReviews = (id, page) => {
   return (dispatch) => {
-    dispatch({type: "FETCH_MOVIE"});
-
     const domain = 'https://api.themoviedb.org/3/movie/';
     const url = domain + id + '/reviews?api_key=' + getTmdbAPIKey() + "&page=" + page;
 

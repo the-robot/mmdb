@@ -1,9 +1,21 @@
 import { Row } from 'antd';
+import { connect } from 'react-redux';
 import React from 'react';
 
+import { getCast } from '../../../../actions/movie/castAction';
 import CastCard from './CastCard';
 
-export default class CastView extends React.Component {
+@connect((store) => {
+  return {
+    cast: store.movie.cast,
+  };
+})
+export default class Casts extends React.Component {
+  componentWillMount() {
+    const ID = this.props.id;
+    this.props.dispatch(getCast(ID));
+  }
+
   getCast(data) {
     var cast = [];
     var castCards = [];

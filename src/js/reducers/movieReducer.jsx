@@ -39,6 +39,7 @@ export default function reducer(state=initialState, action) {
       return {...state, fetching: false, error: action.payload}
     }
 
+    // Fetching Success States
     case "FETCH_MOVIE_FULFILLED": {
       return {
         ...state,
@@ -51,8 +52,6 @@ export default function reducer(state=initialState, action) {
     case "FETCH_MOVIE_TRAILER_FULFILLED": {
       return {
         ...state,
-        fetching: false,
-        fetched: true,
         trailer: action.payload,
       }
     }
@@ -60,8 +59,6 @@ export default function reducer(state=initialState, action) {
     case "FETCH_MOVIE_CAST_FULFILLED": {
       return {
         ...state,
-        fetching: false,
-        fetched: true,
         cast: action.payload,
       }
     }
@@ -69,8 +66,6 @@ export default function reducer(state=initialState, action) {
     case "FETCH_MOVIE_REVIEWS_FULFILLED": {
       return {
         ...state,
-        fetching: false,
-        fetched: true,
         reviews: {
           results: state.reviews.results.concat(action.payload),
           next: state.reviews.next + 1,
