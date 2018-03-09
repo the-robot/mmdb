@@ -33,32 +33,49 @@ export default function reducer(state=INITIAL_STATE, action) {
       }
     }
 
+    case "INIT_CALENDAR_SERIES_BY_YEARS": {
+      return {
+        ...state,
+        series: sort([...state.series, action.payload]),
+      }
+    }
+
     // FETCH METHODS
     case "FETCH_CALENDAR_MOVIES_FULFILLED": {
-      var movies = state.movies;
+      var series = state.movies;
 
       // year of new data
       const year = Object.keys(action.payload)[0];
 
       // get index of given year
       // then add new data into given year
-      const index = movies.findIndex(x => Object.keys(x)[0] === year);
-      movies[index][year] = movies[index][year].concat(action.payload[year]);
+      const index = series.findIndex(x => Object.keys(x)[0] === year);
+      series[index][year] = series[index][year].concat(action.payload[year]);
 
       return {
         ...state,
         fetching: false,
         fetched: true,
-        movies: [...movies],
+        movies: [...series],
       }
     }
 
     case "FETCH_CALENDAR_SERIES_FULFILLED": {
+      var series = state.series;
+
+      // year of new data
+      const year = Object.keys(action.payload)[0];
+
+      // get index of given year
+      // then add new data into given year
+      const index = series.findIndex(x => Object.keys(x)[0] === year);
+      series[index][year] = series[index][year].concat(action.payload[year]);
+
       return {
         ...state,
         fetching: false,
         fetched: true,
-        series: sort([...state.series, action.payload]),
+        series: [...series],
       }
     }
 
@@ -77,6 +94,23 @@ export default function reducer(state=INITIAL_STATE, action) {
       return {
         ...state,
         movies: movies,
+      }
+    }
+
+    case "DELETE_CALENDAR_SERIES_EXPECT_YEAR": {
+      const year = action.payload;
+      const series = state.series;
+
+      for(let i=0; i<series.length; i++) {
+        const temp_year = parseInt(Object.keys(series[i])[0]);
+
+        if ( temp_year !== year )
+          series[i][temp_year] = [];
+      }
+
+      return {
+        ...state,
+        series: series,
       }
     }
 
