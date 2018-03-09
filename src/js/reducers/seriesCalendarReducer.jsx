@@ -1,4 +1,4 @@
-const FUTURE = 1;
+const FUTURE = 0;
 
 const INITIAL_STATE = {
   series: [],
