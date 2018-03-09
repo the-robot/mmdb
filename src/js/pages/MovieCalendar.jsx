@@ -93,7 +93,7 @@ export default class MovieCalendar extends React.Component {
 
       // prepare movie cards for each year
       const content = <Row type="flex" justify="center">
-        <Col>
+        <Col span={24}>
           <ShowsView shows={ movies[i] } year={ year } path='movies/' />
         </Col>
 

@@ -93,7 +93,7 @@ export default class SeriesCalendar extends React.Component {
 
       // prepare tv series cards for each year
       const content = <Row type="flex" justify="center">
-        <Col>
+        <Col span={24}>
           <ShowsView shows={ series[i] } year={ year } path='series/' />
         </Col>
 
