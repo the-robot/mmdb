@@ -4,9 +4,25 @@ import { NavLink } from 'react-router-dom';
 import React from 'react';
 
 export default class Seasons extends React.Component {
+  clean(seasons) {
+    // remove season with empty data
+    for (let i=0; i<seasons.length; i++) {
+      if (Object.keys(seasons[i]).length === 0 && seasons[i].constructor === Object)
+        seasons.splice(i, 1);
+    }
+
+    return seasons;
+  }
+
   render() {
-    const seasons = this.props.seasons;
+    const seasons = this.clean(this.props.seasons);
     const pathname = this.props.pathname;
+
+    // return nothing if length of seasons after
+    // cleaning empty data is 0
+    if (seasons.length === 0) {
+      return (null);
+    }
 
     return (
       <Row type="flex" justify="start">
