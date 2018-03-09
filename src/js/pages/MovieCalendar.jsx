@@ -159,7 +159,7 @@ export default class MovieCalendar extends React.Component {
           { movieTabs }
         </Tabs>
 
-        {/* Button to go back to top */}}
+        {/* Button to go back to top */}
         <BackTop />
       </div>
     );
