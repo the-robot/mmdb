@@ -1,15 +1,15 @@
 import { combineReducers } from 'redux';
 
-import calendar from './calendarReducer';
+import movie_calendar from './movieCalendarReducer';
 import movie from './movieReducer';
+import series_calendar from './seriesCalendarReducer';
 import series from './seriesReducer';
-import shows from './showsReducer';
 import user from './userReducer';
 
 export default combineReducers({
-  calendar,
+  movie_calendar,
   movie,
+  series_calendar,
   series,
-  shows,
   user,
 });

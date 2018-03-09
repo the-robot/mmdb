@@ -8,19 +8,16 @@ import AppLayout from './components/Layout';
 import Home from './pages/Home';
 
 // Movie          : Movie description in details
-// Movies         : Show movie cards
 // MovieCalender  : Show featured movies from different years
 import Movie from './pages/Movie';
 import MovieCalendar from './pages/MovieCalendar';
 
 // Season            : TV Show season in details
 // Seris             : TV Show description in details
-// TVSeries          : Show tv series card
 // TVSeriesCalendar  : Show featured tv series from different years
 import Season from './pages/Series/Season';
 import Series from './pages/Series/Series';
-import TVShows from './pages/TVShows';
-import TVShowCalendar from './pages/TVShowCalendar';
+import SeriesCalendar from './pages/SeriesCalendar';
 
 import NotFound from './pages/NotFound';
 import store from './store';
@@ -37,10 +34,9 @@ const App = () => (
           <Route path='/calendar/movies' component={ MovieCalendar }/>
 
           {/* TV Series */}
-          <Route path='/calendar/series/:year(\d+)/:id(\d+)/:season(\d+)' component={ Season }/>
-          <Route path='/calendar/series/:year(\d+)/:id(\d+)' component={ Series }/>
-          <Route path='/calendar/series/:year(\d+)' component={ TVShows }/>
-          <Route path='/calendar/series' component={ TVShowCalendar }/>
+          <Route path='/calendar/series/:id(\d+)/:season(\d+)' component={ Season }/>
+          <Route path='/calendar/series/:id(\d+)' component={ Series }/>
+          <Route path='/calendar/series' component={ SeriesCalendar }/>
 
           <Route path='/about' component={ About } />
           <Route path="*" component={ NotFound }/>

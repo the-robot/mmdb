@@ -28,6 +28,8 @@ export const fetchMovies = (year, page) => {
 }
 
 export const fetchSeries = (year, page) => {
+  console.log("PAGE", page);
+
   const event = "FETCH_CALENDAR_SERIES_FULFILLED";
   const domain = 'https://api.themoviedb.org/3/discover/tv';
   const url = domain + '?api_key=' + getTmdbAPIKey() + '&page=' + page +
@@ -41,6 +43,12 @@ export const fetchSeries = (year, page) => {
 export const deleteMoviesExcept = (year) => {
   return (dispatch) => {
     dispatch({type: "DELETE_CALENDAR_MOVIES_EXPECT_YEAR", payload: year})
+  }
+}
+
+export const deleteSeriesExcept = (year) => {
+  return (dispatch) => {
+    dispatch({type: "DELETE_CALENDAR_SERIES_EXPECT_YEAR", payload: year})
   }
 }
 

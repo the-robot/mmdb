@@ -2,37 +2,37 @@ import { Row, Col, Tabs, Input, Spin, Button, BackTop } from 'antd';
 import { connect } from 'react-redux';
 import React from 'react';
 
-import { init, deleteExcept, fetch, reset } from '../actions/movieCalendarAction';
+import { init, deleteExcept, fetch, reset } from '../actions/seriesCalendarAction';
 import ShowsView from '../components/Show/ShowsView';
 
 @connect((store) => {
   return {
-    movies: store.movie_calendar.movies,
-    year: store.movie_calendar.year,
-    skip: store.movie_calendar.skip,
+    series: store.series_calendar.series,
+    year: store.series_calendar.year,
+    skip: store.series_calendar.skip,
 
-    fetch_pages: store.movie_calendar.fetch_pages,
+    fetch_pages: store.series_calendar.fetch_pages,
 
     // states
-    fetching: store.movie_calendar.fetching,
+    fetching: store.series_calendar.fetching,
   };
 })
-export default class MovieCalendar extends React.Component {
+export default class SeriesCalendar extends React.Component {
   componentWillMount() {
-    this.addMovieYears();
-    this.getMovies(this.props.year);
+    this.addSeriesYears();
+    this.getSeries(this.props.year);
   }
 
   componentDidMount() {
-    document.title = "Calendar - Movies";
+    document.title = "Calendar - TV Series";
   }
 
   componentWillUnmount() {
     this.props.dispatch(reset());
   }
 
-  // Add movie years on to tab
-  addMovieYears(year=this.props.year, stop=this.props.skip) {
+  // Add tv series years on to tab
+  addSeriesYears(year=this.props.year, stop=this.props.skip) {
     for (let i=0; i<stop; i++) {
       let tofetch = year - i;
 
@@ -42,13 +42,13 @@ export default class MovieCalendar extends React.Component {
     }
   }
 
-  // Load more movie years while browsing
-  loadMovieYears(year) {
-    var lastIndex = this.props.movies.length - 1;
+  // Load more tv series years while browsing
+  loadSeriesYear(year) {
+    var lastIndex = this.props.series.length - 1;
     var lastYear;
 
     try {
-      lastYear = Object.keys(this.props.movies[lastIndex])[0];
+      lastYear = Object.keys(this.props.series[lastIndex])[0];
       lastYear = parseInt(lastYear);
     } catch (err) {
       return;
@@ -57,90 +57,90 @@ export default class MovieCalendar extends React.Component {
     // if year user browsing is near lastYear
     // fetch new else not
     if ( (year - lastYear) < 8 )
-      this.addMovieYears(lastYear-1);
+      this.addSeriesYears(lastYear-1);
   }
 
   hasYear(year) {
-    for (let i=0; i<this.props.movies.length; i++) {
-      if (Object.keys(this.props.movies[i])[0] === year)
+    for (let i=0; i<this.props.series.length; i++) {
+      if (Object.keys(this.props.series[i])[0] === year)
         return true;
     }
     return false;
   }
 
-  getMovies(year, page=1) {
+  getSeries(year, page=1) {
     const tofetch = this.props.fetch_pages;
     for (let i=0; i<=tofetch; i++)
       this.props.dispatch(fetch(year, page+i));
   }
 
-  loadMoreMovies(year) {
-    var index = this.props.movies.findIndex(x => Object.keys(x)[0] === year);
-    var page = (this.props.movies[index][year].length / 20) + 1;
-    this.getMovies(year, page);
+  loadMoreSeries(year) {
+    var index = this.props.series.findIndex(x => Object.keys(x)[0] === year);
+    var page = (this.props.series[index][year].length / 20) + 1;
+    this.getSeries(year, page);
   }
 
-  getMovieTabs(movies) {
+  getSeriesTabs(series) {
     // React Component
     const TabPane = Tabs.TabPane;
 
-    // Store movie data in tabs by year
-    var movie_tabs = [];
+    // Store tv series data in tabs by year
+    var series_tabs = [];
 
-    // prepare movie tabs by year
-    for (let i=0; i<movies.length; i++) {
-      const year = Object.keys(movies[i])[0];
+    // prepare tv series tabs by year
+    for (let i=0; i<series.length; i++) {
+      const year = Object.keys(series[i])[0];
 
-      // prepare movie cards for each year
+      // prepare tv series cards for each year
       const content = <Row type="flex" justify="center">
         <Col>
-          <ShowsView shows={ movies[i] } year={ year } path='movies/' />
+          <ShowsView shows={ series[i] } year={ year } path='series/' />
         </Col>
 
         <Col>
           { this.props.fetching ? (
             <Spin size="large" />
           ) : (
-            <Button type="primary" onClick={() => this.loadMoreMovies(year)}>Load More</Button>
+            <Button type="primary" onClick={() => this.loadMoreSeries(year)}>Load More</Button>
           )}
         </Col>
       </Row>
 
-      movie_tabs.push(
+      series_tabs.push(
         <TabPane tab={ year } key={ year + "" }> { content } </TabPane>
       )
     }
 
-    return movie_tabs;
+    return series_tabs;
   }
 
   onTabClick(year) {
     year = parseInt(year)
 
-    // delete movie data from other years
+    // delete tv series data from other years
     // and get data of current year
     this.props.dispatch(deleteExcept(year));
-    this.getMovies(year);
+    this.getSeries(year);
 
     // if user is near or reach the end of tabs
-    // try to load more movie years
-    this.loadMovieYears(year);
+    // try to load more tv series years
+    this.loadSeriesYear(year);
 }
 
   render() {
     // React Components
-    const movieTabs = this.getMovieTabs(this.props.movies);
+    const seriesTabs = this.getSeriesTabs(this.props.series);
 
     return (
       <div>
         <Row type="flex" justify="start" align="middle">
           <Col span={18}>
-            <h1>Movies Calendar</h1>
+            <h1>TV Series Calendar</h1>
           </Col>
 
           <Col span={6}>
             <Input.Search
-              placeholder="search movies"
+              placeholder="search series"
               style={{ width: 270 }}
               onSearch={value => console.log(value)}
               enterButton
@@ -153,7 +153,7 @@ export default class MovieCalendar extends React.Component {
           size="large"
           onTabClick={ this.onTabClick.bind(this) }
         >
-          { movieTabs }
+          { seriesTabs }
         </Tabs>
 
         {/* Button to go back to top */}
