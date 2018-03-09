@@ -12,6 +12,7 @@ import ShowsView from '../components/Show/ShowsView';
     skip: store.movie_calendar.skip,
 
     fetch_pages: store.movie_calendar.fetch_pages,
+    fetched_all_movies: store.series_calendar.fetched_all_movies,
 
     // states
     fetching: store.movie_calendar.fetching,
@@ -101,7 +102,10 @@ export default class MovieCalendar extends React.Component {
           { this.props.fetching ? (
             <Spin size="large" />
           ) : (
-            <Button type="primary" onClick={() => this.loadMoreMovies(year)}>Load More</Button>
+            <Button type="primary" onClick={() => this.loadMoreMovies(year)}
+              style={{ visibility: this.props.fetched_all_movies }}>
+              Load More
+            </Button>
           )}
         </Col>
       </Row>

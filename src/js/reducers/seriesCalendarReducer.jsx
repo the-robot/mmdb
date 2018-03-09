@@ -7,6 +7,10 @@ const INITIAL_STATE = {
   skip: 16, // year to be skip when load more
   fetch_pages: 4,  // number of pages to be fetched
 
+  // to determine whether to show load button or not
+  // initial (false) or hidden (true)
+  fetched_all_series: 'initial',
+
   // States
   fetching: false,
   fetched: false,
@@ -42,11 +46,20 @@ export default function reducer(state=INITIAL_STATE, action) {
 
       series[index][year] = series[index][year].concat(action.payload[year]);
 
+      // API returns 20 or less per request
+      // if response data is less than 20 or 0 means
+      // previous or current request is the last page (already fetched all data)
+      // if 0 or get decimal by diving with 20 = last page
+      var fetched_all_series = 'initial';
+      if (action.payload[year].length == 0 || (action.payload[year].length / 20) % 1 != 0)
+        fetched_all_series = 'hidden';
+
       return {
         ...state,
         fetching: false,
         fetched: true,
         series: [...series],
+        fetched_all_series: fetched_all_series,
       }
     }
 

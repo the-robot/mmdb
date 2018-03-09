@@ -12,6 +12,7 @@ import ShowsView from '../components/Show/ShowsView';
     skip: store.series_calendar.skip,
 
     fetch_pages: store.series_calendar.fetch_pages,
+    fetched_all_series: store.series_calendar.fetched_all_series,
 
     // states
     fetching: store.series_calendar.fetching,
@@ -56,7 +57,7 @@ export default class SeriesCalendar extends React.Component {
 
     // if year user browsing is near lastYear
     // fetch new else not
-    if ( (year - lastYear) < 8 )
+    if ((year - lastYear) < 8)
       this.addSeriesYears(lastYear-1);
   }
 
@@ -101,7 +102,10 @@ export default class SeriesCalendar extends React.Component {
           { this.props.fetching ? (
             <Spin size="large" />
           ) : (
-            <Button type="primary" onClick={() => this.loadMoreSeries(year)}>Load More</Button>
+            <Button type="primary" onClick={() => this.loadMoreSeries(year)}
+              style={{ visibility: this.props.fetched_all_series }}>
+              Load More
+            </Button>
           )}
         </Col>
       </Row>

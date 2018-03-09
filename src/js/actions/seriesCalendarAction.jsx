@@ -4,8 +4,6 @@ import getTmdbAPIKey from '../api';
 import { cleanShowData as clean } from './dataProcess';
 
 export const init = (year) => {
-  console.log("INIT MY DATA", year);
-
   return (dispatch) => {
     var payload = {};
     payload[year] = [];
