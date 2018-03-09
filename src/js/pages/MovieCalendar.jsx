@@ -1,51 +1,52 @@
-import { Row, Col, Input, Button, BackTop, Spin } from 'antd';
+import { Row, Col, Tabs, Input, Spin, Button, BackTop } from 'antd';
 import { connect } from 'react-redux';
 import React from 'react';
 
-import { fetchMovies as fetch, reset } from '../actions/calendarAction';
+import { initMovieYear,
+         deleteMoviesExcept,
+         fetchMovies as fetch,
+         reset } from '../actions/calendarAction';
 import ShowsView from '../components/Show/ShowsView';
 
 @connect((store) => {
   return {
     movies: store.calendar.movies,
     year: store.calendar.year,
-    skip: store.calendar.skip,
+    year_skip: store.calendar.year_skip,
+
+    fetch_pages: store.calendar.fetch_pages,
+
+    // states
     fetching: store.calendar.fetching,
   };
 })
 export default class MovieCalendar extends React.Component {
   componentWillMount() {
-    this.getMovies();
+    this.addMovieYears();
+    this.getMovies(this.props.year);
   }
 
   componentDidMount() {
     document.title = "Calendar - Movies";
   }
 
-  // componentWillUnmount() {
-  //   this.props.dispatch(reset());
-  // }
+  componentWillUnmount() {
+    this.props.dispatch(reset());
+  }
 
-  getMovies(year=this.props.year, stop=this.props.skip) {
+  // Add movie years on to tab
+  addMovieYears(year=this.props.year, stop=this.props.year_skip) {
     for (let i=0; i<stop; i++) {
       let tofetch = year - i;
 
       // prevent sending request for already fetched data
-      if (!this.isFetched(tofetch.toString()))
-        this.props.dispatch(fetch(tofetch, 1, 4));
+      if (!this.hasYear(tofetch.toString()))
+        this.props.dispatch(initMovieYear(tofetch));
     }
   }
 
-  isFetched(year) {
-    for (let i=0; i<this.props.movies.length; i++) {
-      if (Object.keys(this.props.movies[i])[0] === year)
-        return true;
-    }
-    return false;
-  }
-
-  getNewMovies() {
-    // get last fetched movie year
+  // Load more movie years while browsing
+  loadMovieYears(year) {
     var lastIndex = this.props.movies.length - 1;
     var lastYear;
 
@@ -56,45 +57,109 @@ export default class MovieCalendar extends React.Component {
       return;
     }
 
-    this.getMovies(lastYear-1);
+    // if year user browsing is near lastYear
+    // fetch new else not
+    if ( (year - lastYear) < 8 )
+      this.addMovieYears(lastYear-1);
   }
 
+  hasYear(year) {
+    for (let i=0; i<this.props.movies.length; i++) {
+      if (Object.keys(this.props.movies[i])[0] === year)
+        return true;
+    }
+    return false;
+  }
+
+  getMovies(year, page=1) {
+    const tofetch = this.props.fetch_pages;
+    for (let i=0; i<=tofetch; i++)
+      this.props.dispatch(fetch(year, page+i));
+  }
+
+  loadMoreMovies(year) {
+    var index = this.props.movies.findIndex(x => Object.keys(x)[0] === year);
+    var page = (this.props.movies[index][year].length / 20) + 1;
+    this.getMovies(year, page);
+  }
+
+  getMovieTabs(movies) {
+    // React Component
+    const TabPane = Tabs.TabPane;
+
+    // Store movie data in tabs by year
+    var movie_tabs = [];
+
+    // prepare movie tabs by year
+    for (let i=0; i<movies.length; i++) {
+      const year = Object.keys(movies[i])[0];
+
+      // prepare movie cards for each year
+      const content = <Row type="flex" justify="center">
+        <Col>
+          <ShowsView shows={ movies[i] } year={ year } path='movies/' />
+        </Col>
+
+        <Col>
+          { this.props.fetching ? (
+            <Spin size="large" />
+          ) : (
+            <Button type="primary" onClick={() => this.loadMoreMovies(year)}>Load More</Button>
+          )}
+        </Col>
+      </Row>
+
+      movie_tabs.push(
+        <TabPane tab={ year } key={ year + "" }> { content } </TabPane>
+      )
+    }
+
+    return movie_tabs;
+  }
+
+  onTabClick(year) {
+    year = parseInt(year)
+
+    // delete movie data from other years
+    // and get data of current year
+    this.props.dispatch(deleteMoviesExcept(year));
+    this.getMovies(year);
+
+    // if user is near or reach the end of tabs
+    // try to load more movie years
+    this.loadMovieYears(year);
+}
+
   render() {
-    const Search = Input.Search;
-    const movies = this.props.movies;
+    // React Components
+    const movieTabs = this.getMovieTabs(this.props.movies);
 
     return (
       <div>
-        <Row type="flex" justify="start">
-          <Col>
-            <h1>Movie Calendar</h1>
+        <Row type="flex" justify="start" align="middle">
+          <Col span={18}>
+            <h1>Movies Calendar</h1>
           </Col>
-        </Row>
 
-        <Row type="flex" justify="end" >
-          <Col>
-            <Search
-              placeholder="search movie"
-              style={{ width: 300 }}
+          <Col span={6}>
+            <Input.Search
+              placeholder="search movies"
+              style={{ width: 270 }}
               onSearch={value => console.log(value)}
               enterButton
             />
           </Col>
         </Row>
 
-        <ShowsView shows={ movies } path='movies/' />
+        <Tabs
+          tabPosition="horizontal"
+          size="large"
+          onTabClick={ this.onTabClick.bind(this) }
+        >
+          { movieTabs }
+        </Tabs>
 
-        <Row type="flex" justify="center">
-          <Col>
-            { this.props.fetching ? (
-              <Spin size="large" />
-            ) : (
-              <Button type="primary" onClick={this.getNewMovies.bind(this)} >Load More</Button>
-            )}
-          </Col>
-        </Row>
-
-        {/* Button to go back to top */}
+        {/* Button to go back to top */}}
         <BackTop />
       </div>
     );

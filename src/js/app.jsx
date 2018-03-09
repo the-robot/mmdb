@@ -11,7 +11,6 @@ import Home from './pages/Home';
 // Movies         : Show movie cards
 // MovieCalender  : Show featured movies from different years
 import Movie from './pages/Movie';
-import Movies from './pages/Movies';
 import MovieCalendar from './pages/MovieCalendar';
 
 // Season            : TV Show season in details
@@ -34,8 +33,7 @@ const App = () => (
           <Route exact path='/' component={ Home } />
 
           {/* Movies */}
-          <Route path='/calendar/movies/:year(\d+)/:id(\d+)' component={ Movie }/>
-          <Route path='/calendar/movies/:year(\d+)' component={ Movies }/>
+          <Route path='/calendar/movies/:id(\d+)' component={ Movie }/>
           <Route path='/calendar/movies' component={ MovieCalendar }/>
 
           {/* TV Series */}

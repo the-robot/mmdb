@@ -8,68 +8,40 @@ import ShowCard from './ShowCard';
 // shows = { shows }
 // path = 'path/'
 export default class ShowsView extends React.Component {
-  render() {
-    const shows = this.props.shows;
-    const path = this.props.path;
-
-    const showsInRow = shows.map(
-      (shows, i) => <ShowsInRow key={ i } shows={ shows } path={ path } />
-    );
-
-    return(
-      <div>
-        { showsInRow }
-      </div>
-    );
+  validate(data) {
+    // if movie data does not have summary or poster image
+    // consider as invalid
+    if (data.poster === null)
+      return false
+  
+    if (data.summary === '')
+      return false
+  
+    // valid
+    return true
   }
-}
 
-// Group feature shows by year
-class ShowsInRow extends React.Component {
   render() {
     const shows = this.props.shows;
+    const year = this.props.year;
     const path = this.props.path;
-    
-    // Header Button CSS
-    const headerButton = {
-      fontSize: 28,
-      border: 0,
-      marginBottom: 8,
-    }
 
-    var year = null;
-    var showsLink = null;
-    var showCards = '';
-    
-    // make show cards on each show objects from json
-    var success = true;
-    try {
-      year = Object.keys(shows);
-    } catch (err) {
-      success = false;
-    }
+    var showsInRow = [];
 
-    if (success) {
-      showsLink = path + year;
-      showCards = shows[year].map(
-        (show, i) => <ShowCard key={ i } showInfo={ show } year={ year } path={ path } />
-      );
+    for (let i=0; i<shows[year].length; i++) {
+      if (!this.validate(shows[year][i])) {
+        continue;
+      }
+
+      showsInRow.push(
+        <ShowCard key={ i } showInfo={ shows[year][i] } year={ year } path={ path } />
+      )
     }
 
     return(
-      <div>
-        <Row gutter={16} type="flex" justify="start">
-          <Col>
-            <NavLink to={ showsLink } >
-              <Button size='large' style={ headerButton }> { year } </Button>
-            </NavLink>
-          </Col>
-        </Row>
-
-        <Row gutter={24} type="flex" justify="center">
-          { showCards }
-        </Row>
-      </div>
+      <Row gutter={24} type="flex" justify="center">
+        { showsInRow }
+      </Row>
     );
   }
 }

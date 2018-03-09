@@ -3,9 +3,13 @@ const FUTURE = 1;
 // store information of featured movie from different years
 const INITIAL_STATE = {
   movies: [],
-  year: new Date().getFullYear() + FUTURE,
   series: [],
-  skip: 8, // year to be skip when load more
+  
+  year: new Date().getFullYear() + FUTURE,
+  year_skip: 16, // year to be skip when load more
+  fetch_pages: 4,  // number of pages to be fetched
+
+  // States
   fetching: false,
   fetched: false,
   error: null,
@@ -20,13 +24,32 @@ export default function reducer(state=INITIAL_STATE, action) {
     case "FETCH_CALENDAR_REJECTED": {
       return {...state, fetching: false, error: action.payload}
     }
+    
+    // INITIALISATION
+    case "INIT_CALENDAR_MOVIES_BY_YEARS": {
+      return {
+        ...state,
+        movies: sort([...state.movies, action.payload]),
+      }
+    }
 
+    // FETCH METHODS
     case "FETCH_CALENDAR_MOVIES_FULFILLED": {
+      var movies = state.movies;
+
+      // year of new data
+      const year = Object.keys(action.payload)[0];
+
+      // get index of given year
+      // then add new data into given year
+      const index = movies.findIndex(x => Object.keys(x)[0] === year);
+      movies[index][year] = movies[index][year].concat(action.payload[year]);
+
       return {
         ...state,
         fetching: false,
         fetched: true,
-        movies: sort([...state.movies, action.payload]),
+        movies: [...movies],
       }
     }
 
@@ -39,7 +62,25 @@ export default function reducer(state=INITIAL_STATE, action) {
       }
     }
 
-    // reset all data
+    // DELETE METHODS
+    case "DELETE_CALENDAR_MOVIES_EXPECT_YEAR": {
+      const year = action.payload;
+      const movies = state.movies;
+
+      for(let i=0; i<movies.length; i++) {
+        const temp_year = parseInt(Object.keys(movies[i])[0]);
+
+        if ( temp_year !== year )
+          movies[i][temp_year] = [];
+      }
+
+      return {
+        ...state,
+        movies: movies,
+      }
+    }
+
+    // RESET
     case "RESET_CALENDAR_DATA": {
       return INITIAL_STATE;
     }

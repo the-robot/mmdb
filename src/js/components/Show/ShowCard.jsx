@@ -44,7 +44,7 @@ export default class ShowCard extends React.Component {
     const { showInfo } = this.props;
     const rating = this.ratingScale(showInfo.rating);
 
-    const link = '/calendar/' + this.props.path + this.props.year + '/' + showInfo.id;
+    const link = '/calendar/' + this.props.path + showInfo.id;
 
     return(
       <Col xs={{ span: 24, offset: 0}} 
@@ -57,7 +57,7 @@ export default class ShowCard extends React.Component {
         <Card title={ showInfo.title }
               extra={ <a href="#"><NavLink to={ link } >More Info</NavLink></a> }
               style={{ width: 260, textAlign: 'justify' }}
-              cover={<img alt="poster" src={ showInfo.poster } />
+              cover={<img alt="poster" height={ 360 } src={ showInfo.poster } />
         }>
           <p style={{overflow: 'hidden', height: '210px' }}>{ showInfo.summary }</p>
           <Tag color={ rating.color }>Rating: { rating.value }</Tag>
