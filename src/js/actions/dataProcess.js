@@ -30,6 +30,9 @@ export const cleanShowData = (data) => {
       title: (each.title != undefined ? each.title : each.name),
       original_title: (each.original_title != undefined ? each.original_title : each.original_name),
       language: each.original_language,
+      release_date: (each.release_date != undefined ? getDate(each.release_date) :
+                     getDate(each.first_air_date)
+                    ),
       summary: each.overview,
       rating: each.vote_average,
       poster: (each.poster_path !== null ? POSTER_PATH + each.poster_path : null),

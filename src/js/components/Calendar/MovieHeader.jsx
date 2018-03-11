@@ -1,4 +1,5 @@
-import { Row, Col, Button, Modal, Input } from 'antd';
+import { Row, Col, Button, Modal, Input, List, Card, Avatar } from 'antd';
+import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
 import React from 'react';
 
@@ -18,6 +19,10 @@ export default class MovieHeader extends React.Component {
       visible: false,
       query: '',
     }
+  }
+
+  componentWillUnmount() {
+    this.props.dispatch(clear())
   }
 
   showSearchBox() {
@@ -48,13 +53,39 @@ export default class MovieHeader extends React.Component {
     var results = this.props.results;
     var list = [];
 
-    for (let i=0; i<results.length; i++) {
-      list.push(
-        <li> { results[i].title } - { results[i].original_title } </li>
-      )
-    }
+    // react component
+    const { Meta } = Card;  
 
-    return list;
+    // for (let i=0; i<results.length; i++) {
+    //   list.push(
+    //     <li> { results[i].title } - { results[i].original_title } </li>
+    //   )
+    // }
+    return <List
+      itemLayout="horizontal"
+      dataSource={ results }
+      renderItem={result => (
+        <List.Item>
+          <List.Item.Meta
+            avatar={<Avatar style={{ width: 60, height: 90 }} 
+              shape="square" src={ result.poster } />
+            }
+            title={
+              <NavLink to={ "/calendar/movies/" + result.id }>
+                <a href={ "#/calendar/movies/" + result.id }> { result.title } </a>
+              </NavLink>
+            }
+            description={
+              <div>
+                <p style={{ fontSize: 10 }}><b>{ result.original_title }</b></p>
+                <p>{ result.release_date }</p>
+              </div>
+            }
+          />
+        </List.Item>
+      )}
+    />;
+
   }
 
   render() {
@@ -75,7 +106,6 @@ export default class MovieHeader extends React.Component {
         <Modal
           visible={ this.state.visible }
           style={{ top: 60 }}
-          width={ 600 }
 
           title="Search Movies"
           onCancel={ this.handleCancel }
@@ -88,6 +118,7 @@ export default class MovieHeader extends React.Component {
                 placeholder="Search Movies"
                 value={ this.state.query }
                 onChange={ this.onChange.bind(this) }
+                onPressEnter={ this.search.bind(this) }
                 />
             </Col>
 

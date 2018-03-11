@@ -24,7 +24,7 @@ const search = (url) => {
       .then((response) => {
         dispatch({
           type: "SEARCH_SHOWS_FULFILLED",
-          payload: clean(response.data.results).slice(0, 11)
+          payload: clean(response.data.results).slice(0, 10)
         });
       })
       .catch((err) => {
