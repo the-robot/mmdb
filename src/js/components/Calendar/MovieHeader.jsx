@@ -45,6 +45,7 @@ export default class MovieHeader extends React.Component {
   search() {
     var query = this.state.query;
     if (query && !this.props.fetching) {
+      this.props.dispatch(clear());
       this.props.dispatch(search(query));
     }
   }
