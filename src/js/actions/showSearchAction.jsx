@@ -10,6 +10,12 @@ export const searchMovies = (query) => {
   return search(url);
 }
 
+export const searchSeries = (query) => {
+  const domain = 'https://api.themoviedb.org/3/search/tv';
+  const url = domain + '?api_key=' + getTmdbAPIKey() + '&query=' + query;
+  return search(url);
+}
+
 export const searchClear = () => {
   return (dispatch) => {
     dispatch({type: "SEARCH_SHOWS_CLEAR"});

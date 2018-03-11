@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import React from 'react';
 
 import { init, deleteExcept, fetch, reset } from '../actions/seriesCalendarAction';
+import SeriesHeader from '../components/Calendar/SeriesHeader';
 import ShowsView from '../components/Show/ShowsView';
 
 @connect((store) => {
@@ -137,20 +138,8 @@ export default class SeriesCalendar extends React.Component {
 
     return (
       <div>
-        <Row type="flex" justify="start" align="middle">
-          <Col span={18}>
-            <h1>TV Series Calendar</h1>
-          </Col>
-
-          <Col span={6}>
-            <Input.Search
-              placeholder="search series"
-              style={{ width: 270 }}
-              onSearch={value => console.log(value)}
-              enterButton
-            />
-          </Col>
-        </Row>
+         {/* Page title and search button */}
+         <SeriesHeader />
 
         <Tabs
           tabPosition="horizontal"
