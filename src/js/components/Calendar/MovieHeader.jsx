@@ -44,23 +44,15 @@ export default class MovieHeader extends React.Component {
 
   search() {
     var query = this.state.query;
-    if (query) {
+    if (query && !this.props.fetching) {
       this.props.dispatch(search(query));
     }
   }
 
   getResultList() {
-    var results = this.props.results;
-    var list = [];
-
-    // react component
     const { Meta } = Card;  
+    var results = this.props.results;
 
-    // for (let i=0; i<results.length; i++) {
-    //   list.push(
-    //     <li> { results[i].title } - { results[i].original_title } </li>
-    //   )
-    // }
     return <List
       itemLayout="horizontal"
       dataSource={ results }
@@ -85,7 +77,6 @@ export default class MovieHeader extends React.Component {
         </List.Item>
       )}
     />;
-
   }
 
   render() {
