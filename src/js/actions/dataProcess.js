@@ -21,8 +21,6 @@ const BACKCOVER_PATH = 'https://image.tmdb.org/t/p/' + BACKCOVER_SIZES[3];
 export const cleanShowData = (data) => {
   var results = [];
 
-  console.log("DATA", data);
-
   for (let each of data) {
     results.push({
       id: each.id,
