@@ -13,7 +13,7 @@ import Movie from './pages/Movie';
 import MovieCalendar from './pages/MovieCalendar';
 
 // Season            : TV Show season in details
-// Seris             : TV Show description in details
+// Series             : TV Show description in details
 // TVSeriesCalendar  : Show featured tv series from different years
 import Season from './pages/Series/Season';
 import Series from './pages/Series/Series';
