@@ -106,7 +106,6 @@ export default class MovieHeader extends React.Component {
           <Row type="flex" justify="start">
             <Col span={20}>
               <Input
-                placeholder="Search Movies"
                 value={ this.state.query }
                 onChange={ this.onChange.bind(this) }
                 onPressEnter={ this.search.bind(this) }
