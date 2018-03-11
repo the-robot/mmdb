@@ -1,8 +1,9 @@
-import { Row, Col, Tabs, Input, Spin, Button, BackTop } from 'antd';
+import { Row, Col, Tabs, Spin, Button, BackTop } from 'antd';
 import { connect } from 'react-redux';
 import React from 'react';
 
 import { init, deleteExcept, fetch, reset } from '../actions/movieCalendarAction';
+import MovieHeader from '../components/Calendar/MovieHeader';
 import ShowsView from '../components/Show/ShowsView';
 
 @connect((store) => {
@@ -13,8 +14,7 @@ import ShowsView from '../components/Show/ShowsView';
 
     fetch_pages: store.movie_calendar.fetch_pages,
     fetched_all_movies: store.series_calendar.fetched_all_movies,
-
-    // states
+    
     fetching: store.movie_calendar.fetching,
   };
 })
@@ -129,7 +129,7 @@ export default class MovieCalendar extends React.Component {
     // if user is near or reach the end of tabs
     // try to load more movie years
     this.loadMovieYears(year);
-}
+  }
 
   render() {
     // React Components
@@ -137,21 +137,10 @@ export default class MovieCalendar extends React.Component {
 
     return (
       <div>
-        <Row type="flex" justify="start" align="middle">
-          <Col span={18}>
-            <h1>Movies Calendar</h1>
-          </Col>
+        {/* Page title and search button */}
+        <MovieHeader />
 
-          <Col span={6}>
-            <Input.Search
-              placeholder="search movies"
-              style={{ width: 270 }}
-              onSearch={value => console.log(value)}
-              enterButton
-            />
-          </Col>
-        </Row>
-
+        {/* Movie tabs */}
         <Tabs
           tabPosition="horizontal"
           size="large"

@@ -4,6 +4,7 @@ const initialState = {
   overview: {
     id: null,
     title: '',
+    original_title: '',
     release_date: '',
     status: '',        // whether movie released or not
     language: '',

@@ -1,15 +1,17 @@
 import { combineReducers } from 'redux';
 
-import movie_calendar from './movieCalendarReducer';
 import movie from './movieReducer';
-import series_calendar from './seriesCalendarReducer';
+import movie_calendar from './movieCalendarReducer';
 import series from './seriesReducer';
+import series_calendar from './seriesCalendarReducer';
+import show_search from './showSearchReducer';
 import user from './userReducer';
 
 export default combineReducers({
-  movie_calendar,
   movie,
-  series_calendar,
+  movie_calendar,
   series,
+  series_calendar,
+  show_search,
   user,
 });

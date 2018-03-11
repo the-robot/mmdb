@@ -21,12 +21,14 @@ const BACKCOVER_PATH = 'https://image.tmdb.org/t/p/' + BACKCOVER_SIZES[3];
 export const cleanShowData = (data) => {
   var results = [];
 
+  console.log("DATA", data);
+
   for (let each of data) {
     results.push({
       id: each.id,
       // Movies uses 'title' & Series use 'name'
       title: (each.title != undefined ? each.title : each.name),
-      release_date: each.release_date,
+      original_title: (each.original_title != undefined ? each.original_title : each.original_name),
       language: each.original_language,
       summary: each.overview,
       rating: each.vote_average,

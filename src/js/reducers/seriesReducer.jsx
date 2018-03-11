@@ -4,6 +4,7 @@ const initialState = {
   overview: {
     id: null,
     title: '',
+    original_title: '',
     first_air_date: '',
     last_air_date: '',
     runtime: '',       // series duration
