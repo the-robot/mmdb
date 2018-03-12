@@ -31,6 +31,7 @@ reset()
 - get the youtube trailer id from given movie id
 - returns a string of id
 ```c
+// event : FETCH_MOVIE_TRAILER_FULFILLED
 getTrailer(int movieID) => string
 ```
 <br/>
