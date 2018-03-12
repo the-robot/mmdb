@@ -7,6 +7,9 @@ import About from './pages/About';
 import AppLayout from './components/Layout';
 import Home from './pages/Home';
 
+// InTheatres     : Movies that are showing in theatres
+import InTheatres from './pages/InTheatres';
+
 // Movie          : Movie description in details
 // MovieCalender  : Show featured movies from different years
 import Movie from './pages/Movie';
@@ -29,17 +32,20 @@ const App = () => (
         <Switch>
           <Route exact path='/' component={ Home } />
 
+          {/* On Air & In Theatres */}
+          <Route path='/intheatres' component={InTheatres} />
+
           {/* Movies */}
-          <Route path='/calendar/movies/:id(\d+)' component={ Movie }/>
-          <Route path='/calendar/movies' component={ MovieCalendar }/>
+          <Route path='/calendar/movies/:id(\d+)' component={ Movie } />
+          <Route path='/calendar/movies' component={ MovieCalendar } />
 
           {/* TV Series */}
-          <Route path='/calendar/series/:id(\d+)/:season(\d+)' component={ Season }/>
-          <Route path='/calendar/series/:id(\d+)' component={ Series }/>
-          <Route path='/calendar/series' component={ SeriesCalendar }/>
+          <Route path='/calendar/series/:id(\d+)/:season(\d+)' component={ Season } />
+          <Route path='/calendar/series/:id(\d+)' component={ Series } />
+          <Route path='/calendar/series' component={ SeriesCalendar } />
 
           <Route path='/about' component={ About } />
-          <Route path="*" component={ NotFound }/>
+          <Route path="*" component={ NotFound } />
         </Switch>
       </AppLayout>
     </Router>
