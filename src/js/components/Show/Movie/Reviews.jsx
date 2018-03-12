@@ -1,4 +1,5 @@
 import { List, Modal, Button } from 'antd';
+import { Markdown } from 'react-showdown';
 import { connect } from 'react-redux';
 import React from 'react';
 
@@ -64,6 +65,10 @@ export default class Reviews extends React.Component {
     this.props.dispatch(getReviews(ID, NEXT));
   }
 
+  markdownToHTML(md) {
+    return <Markdown markup={ md } />
+  }
+
   render() {
     const reviews = this.props.reviews.results;
 
@@ -79,8 +84,8 @@ export default class Reviews extends React.Component {
                 title={<a href={ review.url } target="_blank">{ review.author }</a>}
                 description={ 
                   <div>
-                    <p style={{ maxHeight: 65, overflow: 'hidden' }}> 
-                      { review.content }
+                    <p style={{ maxHeight: 85, overflow: 'hidden' }}> 
+                      { this.markdownToHTML(review.content) }
                     </p>
 
                     <a onClick={() => 
@@ -104,7 +109,7 @@ export default class Reviews extends React.Component {
         >
           <p style={{ maxHeight: 300, overflow: 'auto', textAlign: 'justify',
                       paddingLeft: 10, paddingRight: 10 }}>
-            { this.state.content }
+            { this.markdownToHTML(this.state.content) }
           </p>
         </Modal>
 
