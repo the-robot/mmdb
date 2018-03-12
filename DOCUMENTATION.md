@@ -53,5 +53,8 @@ getReviews(int movieID, int pageNumber) => json
 ```
 <br/>
 
----
+**Error**
+- errors will dispatch `FETCH_MOVIE_REJECTED` event
+<br/>
 
+---
