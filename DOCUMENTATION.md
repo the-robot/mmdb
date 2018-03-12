@@ -25,6 +25,7 @@ fetch(int movieID) => json
 // event : RESET_MOVIE_DATA
 reset()
 ```
+<br/>
 
 **trailerAction.jsx**
 - get the youtube trailer id from given movie id
@@ -32,6 +33,7 @@ reset()
 ```c
 getTrailer(int movieID) => string
 ```
+<br/>
 
 **castAction.jsx**
 - get the cast information of given movie id and returns an array.
@@ -39,6 +41,7 @@ getTrailer(int movieID) => string
 // event : FETCH_MOVIE_CAST_FULFILLED
 getCast(int movieID) => array
 ```
+<br/>
 
 **reviewsAction.jsx**
 - get the reviews from given movie id
@@ -48,6 +51,7 @@ getCast(int movieID) => array
 //         FETCH_MOVIE_REVIEWS_NOMORE
 getReviews(int movieID, int pageNumber) => json
 ```
+<br/>
 
 ---
 
