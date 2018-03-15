@@ -13,8 +13,6 @@ import series_calendar from './series/seriesCalendarReducer';
 // Movie / TV Series Search
 import show_search from './showSearchReducer';
 
-import user from './userReducer';
-
 export default combineReducers({
   movie,
   movie_calendar,
@@ -23,5 +21,4 @@ export default combineReducers({
   series,
   series_calendar,
   show_search,
-  user,
 });

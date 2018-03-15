@@ -1,7 +1,7 @@
 import axios from "axios";
 
-import getTmdbAPIKey from '../api';
-import { cleanShowData as clean } from './dataProcess';
+import getTmdbAPIKey from '../../api';
+import { cleanShowData as clean } from '../dataProcess';
 
 export const init = (year) => {
   return (dispatch) => {

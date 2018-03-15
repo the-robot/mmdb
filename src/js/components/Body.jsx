@@ -1,8 +1,6 @@
 import { Layout, Breadcrumb } from 'antd';
 import React from 'react';
 
-import { loginUser } from '../actions/userAction';
-
 export default class Body extends React.Component {
   render() {
     const { Content } = Layout;

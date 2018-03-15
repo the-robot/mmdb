@@ -2,7 +2,7 @@ import { Row } from 'antd';
 import { connect } from 'react-redux';
 import React from 'react';
 
-import { getCast } from '../../../../actions/movie/castAction';
+import { getCast } from '../../../../actions/movies/movie/castAction';
 import CastCard from './CastCard';
 
 @connect((store) => {

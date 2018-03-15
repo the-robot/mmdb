@@ -1,7 +1,7 @@
 import axios from "axios";
 
-import { getDate, getGenres, getLanguages, getTime, toPercentage } from '../dataProcess';
-import getTmdbAPIKey from '../../api';
+import { getDate, getGenres, getLanguages, getTime, toPercentage } from '../../dataProcess';
+import getTmdbAPIKey from '../../../api';
 
 export const fetch = (id) => {
   return (dispatch) => {

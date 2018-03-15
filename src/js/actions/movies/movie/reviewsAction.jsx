@@ -2,7 +2,7 @@
 
 import axios from "axios";
 
-import getTmdbAPIKey from '../../api';
+import getTmdbAPIKey from '../../../api';
 
 export const getReviews = (id, page) => {
   return (dispatch) => {

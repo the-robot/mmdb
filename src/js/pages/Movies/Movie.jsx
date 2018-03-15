@@ -2,8 +2,8 @@ import { Row, Button, Icon, Tabs } from 'antd';
 import { connect } from 'react-redux';
 import React from 'react';
 
-import { fetch, reset } from '../../actions/movie/movieAction';
-import { getTrailer } from '../../actions/movie/trailerAction';
+import { fetch, reset } from '../../actions/movies/movie/movieAction';
+import { getTrailer } from '../../actions/movies/movie/trailerAction';
 
 import Casts from '../../components/Show/Movie/Casts/Casts';
 import Loading from '../../components/Show/Movie/Loading';

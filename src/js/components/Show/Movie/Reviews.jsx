@@ -3,7 +3,7 @@ import { Markdown } from 'react-showdown';
 import { connect } from 'react-redux';
 import React from 'react';
 
-import { getReviews } from '../../../actions/movie/reviewsAction';
+import { getReviews } from '../../../actions/movies/movie/reviewsAction';
 
 @connect((store) => {
   return {
