@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
 
-import intheatres from './inTheatresReducer';
+import in_theatre from './inTheatreReducer';
 import movie from './movieReducer';
 import movie_calendar from './movieCalendarReducer';
 import series from './seriesReducer';
@@ -9,7 +9,7 @@ import show_search from './showSearchReducer';
 import user from './userReducer';
 
 export default combineReducers({
-  intheatres,
+  in_theatre,
   movie,
   movie_calendar,
   series,

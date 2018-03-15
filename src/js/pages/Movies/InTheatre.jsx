@@ -2,22 +2,26 @@ import { Row, Col, Spin, Button } from 'antd';
 import { connect } from 'react-redux';
 import React from 'react';
 
-import { fetch, reset } from '../actions/inTheatresAction';
-import ShowsView from '../components/Show/ShowsView';
+import { fetch, reset } from '../../actions/inTheatreAction';
+import ShowsView from '../../components/Show/ShowsView';
 
 @connect((store) => {
   return {
-    movies: store.intheatres.movies,
-    page: store.intheatres.page,
+    movies: store.in_theatre.movies,
+    page: store.in_theatre.page,
 
-    fetched_all: store.intheatres.fetched_all,
+    fetched_all: store.in_theatre.fetched_all,
     
-    fetching: store.intheatres.fetching,
+    fetching: store.in_theatre.fetching,
   };
 })
-export default class InTheaters extends React.Component {
+export default class InTheater extends React.Component {
   componentWillMount() {
     this.props.dispatch(fetch(this.props.page));
+  }
+
+  componentDidMount() {
+    document.title = "Movies - In Theatre";
   }
 
   componentWillUnmount() {
@@ -38,13 +42,13 @@ export default class InTheaters extends React.Component {
       <div>
         <Row type="flex" justify="start" align="middle">
           <Col span={24}>
-            <h1>Movies in theatre</h1>
+            <h1>Movies In Theatre</h1>
           </Col>
         </Row>
 
         <Row type="flex" justify="center">
           <Col span={24}>
-            <ShowsView shows={ movies } year={ 'intheatres' } path='movies/' />
+            <ShowsView shows={ movies } year={ 'intheatres' } path='calendar/' />
           </Col>
 
           <Col>

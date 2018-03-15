@@ -2,14 +2,14 @@ import { Row, Button, Icon, Tabs } from 'antd';
 import { connect } from 'react-redux';
 import React from 'react';
 
-import { fetch, reset } from '../actions/movie/movieAction';
-import { getTrailer } from '../actions/movie/trailerAction';
+import { fetch, reset } from '../../actions/movie/movieAction';
+import { getTrailer } from '../../actions/movie/trailerAction';
 
-import Casts from '../components/Show/Movie/Casts/Casts';
-import Loading from '../components/Show/Movie/Loading';
-import MovieInformation from '../components/Show/Movie/MovieInformation';
-import Poster from '../components/Show/Movie/Poster';
-import Reviews from '../components/Show/Movie/Reviews'
+import Casts from '../../components/Show/Movie/Casts/Casts';
+import Loading from '../../components/Show/Movie/Loading';
+import MovieInformation from '../../components/Show/Movie/MovieInformation';
+import Poster from '../../components/Show/Movie/Poster';
+import Reviews from '../../components/Show/Movie/Reviews'
 
 @connect((store) => {
   return {

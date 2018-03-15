@@ -44,7 +44,7 @@ export default class ShowCard extends React.Component {
     const { showInfo } = this.props;
     const rating = this.ratingScale(showInfo.rating);
 
-    const link = '/calendar/' + this.props.path + showInfo.id;
+    const link = this.props.path + showInfo.id;
 
     return(
       <Col xs={{ span: 24, offset: 0}} 

@@ -2,9 +2,9 @@ import { Row, Col, Tabs, Input, Spin, Button, BackTop } from 'antd';
 import { connect } from 'react-redux';
 import React from 'react';
 
-import { init, deleteExcept, fetch, reset } from '../actions/seriesCalendarAction';
-import SeriesHeader from '../components/Calendar/SeriesHeader';
-import ShowsView from '../components/Show/ShowsView';
+import { init, deleteExcept, fetch, reset } from '../../actions/seriesCalendarAction';
+import SeriesHeader from '../../components/Calendar/SeriesHeader';
+import ShowsView from '../../components/Show/ShowsView';
 
 @connect((store) => {
   return {
@@ -26,7 +26,7 @@ export default class SeriesCalendar extends React.Component {
   }
 
   componentDidMount() {
-    document.title = "Calendar - TV Series";
+    document.title = "TV Series - Calendar";
   }
 
   componentWillUnmount() {
@@ -96,7 +96,7 @@ export default class SeriesCalendar extends React.Component {
       // prepare tv series cards for each year
       const content = <Row type="flex" justify="center">
         <Col span={24}>
-          <ShowsView shows={ series[i] } year={ year } path='series/' />
+          <ShowsView shows={ series[i] } year={ year } path='calendar/' />
         </Col>
 
         <Col>

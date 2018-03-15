@@ -34,27 +34,35 @@ export default class SideBar extends React.Component {
 
           <SubMenu
             key="sub1"
-            title={<span><Icon type="calendar" /><span>Calendar</span></span>}>
-            <Menu.Item key="2"><NavLink to='/calendar/movies'>Movies</NavLink></Menu.Item>
-            <Menu.Item key="3"><NavLink to='/calendar/series'>TV Series</NavLink></Menu.Item>
+            title={<span><Icon type="video-camera" /><span>Movies</span></span>}>
+            <Menu.Item key="2"><NavLink to='/movies/intheatres'>In Theatre</NavLink></Menu.Item>
+            <Menu.Item key="3"><NavLink to=''>Upcoming</NavLink></Menu.Item>
+            <Menu.Item key="4"><NavLink to='/movies/calendar'>Calendar</NavLink></Menu.Item>
           </SubMenu>
 
-          <Menu.Item key="4">
+          <SubMenu
+            key="sub2"
+            title={<span><Icon type="switcher" /><span>TV Series</span></span>}>
+            <Menu.Item key="5"><NavLink to=''>Airing Today</NavLink></Menu.Item>
+            <Menu.Item key="6"><NavLink to='/series/calendar'>Calendar</NavLink></Menu.Item>
+          </SubMenu>
+
+          <Menu.Item key="7">
             <Icon type="heart" />
             <span>Library</span>
           </Menu.Item>
 
-          <Menu.Item key="5">
+          <Menu.Item key="8">
             <Icon type="question-circle" />
             <span>FAQ</span>
           </Menu.Item>
 
-          <Menu.Item key="6">
+          <Menu.Item key="9">
             <Icon type="mail" />
             <span>Feedback</span>
           </Menu.Item>
 
-          <Menu.Item key="7">
+          <Menu.Item key="10">
             <NavLink to='/about' className="nav-text">
               <Icon type="team" />
               <span>About</span>

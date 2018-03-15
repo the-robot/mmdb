@@ -2,9 +2,9 @@ import { Row, Col, Tabs, Spin, Button, BackTop } from 'antd';
 import { connect } from 'react-redux';
 import React from 'react';
 
-import { init, deleteExcept, fetch, reset } from '../actions/movieCalendarAction';
-import MovieHeader from '../components/Calendar/MovieHeader';
-import ShowsView from '../components/Show/ShowsView';
+import { init, deleteExcept, fetch, reset } from '../../actions/movieCalendarAction';
+import MovieHeader from '../../components/Calendar/MovieHeader';
+import ShowsView from '../../components/Show/ShowsView';
 
 @connect((store) => {
   return {
@@ -25,7 +25,7 @@ export default class MovieCalendar extends React.Component {
   }
 
   componentDidMount() {
-    document.title = "Calendar - Movies";
+    document.title = "Movies - Calendar";
   }
 
   componentWillUnmount() {
@@ -95,7 +95,7 @@ export default class MovieCalendar extends React.Component {
       // prepare movie cards for each year
       const content = <Row type="flex" justify="center">
         <Col span={24}>
-          <ShowsView shows={ movies[i] } year={ year } path='movies/' />
+          <ShowsView shows={ movies[i] } year={ year } path='calendar/' />
         </Col>
 
         <Col>
