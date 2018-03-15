@@ -34,7 +34,7 @@ export default class ShowsView extends React.Component {
       }
 
       showsInRow.push(
-        <ShowCard key={ i } showInfo={ shows[year][i] } year={ year } path={ path } />
+        <ShowCard key={ i } showInfo={ shows[year][i] } path={ path } />
       )
     }
 
