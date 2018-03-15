@@ -1,10 +1,10 @@
 import { combineReducers } from 'redux';
 
-import in_theatre from './inTheatreReducer';
-import movie from './movieReducer';
-import movie_calendar from './movieCalendarReducer';
-import series from './seriesReducer';
-import series_calendar from './seriesCalendarReducer';
+import in_theatre from './movies/inTheatreReducer';
+import movie from './movies/movieReducer';
+import movie_calendar from './movies/movieCalendarReducer';
+import series from './series/seriesReducer';
+import series_calendar from './series/seriesCalendarReducer';
 import show_search from './showSearchReducer';
 import user from './userReducer';
 
