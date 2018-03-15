@@ -2,7 +2,7 @@ import { Row, Col, Tabs, Spin, Button, BackTop } from 'antd';
 import { connect } from 'react-redux';
 import React from 'react';
 
-import { init, deleteExcept, fetch, reset } from '../../actions/movieCalendarAction';
+import { init, deleteExcept, fetch, reset } from '../../actions/movies/movieCalendarAction';
 import MovieHeader from '../../components/Calendar/MovieHeader';
 import ShowsView from '../../components/Show/ShowsView';
 

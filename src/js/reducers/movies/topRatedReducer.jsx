@@ -1,4 +1,4 @@
-//movies that are in theatre
+//movies that will be in theatre
 
 const INITIAL_STATE = {
   movies: [],
@@ -13,15 +13,15 @@ const INITIAL_STATE = {
 
 export default function reducer(state=INITIAL_STATE, action) {
   switch (action.type) {
-    case "FETCH_MOVIES_INTHEATRES": {
+    case "FETCH_MOVIES_TOPRATED": {
       return {...state, fetching: true}
     }
 
-    case "FETCH_MOVIES_INTHEATRES_REJECTED": {
+    case "FETCH_MOVIES_TOPRATED_REJECTED": {
       return {...state, fetching: false, error: action.payload}
     }
 
-    case "FETCH_MOVIES_INTHEATRES_FULFILLED": {
+    case "FETCH_MOVIES_TOPRATED_FULFILLED": {
       return {
         ...state,
         fetching: false,
@@ -31,7 +31,7 @@ export default function reducer(state=INITIAL_STATE, action) {
       }
     }
 
-    case "FETCH_MOVIES_INTHEATRES_ALL_FETCHED": {
+    case "FETCH_MOVIES_TOPRATED_ALL_FETCHED": {
       return {
         ...state,
         fetching: false,
@@ -41,7 +41,7 @@ export default function reducer(state=INITIAL_STATE, action) {
     }
 
     // RESET
-    case "RESET_MOVIES_INTHEATRES": {
+    case "RESET_MOVIES_TOPRATED": {
       return INITIAL_STATE;
     }
   }

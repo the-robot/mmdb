@@ -2,26 +2,26 @@ import { Row, Col, Spin, Button } from 'antd';
 import { connect } from 'react-redux';
 import React from 'react';
 
-import { fetch, reset } from '../../actions/movies/inTheatreAction';
+import { fetch, reset } from '../../actions/movies/topRatedAction';
 import ShowsView from '../../components/Show/ShowsView';
 
 @connect((store) => {
   return {
-    movies: store.movies_in_theatre.movies,
-    page: store.movies_in_theatre.page,
+    movies: store.movies_toprated.movies,
+    page: store.movies_toprated.page,
 
-    fetched_all: store.movies_in_theatre.fetched_all,
+    fetched_all: store.movies_toprated.fetched_all,
     
-    fetching: store.movies_in_theatre.fetching,
+    fetching: store.movies_toprated.fetching,
   };
 })
-export default class InTheater extends React.Component {
+export default class TopRated extends React.Component {
   componentWillMount() {
     this.props.dispatch(fetch(this.props.page));
   }
 
   componentDidMount() {
-    document.title = "Movies - In Theatre";
+    document.title = "Movies - Top Rated";
   }
 
   componentWillUnmount() {
@@ -33,7 +33,7 @@ export default class InTheater extends React.Component {
   }
 
   render() {
-    const movies = { intheatres : this.props.movies };
+    const movies = { toprated : this.props.movies };
 
     // if fetched all hide load more else show
     const buttonVisibility = (this.props.fetched_all != true ? 'initial' : 'hidden');
@@ -42,13 +42,13 @@ export default class InTheater extends React.Component {
       <div>
         <Row type="flex" justify="start" align="middle">
           <Col span={24}>
-            <h1>Movies In Theatre</h1>
+            <h1>Top Rated Movies</h1>
           </Col>
         </Row>
 
         <Row type="flex" justify="center">
           <Col span={24}>
-            <ShowsView shows={ movies } year={ 'intheatres' } path='calendar/' />
+            <ShowsView shows={ movies } year={ 'toprated' } path='calendar/' />
           </Col>
 
           <Col>

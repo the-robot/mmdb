@@ -36,7 +36,7 @@ export default class SideBar extends React.Component {
             key="sub1"
             title={<span><Icon type="video-camera" /><span>Movies</span></span>}>
             <Menu.Item key="2"><NavLink to='/movies/intheatres'>In Theatre</NavLink></Menu.Item>
-            <Menu.Item key="3"><NavLink to=''>Upcoming</NavLink></Menu.Item>
+            <Menu.Item key="3"><NavLink to='/movies/toprated'>Top Rated</NavLink></Menu.Item>
             <Menu.Item key="4"><NavLink to='/movies/calendar'>Calendar</NavLink></Menu.Item>
           </SubMenu>
 

@@ -13,6 +13,7 @@ import Home from './pages/Home';
 import Movie from './pages/Movies/Movie';
 import InTheatre from './pages/Movies/InTheatre';
 import MovieCalendar from './pages/Movies/MovieCalendar';
+import TopRated from './pages/Movies/TopRated';
 
 // Season            : TV Show season in details
 // Series             : TV Show description in details
@@ -32,7 +33,8 @@ const App = () => (
           <Route exact path='/' component={ Home } />
 
           {/* Movies */}
-          <Route path='/movies/intheatres' component={InTheatre} />
+          <Route path='/movies/intheatres' component={ InTheatre } />
+          <Route path='/movies/toprated' component={ TopRated } />
           <Route path='/movies/calendar/:id(\d+)' component={ Movie } />
           <Route path='/movies/calendar' component={ MovieCalendar } />
 
