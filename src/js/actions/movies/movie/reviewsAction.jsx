@@ -1,17 +1,14 @@
 // Get movie cast informations
-
 import axios from "axios";
-
-import getTmdbAPIKey from '../../../api';
+import { getAPI } from "../../../api";
 
 export const getReviews = (id, page) => {
   return (dispatch) => {
-    const domain = 'https://api.themoviedb.org/3/movie/';
-    const url = domain + id + '/reviews?api_key=' + getTmdbAPIKey() + "&page=" + page;
+    const url = getAPI() + '/movies/reviews/' + id + '/' + page;
     
     axios.get(url)
       .then((response) => {
-        const results = response.data.results;
+        const results = response.data;
 
         if (results.length === 0)
           dispatch({

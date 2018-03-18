@@ -1,18 +1,15 @@
 import axios from "axios";
-
-import { cleanShowData as clean } from '../dataProcess';
-import getTmdbAPIKey from '../../api';
+import { getAPI } from '../../api';
 
 export const fetch = (page) => {
-  const domain = "https://api.themoviedb.org/3/movie/now_playing?api_key=";
-  const url = domain + getTmdbAPIKey() + "&page=" + page;
+  const url = getAPI() + '/movies/intheatre/' + page;
 
   return (dispatch) => {
     dispatch({type: "FETCH_MOVIES_INTHEATRES"});
 
     axios.get(url)
       .then((response) => {
-        var results = response.data.results;
+        var results = response.data;
 
         if (results.length == 0) {
           dispatch({
@@ -23,7 +20,7 @@ export const fetch = (page) => {
         else {
           dispatch({
             type: "FETCH_MOVIES_INTHEATRES_FULFILLED",
-            payload: clean(response.data.results),
+            payload: results,
           });
         }
       })

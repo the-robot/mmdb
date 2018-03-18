@@ -1,7 +1,5 @@
 import axios from "axios";
-
-import { cleanShowData as clean } from '../dataProcess';
-import getTmdbAPIKey from '../../api';
+import { getAPI } from '../../api';
 
 export const init = (year) => {
   return (dispatch) => {
@@ -16,9 +14,7 @@ export const init = (year) => {
 }
 
 export const fetch = (year, page) => {
-  const domain = 'https://api.themoviedb.org/3/discover/movie';
-  const url = domain + '?primary_release_year=' + year + '&api_key=' + getTmdbAPIKey() +
-                '&page=' + page + "&sort_by=popularity.desc";
+  const url = getAPI() + '/movies/calendar/' + year + '/' + page;
 
   return (dispatch) => {
     dispatch({type: "FETCH_MOVIE_CALENDAR"});
@@ -26,7 +22,7 @@ export const fetch = (year, page) => {
     axios.get(url)
       .then((response) => {
         let data = {};
-        data[year] = clean(response.data.results);
+        data[year] = response.data;
 
         dispatch({
           type: "FETCH_MOVIE_CALENDAR_FULFILLED",

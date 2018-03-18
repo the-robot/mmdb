@@ -1,19 +1,15 @@
 import axios from "axios";
-
-import getTmdbAPIKey from '../../api';
-import { cleanSeasonData as clean } from '../dataProcess';
+import { getAPI } from '../../api';
 
 export const fetch = (id, season_number) => {
   return (dispatch) => {
-    const domain = 'https://api.themoviedb.org/3/tv/';
-    const url = domain + id + '/season/' + season_number
-                + '?api_key=' + getTmdbAPIKey();
+    const url = getAPI() + '/series/detail/' + id + '/' + season_number
 
     axios.get(url)
       .then((response) => {
           dispatch({
             type: "FETCH_SERIES_SEASON_INFO_FULFILLED",
-            payload: clean(response.data)
+            payload: response.data
           });
       })
 

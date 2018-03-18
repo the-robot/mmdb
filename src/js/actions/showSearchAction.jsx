@@ -1,7 +1,6 @@
 import axios from "axios";
 
-import getTmdbAPIKey from '../api';
-import { cleanShowData as clean } from '../actions/dataProcess';
+import { getTmdbAPIKey } from '../api';
 
 
 export const searchMovies = (query) => {
@@ -30,7 +29,7 @@ const search = (url) => {
       .then((response) => {
         dispatch({
           type: "SEARCH_SHOWS_FULFILLED",
-          payload: clean(response.data.results).slice(0, 10)
+          payload: response.data.results
         });
       })
       .catch((err) => {

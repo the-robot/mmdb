@@ -1,25 +1,16 @@
 // Get youtube id of trailer for given tv series id
-
 import axios from "axios";
+import { getAPI } from "../../api";
 
-import getTmdbAPIKey from '../../api';
-
-export const getTrailer = (id, season=null) => {
+export const getTrailer = (id) => {
   return (dispatch) => {
-    const domain = 'https://api.themoviedb.org/3/tv/';
-    var url;
-    
-    if (season)
-      url = domain + id + '/season/' + season + 
-            '/videos?api_key=' + getTmdbAPIKey() + '&language=en-US';
-    else
-      url = domain + id + '/videos?api_key=' + getTmdbAPIKey() + '&language=en-US';
+    const url = getAPI() + '/series/trailer/' + id;
 
     axios.get(url)
       .then((response) => {
         dispatch({
           type: "FETCH_SERIES_TRAILER_FULFILLED",
-          payload: getYoutubeId(response.data.results)
+          payload: response.data
         });
 
       })
@@ -27,12 +18,4 @@ export const getTrailer = (id, season=null) => {
         dispatch({type: "FETCH_SERIES_REJECTED", payload: err});
       })
   }
-}
-
-function getYoutubeId(data) {
-  for (let trailer of data) {
-    if (trailer.type === 'Trailer')
-      return trailer.key;
-  }
-  return '';
 }

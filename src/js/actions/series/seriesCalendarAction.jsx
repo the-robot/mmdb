@@ -1,7 +1,5 @@
 import axios from "axios";
-
-import getTmdbAPIKey from '../../api';
-import { cleanShowData as clean } from '../dataProcess';
+import { getAPI } from '../../api';
 
 export const init = (year) => {
   return (dispatch) => {
@@ -16,9 +14,7 @@ export const init = (year) => {
 }
 
 export const fetch = (year, page) => {
-  const domain = 'https://api.themoviedb.org/3/discover/tv';
-  const url = domain + '?api_key=' + getTmdbAPIKey() + '&page=' + page +
-              '&sort_by=popularity.desc&first_air_date_year=' + year;
+  const url = getAPI() + '/series/calendar/' + year + '/' + page;
 
   return (dispatch) => {
     dispatch({type: "FETCH_SERIES_CALENDAR"});
@@ -26,7 +22,7 @@ export const fetch = (year, page) => {
     axios.get(url)
       .then((response) => {
         let data = {};
-        data[year] = clean(response.data.results);
+        data[year] = response.data;
 
         dispatch({
           type: "FETCH_SERIES_CALENDAR_FULFILLED",
