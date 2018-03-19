@@ -1,11 +1,10 @@
 import axios from "axios";
 
-import { getTmdbAPIKey } from '../api';
+import { getAPI } from '../api';
 
 
 export const searchMovies = (query) => {
-  const domain = 'https://api.themoviedb.org/3/search/movie';
-  const url = domain + '?api_key=' + getTmdbAPIKey() + '&query=' + query;
+  const url = getAPI() + '/movies/search/' + query;
   return search(url);
 }
 
@@ -29,7 +28,7 @@ const search = (url) => {
       .then((response) => {
         dispatch({
           type: "SEARCH_SHOWS_FULFILLED",
-          payload: response.data.results
+          payload: response.data,
         });
       })
       .catch((err) => {
