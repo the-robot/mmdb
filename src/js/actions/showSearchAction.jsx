@@ -1,7 +1,5 @@
 import axios from "axios";
-
 import { getAPI } from '../api';
-
 
 export const searchMovies = (query) => {
   const url = getAPI() + '/movies/search/' + query;
