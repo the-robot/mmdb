@@ -1,5 +1,4 @@
 import axios from "axios";
-
 import { getAPI } from '../../api';
 
 export const fetch = (page) => {
