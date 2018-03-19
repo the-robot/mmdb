@@ -3,8 +3,9 @@ import { getAPI } from '../../api';
 
 export const fetch = (id, season_number) => {
   return (dispatch) => {
-    const url = getAPI() + '/series/detail/' + id + '/' + season_number
+    dispatch({type: "FETCH_SERIES"});
 
+    const url = getAPI() + '/series/detail/' + id + '/' + season_number
     axios.get(url)
       .then((response) => {
           dispatch({
