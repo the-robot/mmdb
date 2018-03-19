@@ -64,8 +64,8 @@ export default class SeriesHeader extends React.Component {
               shape="square" src={ result.poster } />
             }
             title={
-              <NavLink to={ "/calendar/series/" + result.id }>
-                <a href={ "#/calendar/series/" + result.id }> { result.title } </a>
+              <NavLink to={ "/series/calendar/" + result.id }>
+                <a href={ "#/series/calendar/" + result.id }> { result.title } </a>
               </NavLink>
             }
             description={

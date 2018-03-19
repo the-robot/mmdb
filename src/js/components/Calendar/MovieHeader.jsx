@@ -64,8 +64,8 @@ export default class MovieHeader extends React.Component {
               shape="square" src={ result.poster } />
             }
             title={
-              <NavLink to={ "/calendar/movies/" + result.id }>
-                <a href={ "#/calendar/movies/" + result.id }> { result.title } </a>
+              <NavLink to={ "/movies/calendar/" + result.id }>
+                <a href={ "#/movies/calendar/" + result.id }> { result.title } </a>
               </NavLink>
             }
             description={
