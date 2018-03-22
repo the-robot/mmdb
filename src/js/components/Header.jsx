@@ -1,13 +1,13 @@
-import { Button, Input, Layout, Popover, message } from 'antd';
+import { Button, Icon, Input, Layout, Popover, Modal, message } from 'antd';
 import React from 'react';
 
 export default class AppHeader extends React.Component {
   state = {
-    visible: false,
+    popoverVisible: false,
   }
 
   handleVisibleChange = (visible) => {
-    this.setState({ visible });
+    this.setState({ popoverVisible: visible });
   }
 
   successLogin = () => {
@@ -40,8 +40,10 @@ export default class AppHeader extends React.Component {
         <Popover
           content={
             <div>
-              <Input placeholder='username' style={ inputStyle } />
-              <Input placeholder='password' style={ inputStyle } type='password' />
+              <Input placeholder='username' style={ inputStyle }
+                prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} />
+              <Input placeholder='password' style={ inputStyle } type='password'
+                prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />} />
 
               <div style={{ marginTop: '15px' }}>
                 <a onClick={ this.successLogin } style={ popOverButton }>Login</a>
@@ -52,7 +54,7 @@ export default class AppHeader extends React.Component {
 
           title='Login User'
           trigger='click'
-          visible={ this.state.visible }
+          visible={ this.state.popoverVisible }
           onVisibleChange={ this.handleVisibleChange }
           placement="topRight"
         >
