@@ -1,4 +1,5 @@
 import { Button, Icon, Input, Layout, Popover, Modal, message } from 'antd';
+import { NavLink } from 'react-router-dom';
 import React from 'react';
 
 export default class AppHeader extends React.Component {
@@ -25,14 +26,9 @@ export default class AppHeader extends React.Component {
     }
 
     const inputStyle = {
-      width: '180px',
+      width: '200px',
       display: 'block',
       marginBottom: '5px',
-    }
-
-    const popOverButton = {
-      display: 'block',
-      margin: '5px',
     }
 
     return (
@@ -45,9 +41,25 @@ export default class AppHeader extends React.Component {
               <Input placeholder='password' style={ inputStyle } type='password'
                 prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />} />
 
-              <div style={{ marginTop: '15px' }}>
-                <a onClick={ this.successLogin } style={ popOverButton }>Login</a>
-                <a onClick={ this.successLogin } style={ popOverButton }>Register</a>
+              <div style={{ marginTop: '10px' }}>
+                <Button type="primary" style={{ width: '100%', marginBottom: '10px' }}
+                  onClick={() => this.successLogin()}>
+                  Log in
+                </Button>
+                
+                <NavLink to='/register'>
+                  <a style={{
+                    display: 'block',
+                    margin: '5px',
+                    fontSize: 13,
+                  }}>register</a>
+                </NavLink>
+
+                <a style={{
+                  display: 'block',
+                  margin: '5px',
+                  fontSize: 13,
+                }}>forgot password</a>
               </div>
             </div>
           }
