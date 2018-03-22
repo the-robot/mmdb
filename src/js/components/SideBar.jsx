@@ -1,13 +1,7 @@
 import { Layout, Menu, Icon } from 'antd';
 import { NavLink } from 'react-router-dom';
-import { connect } from 'react-redux';
 import React from 'react';
 
-@connect((store) => {
-  return {
-    sidebar: store.layout_visibility.sidebar
-  };
-})
 export default class SideBar extends React.Component {
   state = {
     collapsed: false,
@@ -25,11 +19,7 @@ export default class SideBar extends React.Component {
       <Sider
           collapsible
           collapsed={ this.state.collapsed }
-          onCollapse={ this.onCollapse }
-
-          // either show or hide sidebar
-          // 200, default sidebar width
-          width={ (this.props.sidebar ? 200 : 0) }>
+          onCollapse={ this.onCollapse }>
 
         <div className="logo" />
 

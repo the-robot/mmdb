@@ -3,8 +3,11 @@ import { HashRouter as Router, Route, Switch } from 'react-router-dom';
 import React from 'react';
 import ReactDOM from 'react-dom';
 
+// Layouts
+import MainLayout from './components/MainLayout';
+import NoSideBarLayout from './components/NoSideBarLayout';
+
 import About from './pages/About';
-import AppLayout from './components/Layout';
 import Home from './pages/Home';
 
 // Movie          : Movie description in details
@@ -25,28 +28,36 @@ import SeriesCalendar from './pages/Series/SeriesCalendar';
 import NotFound from './pages/NotFound';
 import store from './store';
 
+// Multiple Layouts
+const AppRoute = ({ component: Component, layout: Layout, ...rest }) => (
+  <Route {...rest} render={props => (
+    <Layout>
+      <Component {...props} />
+    </Layout>
+  )} />
+)
+
 const App = () => (
   <Provider store={ store }>
     <Router>
-      <AppLayout>
-        <Switch>
-          <Route exact path='/' component={ Home } />
+      <Switch>
+        <AppRoute exact path="/" layout={ MainLayout } component={ Home } />
 
-          {/* Movies */}
-          <Route path='/movies/intheatres' component={ InTheatre } />
-          <Route path='/movies/toprated' component={ TopRated } />
-          <Route path='/movies/calendar/:id(\d+)' component={ Movie } />
-          <Route path='/movies/calendar' component={ MovieCalendar } />
+        {/* Movies */}
+        <AppRoute exact path="/movies/intheatres" layout={ MainLayout } component={ InTheatre } />
+        <AppRoute path="/movies/toprated" layout={ MainLayout } component={ TopRated } />
+        <AppRoute path="/movies/calendar/:id(\d+)" layout={ MainLayout } component={ Movie } />
+        <AppRoute exact path="/movies/calendar" layout={ MainLayout } component={ MovieCalendar } />
 
-          {/* TV Series */}
-          <Route path='/series/calendar/:id(\d+)/:season(\d+)' component={ Season } />
-          <Route path='/series/calendar/:id(\d+)' component={ Series } />
-          <Route path='/series/calendar' component={ SeriesCalendar } />
+        {/* TV Series */}
+        <AppRoute exact path="/series/calendar/:id(\d+)/:season(\d+)" layout={ MainLayout } component={ Season } />
+        <AppRoute exact path="/series/calendar/:id(\d+)" layout={ MainLayout } component={ Series } />
+        <AppRoute exact path="/series/calendar" layout={ MainLayout } component={ SeriesCalendar } />
 
-          <Route path='/about' component={ About } />
-          <Route path="*" component={ NotFound } />
-        </Switch>
-      </AppLayout>
+
+        <AppRoute exact path="/about" layout={ MainLayout } component={ About } />
+        <AppRoute exact path="*" layout={ NoSideBarLayout } component={ NotFound } />
+      </Switch>
     </Router>
   </Provider>
 );

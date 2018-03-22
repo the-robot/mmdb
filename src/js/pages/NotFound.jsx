@@ -1,27 +1,8 @@
-import { connect } from 'react-redux';
 import React from 'react';
 
-@connect((store) => {
-  return {
-    sidebar: store.layout_visibility.sidebar,
-    header_visibility: store.layout_visibility.header
-  }
-})
 export default class NotFound extends React.Component {
-  componentWillMount() {
-    // Hide Sidebar and Header in 404
-    this.props.dispatch({type: 'LAYOUT_SIDEBAR_HIDDEN'});
-    this.props.dispatch({type: 'LAYOUT_HEADER_HIDDEN'});
-  }
-
   componentDidMount() {
     document.title = "MMDB - 404";
-  }
-
-  componentWillUnmount() {
-    // Show Sidebar and Header back on exit
-    this.props.dispatch({type: 'LAYOUT_SIDEBAR_VISIBLE'});
-    this.props.dispatch({type: 'LAYOUT_HEADER_VISIBLE'});
   }
 
   render() {

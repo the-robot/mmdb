@@ -6,9 +6,7 @@ import AppFooter from './Footer';
 import Body from './Body';
 import SideBar from './SideBar';
 
-const AppLayout = props => ({
-  render() {
-    return (
+const MainLayout = props => (
       <Layout style={{ minHeight: '100vh' }}>
         <SideBar />
         <Layout>
@@ -18,7 +16,5 @@ const AppLayout = props => ({
         </Layout>
       </Layout>
     );
-  }
-});
 
-export default AppLayout;
+export default MainLayout;

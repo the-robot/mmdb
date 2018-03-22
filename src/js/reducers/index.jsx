@@ -1,8 +1,5 @@
 import { combineReducers } from 'redux';
 
-// Store Layout Component Visibility States
-import layout_visibility from './layoutVisibilityReducer';
-
 // Movies
 import movie from './movies/movieReducer';
 import movie_calendar from './movies/movieCalendarReducer';
@@ -17,8 +14,6 @@ import series_calendar from './series/seriesCalendarReducer';
 import show_search from './showSearchReducer';
 
 export default combineReducers({
-  layout_visibility,
-
   movie,
   movie_calendar,
   movies_in_theatre,
