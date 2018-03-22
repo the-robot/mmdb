@@ -2,7 +2,7 @@ import React from 'react';
 
 export default class NotFound extends React.Component {
   componentDidMount() {
-    document.title = "MMDB - 404";
+    document.title = "MMDB - 404 - A Unicorn";
   }
 
   render() {

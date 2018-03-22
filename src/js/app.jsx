@@ -4,8 +4,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 // Layouts
-import MainLayout from './components/MainLayout';
-import NoSideBarLayout from './components/NoSideBarLayout';
+import MainLayout from './components/Layout/MainLayout';
+import EmptyLayout from './components/Layout/EmptyLayout';
 
 import About from './pages/About';
 import Home from './pages/Home';
@@ -56,7 +56,7 @@ const App = () => (
 
 
         <AppRoute exact path="/about" layout={ MainLayout } component={ About } />
-        <AppRoute exact path="*" layout={ NoSideBarLayout } component={ NotFound } />
+        <AppRoute exact path="*" layout={ EmptyLayout } component={ NotFound } />
       </Switch>
     </Router>
   </Provider>
