@@ -1,13 +1,19 @@
 import { Button, Icon, Input, Layout, Popover, Modal, message } from 'antd';
+import { connect } from 'react-redux';
 import React from 'react';
 
+@connect((store) => {
+  return {
+    header_visibility: store.layout_visibility.header
+  };
+})
 export default class AppHeader extends React.Component {
   state = {
-    popoverVisible: false,
+    popover_visible: false,
   }
 
   handleVisibleChange = (visible) => {
-    this.setState({ popoverVisible: visible });
+    this.setState({ popover_visible: visible });
   }
 
   successLogin = () => {
@@ -22,6 +28,10 @@ export default class AppHeader extends React.Component {
       padding: 0,
       paddingRight: '20px',
       textAlign: 'right',
+
+      // either show or hide header
+      visibility: ( this.props.header_visibility ? 'visible' : 'hidden' ),
+      height: ( this.props.header_visibility ? 'initial' : 0 ),
     }
 
     const inputStyle = {
@@ -36,7 +46,7 @@ export default class AppHeader extends React.Component {
     }
 
     return (
-      <Header style={ headerStyle } >
+      <Header style={ headerStyle }>
         <Popover
           content={
             <div>
@@ -54,7 +64,7 @@ export default class AppHeader extends React.Component {
 
           title='Login User'
           trigger='click'
-          visible={ this.state.popoverVisible }
+          visible={ this.state.popover_visible }
           onVisibleChange={ this.handleVisibleChange }
           placement="topRight"
         >
