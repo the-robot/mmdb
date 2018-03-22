@@ -25,6 +25,7 @@ import Season from './pages/Series/Season';
 import Series from './pages/Series/Series';
 import SeriesCalendar from './pages/Series/SeriesCalendar';
 
+import Register from './pages/Register';
 import NotFound from './pages/NotFound';
 import store from './store';
 
@@ -55,6 +56,8 @@ const App = () => (
         <AppRoute path="/series/calendar" layout={ MainLayout } component={ SeriesCalendar } />
 
         <AppRoute path="/about" layout={ MainLayout } component={ About } />
+        
+        <AppRoute path="/register" layout={ EmptyLayout } component={ Register } />
         <AppRoute path="*" layout={ EmptyLayout } component={ NotFound } />
       </Switch>
     </Router>
