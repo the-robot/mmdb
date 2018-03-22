@@ -44,19 +44,18 @@ const App = () => (
         <AppRoute exact path="/" layout={ MainLayout } component={ Home } />
 
         {/* Movies */}
-        <AppRoute exact path="/movies/intheatres" layout={ MainLayout } component={ InTheatre } />
+        <AppRoute path="/movies/intheatres" layout={ MainLayout } component={ InTheatre } />
         <AppRoute path="/movies/toprated" layout={ MainLayout } component={ TopRated } />
         <AppRoute path="/movies/calendar/:id(\d+)" layout={ MainLayout } component={ Movie } />
-        <AppRoute exact path="/movies/calendar" layout={ MainLayout } component={ MovieCalendar } />
+        <AppRoute path="/movies/calendar" layout={ MainLayout } component={ MovieCalendar } />
 
         {/* TV Series */}
-        <AppRoute exact path="/series/calendar/:id(\d+)/:season(\d+)" layout={ MainLayout } component={ Season } />
-        <AppRoute exact path="/series/calendar/:id(\d+)" layout={ MainLayout } component={ Series } />
-        <AppRoute exact path="/series/calendar" layout={ MainLayout } component={ SeriesCalendar } />
+        <AppRoute path="/series/calendar/:id(\d+)/:season(\d+)" layout={ MainLayout } component={ Season } />
+        <AppRoute path="/series/calendar/:id(\d+)" layout={ MainLayout } component={ Series } />
+        <AppRoute path="/series/calendar" layout={ MainLayout } component={ SeriesCalendar } />
 
-
-        <AppRoute exact path="/about" layout={ MainLayout } component={ About } />
-        <AppRoute exact path="*" layout={ EmptyLayout } component={ NotFound } />
+        <AppRoute path="/about" layout={ MainLayout } component={ About } />
+        <AppRoute path="*" layout={ EmptyLayout } component={ NotFound } />
       </Switch>
     </Router>
   </Provider>
