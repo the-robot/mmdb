@@ -1,5 +1,8 @@
 import { combineReducers } from 'redux';
 
+// Registration & Signup
+import register from './registerReducer';
+
 // Movies
 import movie from './movies/movieReducer';
 import movie_calendar from './movies/movieCalendarReducer';
@@ -14,6 +17,8 @@ import series_calendar from './series/seriesCalendarReducer';
 import show_search from './showSearchReducer';
 
 export default combineReducers({
+  register,
+
   movie,
   movie_calendar,
   movies_in_theatre,
