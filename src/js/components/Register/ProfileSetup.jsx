@@ -7,9 +7,6 @@ import { profile_setup } from '../../actions/registerAction';
 @connect((store) => {
   return {
     username: store.register.username,
-    // states
-    sending: store.register.sending,
-    error: store.register.error,
   };
 })
 class ProfileSetup extends React.Component {

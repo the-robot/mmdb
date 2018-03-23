@@ -4,16 +4,13 @@ import React from 'react';
 
 import { WrappedRegisterForm } from '../components/Register/RegisterForm';
 import { WrappedProfileSetup } from '../components/Register/ProfileSetup';
+import CompleteMessage from '../components/Register/CompleteMessage';
+
 import { reset } from '../actions/registerAction';
 
 @connect((store) => {
   return {
     register_step: store.register.registration_step,
-    username: store.register.username,
-
-    // states
-    sending: store.register.sending,
-    error: store.register.error,
   };
 })
 export default class Register extends React.Component {
@@ -22,7 +19,7 @@ export default class Register extends React.Component {
   }
 
   render() {
-    const STEP_COMPONENTS = [<WrappedRegisterForm/>, <WrappedProfileSetup />, <p> Success </p>];
+    const STEP_COMPONENTS = [<WrappedRegisterForm />, <WrappedProfileSetup />, <CompleteMessage/>];
     const Current_Component = STEP_COMPONENTS[this.props.register_step];
 
     return (
