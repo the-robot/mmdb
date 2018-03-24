@@ -25,8 +25,26 @@ export const profile_setup = (values) => {
   return (dispatch) => {
     dispatch({type: "REGISTRATION_SENDING"});
 
+    // Create Form Data
+    let data = new FormData();
+    data.append('username', values['username']);
+    data.append('name', values['name']);
+
+    if (values['description'] != undefined)
+      data.append('description', values['description']);
+
+    if (values['avatar'] != undefined)
+      data.append('avatar', values['avatar'], values['avatar'].name);
+
+    let config = {
+      headers : {
+        "accept": "application/json",
+        "Content-Type": "multipart/form-data"
+      }
+    }
+
     const api = axios.create({baseURL: getAPI()})
-    api.post('/users/registration/profile', values)
+    api.post('/users/registration/profile', data, config)
       .then((response) => {
         dispatch({type: "REGISTRATION_PROFILE_SETUP_SUCCESS"});
       })
