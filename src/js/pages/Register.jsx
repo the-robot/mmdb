@@ -6,7 +6,7 @@ import { WrappedRegisterForm } from '../components/Register/RegisterForm';
 import { WrappedProfileSetup } from '../components/Register/ProfileSetup';
 import CompleteMessage from '../components/Register/CompleteMessage';
 
-import { reset } from '../actions/registerAction';
+import { reset } from '../actions/authentication/registerAction';
 
 @connect((store) => {
   return {

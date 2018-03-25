@@ -2,7 +2,7 @@ import { Form, Input, Tooltip, Icon, Checkbox, Button, Upload, message } from 'a
 import { connect } from 'react-redux';
 import React from 'react';
 
-import { profile_setup } from '../../actions/registerAction';
+import { profile_setup } from '../../actions/authentication/registerAction';
 
 @connect((store) => {
   return {

@@ -1,7 +1,7 @@
 import { message } from 'antd';
 import axios from "axios";
 
-import { getAPI } from '../api';
+import { getAPI } from '../../api';
 
 export const signup = (values) => {
   return (dispatch) => {

@@ -1,7 +1,8 @@
 import { combineReducers } from 'redux';
 
-// Registration & Signup
-import register from './registerReducer';
+// Authentications
+import auth from './authentication/authReducer';
+import register from './authentication/registerReducer';
 
 // Movies
 import movie from './movies/movieReducer';
@@ -17,6 +18,7 @@ import series_calendar from './series/seriesCalendarReducer';
 import show_search from './showSearchReducer';
 
 export default combineReducers({
+  auth,
   register,
 
   movie,

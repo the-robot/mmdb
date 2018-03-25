@@ -2,7 +2,7 @@ import { Form, Input, Tooltip, Icon, Checkbox, Button } from 'antd';
 import { connect } from 'react-redux';
 import React from 'react';
 
-import { signup } from '../../actions/registerAction';
+import { signup } from '../../actions/authentication/registerAction';
 
 @connect((store) => {
   return {
