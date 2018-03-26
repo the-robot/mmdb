@@ -1,9 +1,12 @@
-const INIT_STATE = {
-  loggedin: false,
-  token: null,
+import jwtDecode from 'jwt-decode'
 
+const INIT_STATE = {
+  access: undefined,
+  refresh: undefined,
+  
+  loggedin: false,
   loading: false,
-  error: null,
+  errors: {},
 }
 
 export default function reducer(state=INIT_STATE, action) {
@@ -20,7 +23,34 @@ export default function reducer(state=INIT_STATE, action) {
         ...state,
         loggedin: true,
         loading: false,
-        token: action.payload,
+
+        access: {
+          token: action.payload.access,
+          ...jwtDecode(action.payload.access)
+        },
+
+        refresh: {
+          token: action.payload.refresh,
+          ...jwtDecode(action.payload.refresh)
+        },
+      }
+    }
+
+    case "AUTH_REFRESH_TOKEN_FULFILLED": {
+      return {
+        ...state,
+
+        access: {
+          token: action.payload.access,
+          ...jwtDecode(action.payload.access)
+        },
+      }
+    }
+
+    case "AUTH_REFRESH_TOKEN_REJECTED": {
+      return {
+        ...state,
+        errors: action.payload.response || {'non_field_errors': action.payload.statusText},
       }
     }
 
@@ -28,7 +58,7 @@ export default function reducer(state=INIT_STATE, action) {
       return {
         ...state,
         loading: false,
-        error: action.payload,
+        errors: action.payload.response || {'non_field_errors': action.payload.statusText},
       }
     }
 

@@ -55,7 +55,7 @@ export default class ShowCard extends React.Component {
            style={{ marginBottom: '32px' }}>
 
         <Card title={ showInfo.title }
-              extra={ <a href="#"><NavLink to={ link } >More Info</NavLink></a> }
+              extra={ <p><NavLink to={ link } >More Info</NavLink></p> }
               style={{ width: 260, textAlign: 'justify' }}
               cover={<img alt="poster" height={ 360 } src={ showInfo.poster } />
         }>
