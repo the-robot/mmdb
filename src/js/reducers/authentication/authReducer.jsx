@@ -1,8 +1,7 @@
 import jwtDecode from 'jwt-decode'
 
 const INIT_STATE = {
-  access: undefined,
-  refresh: undefined,
+  token: undefined,
   
   loggedin: false,
   loading: false,
@@ -11,7 +10,7 @@ const INIT_STATE = {
 
 export default function reducer(state=INIT_STATE, action) {
   switch (action.type) {
-    case "ATUH_GET_TOKEN": {
+    case "AUTH_GET_TOKEN": {
       return {
         ...state,
         loading: true,
@@ -23,31 +22,18 @@ export default function reducer(state=INIT_STATE, action) {
         ...state,
         loggedin: true,
         loading: false,
-
-        access: {
-          token: action.payload.access,
-          ...jwtDecode(action.payload.access)
-        },
-
-        refresh: {
-          token: action.payload.refresh,
-          ...jwtDecode(action.payload.refresh)
-        },
+        token: action.payload.token,
       }
     }
 
-    case "AUTH_REFRESH_TOKEN_FULFILLED": {
+    case "AUTH_TOKEN_REFRESH_FULFILLED": {
       return {
         ...state,
-
-        access: {
-          token: action.payload.access,
-          ...jwtDecode(action.payload.access)
-        },
+        token: action.payload.token,
       }
     }
 
-    case "AUTH_REFRESH_TOKEN_REJECTED": {
+    case "AUTH_TOKEN_REFRESH_REJECTED": {
       return {
         ...state,
         errors: action.payload.response || {'non_field_errors': action.payload.statusText},

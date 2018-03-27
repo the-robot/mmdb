@@ -8,15 +8,24 @@ export const signup = (values) => {
     dispatch({type: "REGISTRATION_SENDING"});
 
     const api = axios.create({baseURL: getAPI()})
-    api.post('/users/registration/', values)
+    api.post('/api/users/create/', values)
       .then((response) => {
         dispatch({type: "REGISTRATION_SIGNUP_SUCCESS", payload: response.data['username']});
       })
 
       .catch((err) => {
         // show error message to user
-        message.error(err.response.data);
-        dispatch({type: "REGISTRATION_SIGNUP_REJECTED", payload: err.response});
+        console.log(err.response.data)
+        if ('email' in err.response.data)
+          message.error(err.response.data['email'][0])
+
+        else if ('username' in err.response.data)
+          message.error(err.response.data['username'][0])
+        
+        else if ('password' in err.response.data)
+          message.error(err.response.data['password'][0])
+
+        dispatch({type: "REGISTRATION_SIGNUP_REJECTED", payload: err.response.data});
       })
   }
 }

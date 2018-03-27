@@ -3,11 +3,13 @@ import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
 import React from 'react';
 
-import { login, logout, refresh_token } from '../actions/authentication/authAction';
+import { login, logout,
+         refresh_token, isAccessTokenExpired,
+         demo_auth, } from '../actions/authentication/authAction';
 
 @connect((store) => {
   return {
-    auth_refresh: store.auth.refresh,
+    token: store.auth.token,
     loggedin: store.auth.loggedin,
   };
 })
@@ -57,9 +59,9 @@ export default class AppHeader extends React.Component {
       marginBottom: '5px',
     }
 
-    // FOR TESTING / DEVELOPMENT
+    // if logged in and check if auth token expired
     if ( this.props.loggedin ) {
-      //this.props.dispatch(refresh_token(this.props.auth_refresh.token));
+      //this.props.dispatch(refresh_token(this.props.token));
     }
 
     return (

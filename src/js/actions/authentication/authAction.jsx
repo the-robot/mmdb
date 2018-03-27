@@ -5,10 +5,10 @@ import { getAPI } from '../../api';
 
 export const login = (username, password) => {
   return (dispatch) => {
-    dispatch({type: "ATUH_GET_TOKEN"});
+    dispatch({type: "AUTH_GET_TOKEN"});
 
     const api = axios.create({baseURL: getAPI()});
-    api.post('/api/auth/token/obtain/', {'username': username, 'password': password})
+    api.post('/users/login/', {'username': username, 'password': password})
       .then((response) => {
         dispatch({type: "AUTH_GET_TOKEN_FULFILLED", payload: response.data});
       })
@@ -21,6 +21,7 @@ export const login = (username, password) => {
   }
 }
 
+
 export const logout = () => {
   return (dispatch) => {
     dispatch({type: "AUTH_DEL_TOKEN"});
@@ -30,13 +31,21 @@ export const logout = () => {
 export const refresh_token = (token) => {
   return (dispatch) => {
     const api = axios.create({baseURL: getAPI()})
-    api.post('/api/auth/token/refresh/', {'refresh': token})
+    api.post('/users/login/refresh/', {'refresh': token})
       .then((response) => {
-        dispatch({type: "AUTH_REFRESH_TOKEN_FULFILLED", payload: response.data});
+        dispatch({type: "AUTH_TOKEN_REFRESH_FULFILLED", payload: response.data});
       })
 
       .catch((err) => {
-        dispatch({type: "AUTH_REFRESH_TOKEN_REJECTED", payload: err});
+        dispatch({type: "AUTH_TOKEN_REFRESH_REJECTED", payload: err});
       })
   }
+}
+
+// method to be called before token renewal
+export function isAccessTokenExpired(access) {
+  if (access && access.exp) {
+    return (1000 * access.exp - (new Date()).getTime()) < 5000;
+  }
+  return true
 }
