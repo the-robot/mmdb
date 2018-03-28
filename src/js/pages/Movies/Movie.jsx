@@ -64,7 +64,8 @@ export default class Movie extends React.Component {
           <TabPane tab={<span><Icon type="info-circle" />Overview</span>} key="1">
             <Row type="flex" justify="center" gutter={16}>
               <Poster movie={ overview } />
-              <MovieInformation movie={ overview } trailer={ trailer } />
+              <MovieInformation movie={ overview } trailer={ trailer }
+                id={ this.props.match.params.id } />
             </Row>
           </TabPane>
 
