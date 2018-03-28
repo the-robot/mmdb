@@ -5,7 +5,8 @@ import { getAPI, getAPIAuthPrefix } from '../../api';
 
 // method to be called before token renewal
 export function isTokenExpired(expire) {
-  return (expire - (new Date()).getTime()) < 5000;
+  // if token expiration is less than 5 days, says expire
+  return (expire - (new Date()).getTime()) < 450000000;
 }
 
 

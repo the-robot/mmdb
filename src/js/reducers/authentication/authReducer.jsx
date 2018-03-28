@@ -1,5 +1,3 @@
-import jwtDecode from 'jwt-decode'
-
 const INIT_STATE = {
   token: undefined,
   expire: undefined,
