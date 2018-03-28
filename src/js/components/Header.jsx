@@ -4,8 +4,7 @@ import { connect } from 'react-redux';
 import React from 'react';
 
 import { login, logout,
-         refresh_token, isAccessTokenExpired,
-         demo_auth, } from '../actions/authentication/authAction';
+         refresh_token, isAccessTokenExpired } from '../actions/authentication/authAction';
 
 @connect((store) => {
   return {
@@ -49,7 +48,7 @@ export default class AppHeader extends React.Component {
   }
 
   logout = () => {
-    this.props.dispatch(logout());
+    this.props.dispatch(logout( this.props.token ));
   }
 
   render() {

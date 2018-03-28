@@ -21,10 +21,25 @@ export const login = (username, password) => {
   }
 }
 
-
-export const logout = () => {
+export const logout = (token) => {
   return (dispatch) => {
-    dispatch({type: "AUTH_DEL_TOKEN"});
+    let config = {
+      headers: {'Authorization': "JWT " + token}
+    };
+
+    const api = axios.create({baseURL: getAPI()});
+    api.post('/users/logout/', {}, config)
+      .then((response) => {
+        dispatch({type: "AUTH_DEL_TOKEN"});
+      })
+
+      .catch((err) => {
+        console.log("ERR", err.response);
+        if ('detail' in err.response.data)
+          message.error(err.response.data['detail'])
+        else
+          message.error("Unknown error occurred. Please contact the staffs.")
+      })
   }
 }
 
