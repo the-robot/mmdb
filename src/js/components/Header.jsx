@@ -4,11 +4,12 @@ import { connect } from 'react-redux';
 import React from 'react';
 
 import { login, logout,
-         refresh_token, isAccessTokenExpired } from '../actions/authentication/authAction';
+         refresh_token, isTokenExpired } from '../actions/authentication/authAction';
 
 @connect((store) => {
   return {
     token: store.auth.token,
+    expire: store.auth.expire,
     loggedin: store.auth.loggedin,
   };
 })
@@ -60,7 +61,9 @@ export default class AppHeader extends React.Component {
 
     // if logged in and check if auth token expired
     if ( this.props.loggedin ) {
-      //this.props.dispatch(refresh_token(this.props.token));
+      // if token is about to expire, refresh
+      if (isTokenExpired(this.props.expire))
+        this.props.dispatch(refresh_token(this.props.token));
     }
 
     return (
@@ -100,11 +103,13 @@ export default class AppHeader extends React.Component {
                     }}>register</p>
                   </NavLink>
 
+                  {/*
                   <p style={{
                     display: 'block',
                     margin: '5px',
                     fontSize: 13,
                   }}>forgot password</p>
+                  */}
                 </div>
               </div>
             }

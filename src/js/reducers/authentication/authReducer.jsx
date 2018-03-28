@@ -2,10 +2,20 @@ import jwtDecode from 'jwt-decode'
 
 const INIT_STATE = {
   token: undefined,
-  
+  expire: undefined,
+
   loggedin: false,
   loading: false,
   errors: {},
+}
+
+// token expiration is set of 30 days in backend
+const TOKEN_EXPIRE_DAYS = 30;
+
+const getExpireDate = (days) => {
+  let date = new Date();
+  date.setDate(date.getDate() + days);
+  return date.getTime();
 }
 
 export default function reducer(state=INIT_STATE, action) {
@@ -22,7 +32,9 @@ export default function reducer(state=INIT_STATE, action) {
         ...state,
         loggedin: true,
         loading: false,
+
         token: action.payload.token,
+        expire: getExpireDate(TOKEN_EXPIRE_DAYS),
       }
     }
 
@@ -30,6 +42,7 @@ export default function reducer(state=INIT_STATE, action) {
       return {
         ...state,
         token: action.payload.token,
+        expire: getExpireDate(TOKEN_EXPIRE_DAYS),
       }
     }
 

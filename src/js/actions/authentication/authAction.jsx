@@ -1,7 +1,7 @@
 import { message } from 'antd';
 import axios from "axios";
 
-import { getAPI } from '../../api';
+import { getAPI, getAPIAuthPrefix } from '../../api';
 
 export const login = (username, password) => {
   return (dispatch) => {
@@ -24,7 +24,7 @@ export const login = (username, password) => {
 export const logout = (token) => {
   return (dispatch) => {
     let config = {
-      headers: {'Authorization': "JWT " + token}
+      headers: {'Authorization': getAPIAuthPrefix() + token}
     };
 
     const api = axios.create({baseURL: getAPI()});
@@ -34,11 +34,19 @@ export const logout = (token) => {
       })
 
       .catch((err) => {
-        console.log("ERR", err.response);
-        if ('detail' in err.response.data)
-          message.error(err.response.data['detail'])
-        else
-          message.error("Unknown error occurred. Please contact the staffs.")
+        // user token is already expired, just delete saved token
+        if (err.response.status === 401) {
+          // delete expired session key and force logout
+          //message.error("User session expired. Please login again.")
+          dispatch({type: 'AUTH_DEL_TOKEN'});
+        }
+
+        else {
+          if ('detail' in err.response.data)
+            message.error(err.response.data['detail'])
+          else
+            message.error("Unknown error occurred. Please contact the staffs.")
+        }
       })
   }
 }
@@ -46,7 +54,7 @@ export const logout = (token) => {
 export const refresh_token = (token) => {
   return (dispatch) => {
     const api = axios.create({baseURL: getAPI()})
-    api.post('/users/login/refresh/', {'refresh': token})
+    api.post('/users/login/refresh/', {'token': token})
       .then((response) => {
         dispatch({type: "AUTH_TOKEN_REFRESH_FULFILLED", payload: response.data});
       })
@@ -58,9 +66,6 @@ export const refresh_token = (token) => {
 }
 
 // method to be called before token renewal
-export function isAccessTokenExpired(access) {
-  if (access && access.exp) {
-    return (1000 * access.exp - (new Date()).getTime()) < 5000;
-  }
-  return true
+export function isTokenExpired(expire) {
+  return (expire - (new Date()).getTime()) < 5000;
 }
