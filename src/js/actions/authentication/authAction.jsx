@@ -3,6 +3,12 @@ import axios from "axios";
 
 import { getAPI, getAPIAuthPrefix } from '../../api';
 
+// method to be called before token renewal
+export function isTokenExpired(expire) {
+  return (expire - (new Date()).getTime()) < 5000;
+}
+
+
 export const login = (username, password) => {
   return (dispatch) => {
     dispatch({type: "AUTH_GET_TOKEN"});
@@ -63,9 +69,4 @@ export const refresh_token = (token) => {
         dispatch({type: "AUTH_TOKEN_REFRESH_REJECTED", payload: err});
       })
   }
-}
-
-// method to be called before token renewal
-export function isTokenExpired(expire) {
-  return (expire - (new Date()).getTime()) < 5000;
 }

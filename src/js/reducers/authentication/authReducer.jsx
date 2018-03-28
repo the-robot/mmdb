@@ -12,7 +12,7 @@ const INIT_STATE = {
 // token expiration is set of 30 days in backend
 const TOKEN_EXPIRE_DAYS = 30;
 
-const getExpireDate = (days) => {
+const getExpireDate = (days=TOKEN_EXPIRE_DAYS) => {
   let date = new Date();
   date.setDate(date.getDate() + days);
   return date.getTime();
@@ -34,7 +34,7 @@ export default function reducer(state=INIT_STATE, action) {
         loading: false,
 
         token: action.payload.token,
-        expire: getExpireDate(TOKEN_EXPIRE_DAYS),
+        expire: getExpireDate(),
       }
     }
 
@@ -42,7 +42,7 @@ export default function reducer(state=INIT_STATE, action) {
       return {
         ...state,
         token: action.payload.token,
-        expire: getExpireDate(TOKEN_EXPIRE_DAYS),
+        expire: getExpireDate(),
       }
     }
 
