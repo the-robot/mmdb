@@ -16,6 +16,8 @@ export default class MovieTracker extends React.Component {
     super(props);
 
     this.state = {
+      movie_id: props.id,
+
       tracker: {
         "0": setWatching,
         "1": setPlanning,
@@ -28,7 +30,7 @@ export default class MovieTracker extends React.Component {
 
   onClick = ({ key }) => {
     var track_function = this.state.tracker[key];
-    track_function(this.props.id);
+    track_function(this.state.movie_id);
   };
 
   render() {
