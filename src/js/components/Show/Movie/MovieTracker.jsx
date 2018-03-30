@@ -9,28 +9,40 @@ import { setWatching, setPlanning,
   return {
     token: store.auth.token,
     loggedin: store.auth.loggedin,
+
+    tracker_state: store.show_track.tracker_state,
   };
 })
 export default class MovieTracker extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      movie_id: props.id,
+    const POSTER_PATH = 'https://image.tmdb.org/t/p/w342/';
 
-      tracker: {
+    this.state = {
+      movie: {
+        id: props.movie.id,
+        title: props.movie.title,
+        rating: props.movie.rating / 10,
+        summary: props.movie.summary,
+        poster: POSTER_PATH + props.movie.poster.split('/').pop(),
+      },
+
+      tracker_methods: {
         "0": setWatching,
         "1": setPlanning,
         "2": setComplete,
         "3": setDropped,
         "4": remove,
-      }
+      },
+
+      track_state: 'Tracker',
     }
   }
 
   onClick = ({ key }) => {
-    var track_function = this.state.tracker[key];
-    track_function(this.state.movie_id);
+    var tracker = this.state.tracker_methods[key];
+    this.props.dispatch(tracker(this.props.token, this.state.movie));
   };
 
   render() {
@@ -54,7 +66,7 @@ export default class MovieTracker extends React.Component {
       <Col span={5} offset={2}>
         <Dropdown overlay={ trackerMenu } trigger={ ['click']}>
           <a className="ant-dropdown-link" href="#">
-            Tracker <Icon type="down" />
+            { this.props.tracker_state } <Icon type="down" />
           </a>
         </Dropdown>
       </Col>

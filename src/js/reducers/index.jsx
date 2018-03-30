@@ -15,7 +15,10 @@ import series from './series/seriesReducer';
 import series_calendar from './series/seriesCalendarReducer';
 
 // Movie / TV Series Search
-import show_search from './showSearchReducer';
+import show_search from './searchReducer';
+
+// Movie / TV Series Tracker
+import show_track from './trackerReducer';
 
 export default combineReducers({
   auth,
@@ -25,7 +28,10 @@ export default combineReducers({
   movie_calendar,
   movies_in_theatre,
   movies_toprated,
+
   series,
   series_calendar,
+
   show_search,
+  show_track,
 });

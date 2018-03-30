@@ -52,7 +52,7 @@ export default class MovieInformation extends React.Component {
           </Col>
 
           {/* Add to user library */}
-          <MovieTracker id={ this.props.id } />
+          <MovieTracker movie={ this.props.movie } />
 
           {/* Watch trailer button */}
           <Col span={2} offset={1}>
