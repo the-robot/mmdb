@@ -1,6 +1,25 @@
 import { getAPI, getAPIAuthPrefix } from '../../api';
 import axios from 'axios';
 
+export const isTracked = (token, movie_id) => {
+  return (dispatch) => {
+    const api = axios.create({baseURL: getAPI()});
+    let config = {
+      headers: {'Authorization': getAPIAuthPrefix() + token}
+    };
+
+    api.post('/users/tracker/movie/tracked', {movie_id: movie_id}, config)
+      .then((response) => {
+        if (response.data.tracker)
+          dispatch({type: "SHOW_TRACKER_SUCCESS", payload: response.data.tracker});
+      })
+
+      .catch((err) => {
+        dispatct({type: "SHOW_TRACKER_FAILED", payload: err.response.data});
+      })
+  }
+}
+
 export const setWatching = (token, movie) => {
   return (dispatch) => {
     const api = axios.create({baseURL: getAPI()});
@@ -18,7 +37,6 @@ export const setWatching = (token, movie) => {
       })
   }
 }
-
 export const setPlanning = (token, movie) => {
   return (dispatch) => {
     const api = axios.create({baseURL: getAPI()});

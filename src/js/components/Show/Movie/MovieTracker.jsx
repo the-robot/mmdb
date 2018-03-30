@@ -2,7 +2,7 @@ import { Col, Dropdown, Menu, Icon, message} from 'antd';
 import { connect } from 'react-redux';
 import React from 'react';
 
-import { setWatching, setPlanning, 
+import { isTracked, setWatching, setPlanning, 
          setComplete, setDropped, remove } from '../../../actions/movies/trackerAction';
 
 @connect((store) => {
@@ -38,6 +38,11 @@ export default class MovieTracker extends React.Component {
 
       track_state: 'Tracker',
     }
+  }
+
+  componentDidMount() {
+    if (this.props.token && this.props.movie.id)
+      this.props.dispatch(isTracked(this.props.token, this.props.movie.id));
   }
 
   onClick = ({ key }) => {
