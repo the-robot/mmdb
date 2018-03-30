@@ -23,7 +23,6 @@ export default class MovieTracker extends React.Component {
       movie: {
         id: props.movie.id,
         title: props.movie.title,
-        rating: props.movie.rating / 10,
         summary: props.movie.summary,
         poster: POSTER_PATH + props.movie.poster.split('/').pop(),
       },
