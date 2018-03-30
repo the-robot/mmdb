@@ -15,7 +15,7 @@ export const isTracked = (token, movie_id) => {
       })
 
       .catch((err) => {
-        dispatct({type: "SHOW_TRACKER_FAILED", payload: err.response.data});
+        dispatch({type: "SHOW_TRACKER_FAILED", payload: err.response.data});
       })
   }
 }
@@ -33,7 +33,7 @@ export const setWatching = (token, movie) => {
       })
 
       .catch((err) => {
-        dispatct({type: "SHOW_TRACKER_FAILED", payload: err.response.data});
+        dispatch({type: "SHOW_TRACKER_FAILED", payload: err.response.data});
       })
   }
 }
@@ -50,7 +50,7 @@ export const setPlanning = (token, movie) => {
       })
 
       .catch((err) => {
-        dispatct({type: "SHOW_TRACKER_FAILED", payload: err.response.data});
+        dispatch({type: "SHOW_TRACKER_FAILED", payload: err.response.data});
       })
   }
 }
@@ -68,7 +68,7 @@ export const setComplete = (token, movie) => {
       })
 
       .catch((err) => {
-        dispatct({type: "SHOW_TRACKER_FAILED", payload: err.response.data});
+        dispatch({type: "SHOW_TRACKER_FAILED", payload: err.response.data});
       })
   }
 }
@@ -86,7 +86,7 @@ export const setDropped = (token, movie) => {
       })
 
       .catch((err) => {
-        dispatct({type: "SHOW_TRACKER_FAILED", payload: err.response.data});
+        dispatch({type: "SHOW_TRACKER_FAILED", payload: err.response.data});
       })
   }
 }
@@ -104,7 +104,7 @@ export const remove = (token, movie) => {
       })
 
       .catch((err) => {
-        dispatct({type: "SHOW_TRACKER_FAILED", payload: err.response.data});
+        dispatch({type: "SHOW_TRACKER_FAILED", payload: err.response.data});
       })
   }
 }
