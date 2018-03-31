@@ -108,3 +108,9 @@ export const remove = (token, movie) => {
       })
   }
 }
+
+export const reset = () => {
+  return (dispatch) => {
+    dispatch({type: "RESET_SHOW_TRACKER"});
+  }
+}

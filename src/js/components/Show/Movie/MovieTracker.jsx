@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import React from 'react';
 
 import { isTracked, setWatching, setPlanning, 
-         setComplete, setDropped, remove } from '../../../actions/movies/trackerAction';
+         setComplete, setDropped, remove, reset } from '../../../actions/movies/trackerAction';
 
 @connect((store) => {
   return {
@@ -42,6 +42,11 @@ export default class MovieTracker extends React.Component {
   componentDidMount() {
     if (this.props.token && this.props.movie.id)
       this.props.dispatch(isTracked(this.props.token, this.props.movie.id));
+  }
+
+  componentWillUnmount() {
+    if (this.props.token && this.props.movie.id)
+      this.props.dispatch(reset());
   }
 
   onClick = ({ key }) => {
