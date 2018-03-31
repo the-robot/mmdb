@@ -8,7 +8,7 @@ export const isTracked = (token, movie_id) => {
       headers: {'Authorization': getAPIAuthPrefix() + token}
     };
 
-    api.post('/users/tracker/movie/tracked', {movie_id: movie_id}, config)
+    api.post('/movies/tracker/tracked', {movie_id: movie_id}, config)
       .then((response) => {
         if (response.data.tracker)
           dispatch({type: "SHOW_TRACKER_SUCCESS", payload: response.data.tracker});
@@ -27,7 +27,7 @@ export const setWatching = (token, movie) => {
       headers: {'Authorization': getAPIAuthPrefix() + token}
     };
 
-    api.post('/users/tracker/movie/watching', {movie: movie}, config)
+    api.post('/movies/tracker/watching', {movie: movie}, config)
       .then((response) => {
         dispatch({type: "SHOW_TRACKER_SUCCESS", payload: 'Watching'});
       })
@@ -44,7 +44,7 @@ export const setPlanning = (token, movie) => {
       headers: {'Authorization': getAPIAuthPrefix() + token}
     };
 
-    api.post('/users/tracker/movie/planning', {movie: movie}, config)
+    api.post('/movies/tracker/planning', {movie: movie}, config)
       .then((response) => {
         dispatch({type: "SHOW_TRACKER_SUCCESS", payload: 'Planning'});
       })
@@ -62,7 +62,7 @@ export const setComplete = (token, movie) => {
       headers: {'Authorization': getAPIAuthPrefix() + token}
     };
 
-    api.post('/users/tracker/movie/complete', {movie: movie}, config)
+    api.post('/movies/tracker/complete', {movie: movie}, config)
       .then((response) => {
         dispatch({type: "SHOW_TRACKER_SUCCESS", payload: 'Complete'});
       })
@@ -80,7 +80,7 @@ export const setDropped = (token, movie) => {
       headers: {'Authorization': getAPIAuthPrefix() + token}
     };
 
-    api.post('/users/tracker/movie/dropped', {movie: movie}, config)
+    api.post('/movies/tracker/dropped', {movie: movie}, config)
       .then((response) => {
         dispatch({type: "SHOW_TRACKER_SUCCESS", payload: 'Dropped'});
       })
@@ -98,7 +98,7 @@ export const remove = (token, movie) => {
       headers: {'Authorization': getAPIAuthPrefix() + token}
     };
 
-    api.post('/users/tracker/movie/untrack', {movie: movie}, config)
+    api.post('/movies/tracker/untrack', {movie: movie}, config)
       .then((response) => {
         dispatch({type: "RESET_SHOW_TRACKER"});
       })
