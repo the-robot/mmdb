@@ -3,7 +3,7 @@ import React from 'react';
 
 export default class Poster extends React.Component {
   visitMoviePage() {
-    window.open(this.props.movie.homepage, "_blank");
+    window.open(this.props.series.homepage, "_blank");
   }
 
   render() {
