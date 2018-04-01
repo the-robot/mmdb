@@ -39,7 +39,10 @@ export default class ShowsView extends React.Component {
     }
 
     return(
-      <Row gutter={24} type="flex" justify="center">
+      <Row
+        type="flex"
+        justify="center"
+      >
         { showsInRow }
       </Row>
     );

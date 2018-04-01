@@ -17,9 +17,10 @@ export default class SideBar extends React.Component {
 
     return (
       <Sider
-          collapsible
-          collapsed={ this.state.collapsed }
-          onCollapse={ this.onCollapse }>
+        breakpoint="xl"
+        collapsible
+        collapsed={ this.state.collapsed }
+        onCollapse={ this.onCollapse }>
 
         <div className="logo" />
 

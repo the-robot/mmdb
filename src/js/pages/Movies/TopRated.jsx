@@ -41,8 +41,14 @@ export default class TopRated extends React.Component {
     return(
       <div>
         <Row type="flex" justify="start" align="middle">
-          <Col span={24}>
-            <h1>Top Rated Movies</h1>
+        <Col
+            xs={{ span: 24 }} 
+            sm={{ span: 14 }}
+            md={{ span: 10 }}
+            lg={{ span: 8 }}
+            xl={{ span: 6 }}
+          >
+            <h4>Top Rated Movies</h4>
           </Col>
         </Row>
 

@@ -41,8 +41,14 @@ export default class InTheater extends React.Component {
     return(
       <div>
         <Row type="flex" justify="start" align="middle">
-          <Col span={24}>
-            <h1>Movies In Theatre</h1>
+          <Col
+            xs={{ span: 24 }} 
+            sm={{ span: 14 }}
+            md={{ span: 10 }}
+            lg={{ span: 8 }}
+            xl={{ span: 6 }}
+          >
+            <h4>Movies In Theatre</h4>
           </Col>
         </Row>
 

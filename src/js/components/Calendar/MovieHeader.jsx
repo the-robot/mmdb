@@ -85,11 +85,23 @@ export default class MovieHeader extends React.Component {
 
     return(
       <Row type="flex" justify="start" align="middle">
-        <Col span={23}>
-          <h1>Movies Calendar</h1>
+        <Col
+          xs={{ span: 16 }} 
+          sm={{ span: 14 }}
+          md={{ span: 10 }}
+          lg={{ span: 8 }}
+          xl={{ span: 6 }}
+        >
+          <h4>Movies Calendar</h4>
         </Col>
 
-        <Col span={1}>
+        <Col
+          xs={{ span: 1, offset: 5 }} 
+          sm={{ span: 1, offset: 7 }}
+          md={{ span: 1, offset: 12 }}
+          lg={{ span: 1, offset: 15 }}
+          xl={{ span: 1, offset: 17 }}
+        >
           <Button shape="circle" icon="search" size="large"
             onClick={ this.showSearchBox.bind(this) } />
         </Col>
@@ -98,6 +110,7 @@ export default class MovieHeader extends React.Component {
         <Modal
           visible={ this.state.visible }
           style={{ top: 60 }}
+          width={ 540 }
 
           title="Search Movies"
           onCancel={ this.handleCancel }
@@ -115,7 +128,7 @@ export default class MovieHeader extends React.Component {
 
             <Col span={4}>
               <Button loading={ this.props.fetching } onClick={ this.search.bind(this) }
-                style={{ border: 0, width: '100%' }} >
+                style={{ border: 0 }} >
                 Search
               </Button>
             </Col>

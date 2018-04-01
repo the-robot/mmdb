@@ -47,11 +47,11 @@ export default class ShowCard extends React.Component {
     const link = this.props.path + showInfo.id;
 
     return(
-      <Col xs={{ span: 24, offset: 0}} 
-           sm={{ span: 12, offset: 0}}
-           md={{ span: 12, offset: 0}}
-           lg={{ span: 8, offset: 0}}
-           xl={{ span: 6, offset: 0}}
+      <Col xs={{ span: 21, offset: 3 }} 
+           sm={{ span: 18, offset: 6 }}
+           md={{ span: 10, offset: 2 }}
+           lg={{ span: 8, offset: 0 }}
+           xl={{ span: 6, offset: 0 }}
            style={{ marginBottom: '32px' }}>
 
         <Card title={ showInfo.title }
