@@ -22,7 +22,7 @@ export default class Poster extends React.Component {
           <Button.Group>
             {/* Disable button if homepage is not found */}
             <Button onClick={ this.visitMoviePage.bind(this) }
-              disabled={ movie.homepage === '' }>
+              disabled={ movie.homepage === '' || movie.homepage === null }>
               <Icon type="link" />Homepage
             </Button>
 
