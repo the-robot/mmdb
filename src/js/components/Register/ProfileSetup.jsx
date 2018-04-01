@@ -40,11 +40,17 @@ class ProfileSetup extends React.Component {
     const formItemLayout = {
       labelCol: {
         xs: { span: 24 },
-        sm: { span: 8, offset: 1 },
+        sm: { span: 24 },
+        md: { span: 6, offset: 0},
+        lg: { span: 4, offset: 4},
+        xl: { span: 4, offset: 5},
       },
       wrapperCol: {
-        xs: { span: 20 },
-        sm: { span: 6 },
+        xs: { span: 24 },
+        sm: { span: 24 },
+        md: { span: 12, offset: 0},
+        lg: { span: 8, offset: 0},
+        xl: { span: 6, offset: 0},
       },
     };
 
@@ -126,17 +132,14 @@ class ProfileSetup extends React.Component {
           {getFieldDecorator('description', {
             rules: [{ required: false, whitespace: true }],
           })(
-            <Input.TextArea />
+            <Input.TextArea autosize={{ minRows: 4, maxRows: 6 }} maxlength="200" />
           )}
         </FormItem>
 
         <FormItem {...formItemLayout}
           label={(
               <span>
-                Avatar&nbsp;
-              <Tooltip title="Profile picture.">
-                <Icon type="question-circle-o" />
-              </Tooltip>
+                Profile Picture&nbsp;
               </span>
             )}
           >

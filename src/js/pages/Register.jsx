@@ -24,10 +24,16 @@ export default class Register extends React.Component {
 
     return (
       <div style={{ textAlign: 'center'}}>
-        <h2> My Movie Database - Registration </h2>
+        <h4> My Movie Database - Registration </h4>
 
-        <Row type="flex" justify="center" style={{ padding: 42 }}>
-          <Col span={12}>
+        <Row type="flex" justify="center" style={{ paddingTop: 24, paddingBottom: 42 }}>
+          <Col
+            xs={{ span: 24 }} 
+            sm={{ span: 20 }}
+            md={{ span: 16 }}
+            lg={{ span: 12 }}
+            xl={{ span: 10 }}
+          >
             <Steps current={ this.props.register_step }>
               <Steps.Step title="Sign up" />
               {/* <Steps.Step title="Confirmation" /> */}

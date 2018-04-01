@@ -65,11 +65,17 @@ class RegisterForm extends React.Component {
     const formItemLayout = {
       labelCol: {
         xs: { span: 24 },
-        sm: { span: 8, offset: 1 },
+        sm: { span: 24 },
+        md: { span: 6, offset: 0},
+        lg: { span: 4, offset: 4},
+        xl: { span: 4, offset: 5},
       },
       wrapperCol: {
-        xs: { span: 20 },
-        sm: { span: 6 },
+        xs: { span: 24 },
+        sm: { span: 24 },
+        md: { span: 12, offset: 0},
+        lg: { span: 8, offset: 0},
+        xl: { span: 6, offset: 0},
       },
     };
 
