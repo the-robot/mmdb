@@ -84,9 +84,9 @@ export default class MovieInformation extends React.Component {
 
           {/* Add to user library */}
           <Col
-            xs={{ span: 6, offset: 2 }}
-            sm={{ span: 4, offset: 2 }}
-            md={{ span: 4, offset: 2 }}
+            xs={{ span: 7, offset: 2 }}
+            sm={{ span: 5, offset: 2 }}
+            md={{ span: 5, offset: 2 }}
             lg={{ span: 6, offset: 2 }}
             xl={{ span: 4, offset: 1 }}
           >
