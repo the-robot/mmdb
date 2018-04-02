@@ -90,7 +90,7 @@ export default class Seasons extends React.Component {
                 sm={{ span: 24, offset: 0 }}
                 md={{ span: 24, offset: 0 }}
                 lg={{ span: 13, offset: 0 }}
-                xl={{ span: 16, offset: 0 }}
+                xl={{ span: 15, offset: 1 }}
 
                 style={{ paddingTop: smallscreenTopPadding }}
               >
