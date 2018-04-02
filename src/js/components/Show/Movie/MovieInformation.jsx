@@ -25,7 +25,9 @@ export default class MovieInformation extends React.Component {
   }
 
   render() {
-    const mobileTopPadding = (this.props.isTablet ? 25 : 0)
+    // in small screen, poster and movie info will be in different rows
+    // so put space between them
+    const smallscreenTopPadding = (this.props.isTablet ? 25 : 0)
 
     const movie = this.props.movie;
     const trailer = this.props.trailer;
@@ -43,7 +45,7 @@ export default class MovieInformation extends React.Component {
         xl={{ span: 16, offset: 1 }}
       >
         {/* Movie Title */}
-        <Row type="flex" justify="start" style={{ paddingTop: mobileTopPadding }}>
+        <Row type="flex" justify="start" style={{ paddingTop: smallscreenTopPadding }}>
           <Col
             xs={{ span: 22, offset: 2 }}
             sm={{ span: 20, offset: 2 }}
