@@ -1,4 +1,4 @@
-import { Col, Dropdown, Menu, Icon, message} from 'antd';
+import { Dropdown, Menu, Icon, message} from 'antd';
 import { connect } from 'react-redux';
 import React from 'react';
 
@@ -70,13 +70,11 @@ export default class SeriesTracker extends React.Component {
       return ( null );
 
     return (
-      <Col span={5} offset={2}>
-        <Dropdown overlay={ trackerMenu } trigger={ ['click']}>
-          <a className="ant-dropdown-link" href="#">
-            { this.props.tracker_state } <Icon type="down" />
-          </a>
-        </Dropdown>
-      </Col>
+      <Dropdown overlay={ trackerMenu } trigger={ ['click']}>
+        <a className="ant-dropdown-link" href="#">
+          { this.props.tracker_state } <Icon type="down" />
+        </a>
+      </Dropdown>
     );
   }
 }

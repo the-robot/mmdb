@@ -10,10 +10,16 @@ export default class Poster extends React.Component {
     const series = this.props.series;
 
     return (
-      <Col span={8}>
+      <Col 
+        xs={{ span: 24, offset: 0 }} 
+        sm={{ span: 24, offset: 0 }}
+        md={{ span: 24, offset: 0 }}
+        lg={{ span: 8, offset: 0 }}
+        xl={{ span: 7, offset: 0 }}
+      >
         {/* Poster */}
         <Row type="flex" justify="center" style={{ marginBottom: 10 }}>
-          <img src={ series.poster } 
+          <img src={ series.poster } width={300} height={450}
           alt="poster"/>
         </Row>
 

@@ -60,7 +60,7 @@ export default class Seasons extends React.Component {
           <TabPane tab={<span><Icon type="info-circle" />Overview</span>} key="1">
             <Row type="flex" justify="start">
               <Col span={8}>
-                <img src={ season.poster } alt="poster"/>
+                <img src={ season.poster } alt="poster" width={300} height={450} />
               </Col>
 
               <Col offset={1} span={14}>

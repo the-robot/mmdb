@@ -32,7 +32,7 @@ export default class Seasons extends React.Component {
 
         <Col span={24}>
           <List
-            grid={{ gutter:12, column: 6 }}
+            grid={{ gutter:12, xs: 2, sm: 3, md: 4, lg: 6, xl: 6, xxl: 8 }}
             dataSource={ seasons }
             renderItem={season => (
               <List.Item>

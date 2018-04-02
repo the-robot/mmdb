@@ -43,7 +43,7 @@ export default class MovieInformation extends React.Component {
         xl={{ span: 16, offset: 1 }}
       >
         {/* Movie Title */}
-        <Row type="flex" justify='start' style={{ paddingTop: mobileTopPadding }}>
+        <Row type="flex" justify="start" style={{ paddingTop: mobileTopPadding }}>
           <Col
             xs={{ span: 22, offset: 2 }}
             sm={{ span: 20, offset: 2 }}
@@ -136,7 +136,7 @@ export default class MovieInformation extends React.Component {
         <Row type="flex" justify="start" align="middle" gutter={16}
           style={{ marginBottom: 25 }}>
         
-        <Col
+          <Col
             xs={{ span: 22, offset: 2 }}
             sm={{ span: 20, offset: 2 }}
             md={{ span: 24, offset: 0 }}
