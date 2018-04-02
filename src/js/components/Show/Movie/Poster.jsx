@@ -10,7 +10,12 @@ export default class Poster extends React.Component {
     const movie = this.props.movie;
 
     return (
-      <Col span={8}>
+      <Col 
+      xs={{ span: 24, offset: 0 }} 
+      sm={{ span: 24, offset: 0 }}
+      md={{ span: 24, offset: 0 }}
+      lg={{ span: 8, offset: 0 }}
+      xl={{ span: 7, offset: 0 }}>
         {/* Movie poster */}
         <Row type="flex" justify="center" style={{ marginBottom: 10 }}>
           <img src={ movie.poster } 

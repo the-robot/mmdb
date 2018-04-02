@@ -4,9 +4,13 @@
 import { Row, Col, Button, Tag, Tooltip, Progress } from 'antd';
 import ModalVideo from 'react-modal-video';
 import React from 'react';
+import withSizes from 'react-sizes';
 
 import MovieTracker from './MovieTracker';
 
+@withSizes(({ width }) => ({
+  isTablet: width < 992
+}))
 export default class MovieInformation extends React.Component {
   constructor (props) {
     super(props);
@@ -21,6 +25,8 @@ export default class MovieInformation extends React.Component {
   }
 
   render() {
+    const mobileTopPadding = (this.props.isTablet ? 25 : 0)
+
     const movie = this.props.movie;
     const trailer = this.props.trailer;
 
@@ -29,12 +35,23 @@ export default class MovieInformation extends React.Component {
     );
 
     return (
-      <Col offset={1} span={15}>
-
+      <Col
+        xs={{ span: 24, offset: 0 }}
+        sm={{ span: 24, offset: 0 }}
+        md={{ span: 23, offset: 1 }}
+        lg={{ span: 14, offset: 2 }}
+        xl={{ span: 16, offset: 1 }}
+      >
         {/* Movie Title */}
-        <Row type="flex" justify="start">
-          <Col span={24}>
-            <h2> { movie.title } </h2>
+        <Row type="flex" justify='start' style={{ paddingTop: mobileTopPadding }}>
+          <Col
+            xs={{ span: 22, offset: 2 }}
+            sm={{ span: 20, offset: 2 }}
+            md={{ span: 24, offset: 0 }}
+            lg={{ span: 18, offset: 0 }}
+            xl={{ span: 18, offset: 0 }}
+          >
+            <h3> { movie.title } </h3>
           </Col>
         </Row>
 
@@ -43,19 +60,47 @@ export default class MovieInformation extends React.Component {
           style={{ marginBottom: 10 }}>
 
           {/* Rating */}
-          <Col span={2}>
-              <Progress type="dashboard" percent={ movie.rating }
-              width={60} />
+          <Col
+            xs={{ span: 2, offset: 2 }}
+            sm={{ span: 2, offset: 2 }}
+            md={{ span: 2, offset: 0 }}
+            lg={{ span: 2, offset: 0 }}
+            xl={{ span: 2, offset: 0 }}
+          >
+            <Progress type="dashboard" percent={ movie.rating }
+            width={60} />
           </Col>
-          <Col span={2} style={{ paddingLeft: 25 }}>
+          <Col
+            xs={{ span: 18, offset: 2 }}
+            sm={{ span: 18, offset: 2 }}
+            md={{ span: 2, offset: 0 }}
+            lg={{ span: 2, offset: 1 }}
+            xl={{ span: 2, offset: 0 }}
+          
+            style={{ paddingLeft: 25 }}
+          >
             <p>User Rating</p>
           </Col>
 
           {/* Add to user library */}
-          <MovieTracker movie={ this.props.movie } />
+          <Col
+            xs={{ span: 6, offset: 2 }}
+            sm={{ span: 4, offset: 2 }}
+            md={{ span: 4, offset: 2 }}
+            lg={{ span: 6, offset: 2 }}
+            xl={{ span: 4, offset: 1 }}
+          >
+            <MovieTracker movie={ this.props.movie } />
+          </Col>
 
           {/* Watch trailer button */}
-          <Col span={2} offset={1}>
+          <Col
+            xs={{ span: 8, offset: 1 }}
+            sm={{ span: 8, offset: 1 }}
+            md={{ span: 2, offset: 0 }}
+            lg={{ span: 2, offset: 0 }}
+            xl={{ span: 2, offset: 0 }}
+          >
             <ModalVideo channel='youtube' isOpen={this.state.isTrailerOpen} 
               videoId={ trailer } onClose={() => this.setState({isTrailerOpen: false})} />
             
@@ -76,7 +121,13 @@ export default class MovieInformation extends React.Component {
           </Col>
           */}
 
-          <Col span={18}>
+          <Col
+            xs={{ span: 22, offset: 2 }}
+            sm={{ span: 20, offset: 2 }}
+            md={{ span: 24, offset: 0 }}
+            lg={{ span: 18, offset: 0 }}
+            xl={{ span: 18, offset: 0 }}
+          >
             { genreTags }
           </Col>
         </Row>
@@ -85,22 +136,46 @@ export default class MovieInformation extends React.Component {
         <Row type="flex" justify="start" align="middle" gutter={16}
           style={{ marginBottom: 25 }}>
         
-          <Col span={10}>
+        <Col
+            xs={{ span: 22, offset: 2 }}
+            sm={{ span: 20, offset: 2 }}
+            md={{ span: 24, offset: 0 }}
+            lg={{ span: 24, offset: 0 }}
+            xl={{ span: 24, offset: 0 }}
+          >
             Release Date: { movie.release_date }
           </Col>
 
-          <Col span={6}>
+          <Col
+            xs={{ span: 22, offset: 2 }}
+            sm={{ span: 20, offset: 2 }}
+            md={{ span: 24, offset: 0 }}
+            lg={{ span: 24, offset: 0 }}
+            xl={{ span: 24, offset: 0 }}
+          >
             Runtime: { movie.runtime }
           </Col>
         </Row>
 
         {/* Movie Summary */}
         <Row type="flex" justify="start">
-          <Col span={24}>
+          <Col
+            xs={{ span: 22, offset: 2 }}
+            sm={{ span: 22, offset: 2 }}
+            md={{ span: 24, offset: 0 }}
+            lg={{ span: 24, offset: 0 }}
+            xl={{ span: 24, offset: 0 }}
+          >
             <h6><b>Movie Summary</b></h6>
           </Col>
 
-          <Col span={23}>
+          <Col
+            xs={{ span: 20, offset: 2 }}
+            sm={{ span: 20, offset: 2 }}
+            md={{ span: 24, offset: 0 }}
+            lg={{ span: 24, offset: 0 }}
+            xl={{ span: 24, offset: 0 }}
+          >
             <p style={{ textAlign: 'justify'}}>
               { movie.summary }
             </p>

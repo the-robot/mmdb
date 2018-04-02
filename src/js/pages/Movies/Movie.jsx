@@ -1,6 +1,7 @@
 import { Row, Button, Icon, Tabs } from 'antd';
 import { connect } from 'react-redux';
 import React from 'react';
+import withSizes from 'react-sizes';
 
 import { fetch, reset } from '../../actions/movies/movie/movieAction';
 import { getTrailer } from '../../actions/movies/movie/trailerAction';
@@ -11,6 +12,9 @@ import MovieInformation from '../../components/Show/Movie/MovieInformation';
 import Poster from '../../components/Show/Movie/Poster';
 import Reviews from '../../components/Show/Movie/Reviews'
 
+@withSizes(({ width }) => ({
+  isTablet: width < 768
+}))
 @connect((store) => {
   return {
     overview: store.movie.overview,
@@ -38,6 +42,9 @@ export default class Movie extends React.Component {
 
   render() {
     const TabPane = Tabs.TabPane;
+    const tabPosition = (this.props.isTablet ? 'top' : 'right');
+    const tabSize = (this.props.isTablet ? 'small' : 'default');
+
     const ID = this.props.match.params.id;
 
     var overview = this.props.overview;
@@ -59,7 +66,7 @@ export default class Movie extends React.Component {
           </Button>
         </Row>
 
-        <Tabs defaultActiveKey="1" tabPosition="right">
+        <Tabs defaultActiveKey="1" tabPosition={ tabPosition } size={ tabSize }>
           {/* Movie overview */}
           <TabPane tab={<span><Icon type="info-circle" />Overview</span>} key="1">
             <Row type="flex" justify="center" gutter={16}>
