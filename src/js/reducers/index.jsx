@@ -2,6 +2,7 @@ import { combineReducers } from 'redux';
 
 // Authentications
 import auth from './authentication/authReducer';
+import profile from './authentication/profileReducer';
 import register from './authentication/registerReducer';
 
 // Movies
@@ -23,6 +24,7 @@ import show_track from './trackerReducer';
 
 export default combineReducers({
   auth,
+  profile,
   register,
 
   movie,

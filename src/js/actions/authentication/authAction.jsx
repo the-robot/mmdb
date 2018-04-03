@@ -38,6 +38,9 @@ export const logout = (token) => {
     api.post('/users/logout/', {}, config)
       .then((response) => {
         dispatch({type: "AUTH_DEL_TOKEN"});
+
+        // reset profile data
+        dispatch({type: "RESET_PROFILE"});
       })
 
       .catch((err) => {

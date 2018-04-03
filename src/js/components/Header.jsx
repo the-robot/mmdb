@@ -1,27 +1,40 @@
-import { Button, Icon, Input, Layout, Popover, Modal, message } from 'antd';
+import { Avatar, Button, Icon, Input, Layout, Popover, Modal, message } from 'antd';
 import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
 import React from 'react';
 
 import { login, logout,
          refresh_token, isTokenExpired } from '../actions/authentication/authAction';
+import { get_profile, reset_profile } from '../actions/authentication/profileAction';
 
 @connect((store) => {
   return {
     token: store.auth.token,
     expire: store.auth.expire,
     loggedin: store.auth.loggedin,
+
+    // profile
+    username: store.profile.username,
+    name: store.profile.name,
+    avatar: store.profile.avatar,
+    description: store.profile.description,
+    profile_fetched: store.profile.fetched,
   };
 })
 export default class AppHeader extends React.Component {
   state = {
-    popover_visible: false,
+    login_popover_visible: false,
+    profile_popover_visible: false,
     username: '',
     password: '',
   }
 
-  handleVisibleChange = (visible) => {
-    this.setState({ popover_visible: visible });
+  handleLoginVisibleChange = (visible) => {
+    this.setState({ login_popover_visible: visible });
+  }
+
+  handleProfileVisibleChange = (visible) => {
+    this.setState({ profile_popover_visible: visible });
   }
 
   login = () => {
@@ -42,7 +55,7 @@ export default class AppHeader extends React.Component {
     // hide popover then
     // reset saved credentials in state
     this.setState({
-      popover_visible: false,
+      login_popover_visible: false,
       username: '',
       password: '',
     });
@@ -62,8 +75,12 @@ export default class AppHeader extends React.Component {
     // if logged in and check if auth token expired
     if ( this.props.loggedin ) {
       // if token is about to expire, refresh
-      if (isTokenExpired(this.props.expire))
+      if ( isTokenExpired(this.props.expire) )
         this.props.dispatch(refresh_token(this.props.token));
+
+      // if profile is not fetched yet, get it
+      if ( !this.props.profile_fetched )
+        this.props.dispatch(get_profile(this.props.token));
     }
 
     return (
@@ -116,14 +133,40 @@ export default class AppHeader extends React.Component {
 
             title='Login User'
             trigger='click'
-            visible={ this.state.popover_visible }
-            onVisibleChange={ this.handleVisibleChange }
+            visible={ this.state.login_popover_visible }
+            onVisibleChange={ this.handleLoginVisibleChange }
             placement="topRight"
           >
-            <Button type="primary" icon="login">LOGIN</Button>
+            <Avatar size="large" icon="login" style={{ backgroundColor: '#3E91F7' }}/>
           </Popover>
         ) : (
-          <Button type="primary" icon="logout" type="danger" onClick={() => this.logout()}>LOGOUT</Button>
+          <Popover
+            content={
+              <div style={{ width: 200 }} >
+                <div style={{ textAlign: 'center' }}>
+                </div>
+
+                <Button type="primary" icon="logout" type="danger"
+                  onClick={() => this.logout()}
+                  style={{ width: '100%', borderColor: 'white' }}>
+                  LOGOUT
+                </Button> 
+              </div>
+            }
+
+            trigger='click'
+            visible={ this.state.profile_popover_visible }
+            onVisibleChange={ this.handleProfileVisibleChange }
+            placement="topRight"
+          >
+
+          {/* if there is an anvtar, show that else show the first char of name as icon */} 
+          { this.props.avatar ? <Avatar src={ this.props.avatar } size="large" /> :
+            <Avatar style={{ backgroundColor: '#3E91F7', verticalAlign: 'middle' }} size="large">
+              { this.props.name != undefined ? this.props.name.charAt(0) : '' }
+            </Avatar>
+          }
+          </Popover>
         )}
       </Layout.Header>
     );
