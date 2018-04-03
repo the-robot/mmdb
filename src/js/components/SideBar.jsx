@@ -43,7 +43,7 @@ export default class SideBar extends React.Component {
           <SubMenu
             key="sub2"
             title={<span><Icon type="switcher" /><span>TV Series</span></span>}>
-            <Menu.Item key="5"><NavLink to=''>On TV</NavLink></Menu.Item>
+            <Menu.Item key="5"><NavLink to='/series/ontv'>On TV</NavLink></Menu.Item>
             <Menu.Item key="6"><NavLink to='/series/calendar'>Calendar</NavLink></Menu.Item>
           </SubMenu>
 

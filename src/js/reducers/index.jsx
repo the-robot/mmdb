@@ -13,6 +13,7 @@ import movies_toprated from './movies/topRatedReducer';
 // TV Series
 import series from './series/seriesReducer';
 import series_calendar from './series/seriesCalendarReducer';
+import series_ontv from './series/seriesOnTvReducer';
 
 // Movie / TV Series Search
 import show_search from './searchReducer';
@@ -31,6 +32,7 @@ export default combineReducers({
 
   series,
   series_calendar,
+  series_ontv,
 
   show_search,
   show_track,
