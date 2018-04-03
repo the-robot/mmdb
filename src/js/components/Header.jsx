@@ -1,4 +1,4 @@
-import { Avatar, Button, Icon, Input, Layout, Popover, Modal, message } from 'antd';
+import { Avatar, Button, Icon, Input, Modal, Layout, List, Popover, message } from 'antd';
 import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
 import React from 'react';
@@ -63,6 +63,11 @@ export default class AppHeader extends React.Component {
 
   logout = () => {
     this.props.dispatch(logout( this.props.token ));
+
+    // hide profile popover
+    this.setState({
+      profile_popover_visible: false,
+    });
   }
 
   render() {
@@ -71,6 +76,32 @@ export default class AppHeader extends React.Component {
       display: 'block',
       marginBottom: '5px',
     }
+
+    var profile_popover_menu = [
+      {
+        icon: 'user',
+        menu: 'Profile',
+        link: '#',
+      },
+
+      {
+        icon: 'question-circle',
+        menu: 'FAQ',
+        link: '#',
+      },
+
+      {
+        icon: 'smile',
+        menu: 'Feedback',
+        link: '#',
+      },
+
+      {
+        icon: 'setting',
+        menu: 'Settings',
+        link: '#',
+      }
+    ]
 
     // if logged in and check if auth token expired
     if ( this.props.loggedin ) {
@@ -142,13 +173,31 @@ export default class AppHeader extends React.Component {
         ) : (
           <Popover
             content={
-              <div style={{ width: 200 }} >
+              <div style={{ minWidth: 180, maxWidth: 250, overflow: 'hidden' }} >
                 <div style={{ textAlign: 'center' }}>
+                  <h6 style={{ marginBottom: 0, color: '#3E91F7' }}> { this.props.username } </h6>
+                  <p style={{ fontSize: 10, marginTop: 0 }}> @{ this.props.username } </p>
                 </div>
+
+                <List
+                  itemLayout="horizontal"
+                  dataSource={profile_popover_menu}
+
+                  renderItem={item => (
+                    <List.Item style={{ border: 0, padding: 10 }}>
+                    <a href={ item.link } style={{ color: '#595959' }}>
+                      <Icon type={ item.icon }
+                        style={{ paddingRight: 16, fontSize: 18, color: '#888888' }}
+                      />
+                      { item.menu }
+                    </a>
+                    </List.Item>
+                  )}
+                />
 
                 <Button type="primary" icon="logout" type="danger"
                   onClick={() => this.logout()}
-                  style={{ width: '100%', borderColor: 'white' }}>
+                  style={{ width: '100%', borderColor: 'white', marginTop: 20 }}>
                   LOGOUT
                 </Button> 
               </div>
