@@ -19,7 +19,7 @@ export default class Poster extends React.Component {
       >
         {/* Poster */}
         <Row type="flex" justify="center" style={{ marginBottom: 10 }}>
-          <img src={ movie.poster } width={300} height={420}
+          <img src={ movie.poster } width={300} height={400}
           alt="poster"/>
         </Row>
 
