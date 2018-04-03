@@ -168,7 +168,7 @@ export default class AppHeader extends React.Component {
             onVisibleChange={ this.handleLoginVisibleChange }
             placement="topRight"
           >
-            <Avatar size="large" icon="login" style={{ backgroundColor: '#3E91F7' }}/>
+            <Avatar size="large" icon="user" style={{ backgroundColor: '#3E91F7' }}/>
           </Popover>
         ) : (
           <Popover
