@@ -13,6 +13,7 @@ import EmptyLayout from './components/Layout/EmptyLayout';
 
 import About from './pages/About';
 import Home from './pages/Home';
+import Profile from './pages/Profile';
 
 // Movie          : Movie description in details
 // InTheatres     : Movies that are showing in theatres
@@ -75,13 +76,13 @@ class App extends React.Component {
             <AppRoute path="/movies/calendar/:id(\d+)" layout={ MainLayout } component={ Movie } />
             <AppRoute path="/movies/calendar" layout={ MainLayout } component={ MovieCalendar } />
 
-            {
-              /* TV Series */}
+            {/* TV Series */}
             <AppRoute path="/series/calendar/:id(\d+)/:season(\d+)" layout={ MainLayout } component={ Season } />
             <AppRoute path="/series/calendar/:id(\d+)" layout={ MainLayout } component={ Series } />
             <AppRoute path="/series/calendar" layout={ MainLayout } component={ SeriesCalendar } />
             <AppRoute path="/series/ontv" layout={ MainLayout } component={ OnTv } />
 
+            <AppRoute path='/profile/:username' layout={ MainLayout } component={ Profile } />
             <AppRoute path="/about" layout={ MainLayout } component={ About } />
             
             <AppRoute path="/register" layout={ EmptyLayout } component={ Register } />

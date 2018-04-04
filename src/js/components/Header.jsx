@@ -81,7 +81,7 @@ export default class AppHeader extends React.Component {
       {
         icon: 'user',
         menu: 'Profile',
-        link: '#',
+        link: '#/profile/' + this.props.username,
       },
 
       {
