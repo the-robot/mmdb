@@ -44,6 +44,15 @@ export const profile_setup = (values) => {
 
     if (values['avatar'] != undefined)
       data.append('avatar', values['avatar'], values['avatar'].name);
+    
+    if (values['gender'] != undefined)
+      data.append('gender', values['gender']);
+    
+    if (values['birthday'] != undefined)
+      data.append('birthday', values['birthday'].format('YYYY-MM-DD'));
+    
+    if (values['location'] != undefined)
+      data.append('location', values['location']);
 
     let config = {
       headers : {

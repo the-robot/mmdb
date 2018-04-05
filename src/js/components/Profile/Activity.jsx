@@ -1,6 +1,17 @@
 import { Col, Row, Divider, Icon, Timeline } from 'antd';
+import { connect } from 'react-redux';
 import React from 'react';
 
+@connect((store) => {
+  return {
+    loggedin: store.auth.loggedin,
+
+    // profile
+    gender: store.profile.gender,
+    birthday: store.profile.birthday,
+    location: store.profile.location,
+  };
+})
 export default class Activity extends React.Component {
   render() {
     return (
@@ -14,9 +25,18 @@ export default class Activity extends React.Component {
         >
           <h6> About </h6>
           <Divider/>
-          <p><b><Icon type="user"/> Gender: </b> Male </p>
-          <p><b><Icon type="gift"/> Birthday: </b> It's a secret </p>
-          <p><b><Icon type="environment"/> Location: </b> Mars </p>
+          { this.props.gender ?
+            <p><b><Icon type="user"/> Gender: </b> { this.props.gender } </p>
+          : null }
+
+          { this.props.birthday ?
+            <p><b><Icon type="gift"/> Birthday: </b> { this.props.birthday } </p>
+          : null }
+
+          { this.props.location ? 
+            <p><b><Icon type="environment"/> Location: </b> { this.props.location } </p>
+          : null }
+
           <p><b><Icon type="facebook"/> Facebook: </b> <a href="#">fb.com/abc </a></p>
         </Col>
 

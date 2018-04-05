@@ -1,4 +1,5 @@
-import { Form, Input, Tooltip, Icon, Checkbox, Button, Upload, message } from 'antd';
+import { DatePicker, Form, Input, Select, Tooltip, Icon,
+         Checkbox, Button, Upload, message } from 'antd';
 import { connect } from 'react-redux';
 import React from 'react';
 
@@ -87,7 +88,7 @@ class ProfileSetup extends React.Component {
 
         const isLt2M = file.size / 1024 / 1024 < 2;
         if (!isLt2M) {
-          message.error('Image must smaller than 2MB!');
+          message.error('Image must smaller than 2MB');
           return false;
         }
 
@@ -112,10 +113,75 @@ class ProfileSetup extends React.Component {
           )}
         >
           {getFieldDecorator('name', {
-            rules: [{ required: true, message: 'Please input your name!', whitespace: true }],
+            rules: [{ required: true, message: 'Umm? Please tell me your name.', whitespace: true }],
           })(
             <Input />
           )}
+        </FormItem>
+
+        <FormItem {...formItemLayout}
+          label={(
+              <span>
+                Avatar&nbsp;
+              </span>
+            )}
+          >
+            {getFieldDecorator('avatar', {
+              rules: [{ required: false }],
+            })(
+              <Upload {...upload_avatar_props}
+              >
+                <Button>
+                  <Icon type="upload"/> Select Image
+                </Button>
+              </Upload>
+            )}
+        </FormItem>
+
+        <FormItem {...formItemLayout}
+          label={(
+              <span>
+                Birthday&nbsp;
+              </span>
+            )}
+          >
+            {getFieldDecorator('birthday', {
+              rules: [{ required: false }],
+            })(
+              <DatePicker style={{ width: '100%' }}/>
+            )}
+        </FormItem>
+
+        <FormItem {...formItemLayout}
+          label={(
+              <span>
+                Gender&nbsp;
+              </span>
+            )}
+          >
+            {getFieldDecorator('gender', {
+              rules: [{ required: false }],
+            })(
+              <Select placeholder="Please select your gender">
+                <Select.Option value="Male">Male</Select.Option>
+                <Select.Option value="Female">Female</Select.Option>
+                <Select.Option value="It's a secret">It's a secret</Select.Option>
+              </Select>
+            )}
+        </FormItem>
+
+        <FormItem {...formItemLayout}
+          label={(
+              <span>
+                Location&nbsp;
+              </span>
+            )}
+          >
+            {getFieldDecorator('location', {
+              rules: [{ required: false }],
+            })(
+              <Input/>
+            )}
         </FormItem>
 
         <FormItem
@@ -132,27 +198,8 @@ class ProfileSetup extends React.Component {
           {getFieldDecorator('description', {
             rules: [{ required: false, whitespace: true }],
           })(
-            <Input.TextArea autosize={{ minRows: 4, maxRows: 6 }} maxlength="200" />
+            <Input.TextArea autosize={{ minRows: 4, maxRows: 6 }} maxLength="200" />
           )}
-        </FormItem>
-
-        <FormItem {...formItemLayout}
-          label={(
-              <span>
-                Profile Picture&nbsp;
-              </span>
-            )}
-          >
-            {getFieldDecorator('avatar', {
-              rules: [{ required: false }],
-            })(
-              <Upload {...upload_avatar_props}
-              >
-                <Button>
-                  <Icon type="upload" /> Select Image
-                </Button>
-              </Upload>
-            )}
         </FormItem>
 
         <FormItem {...tailFormItemLayout}>

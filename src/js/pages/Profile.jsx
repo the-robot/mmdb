@@ -14,6 +14,7 @@ import Activity from '../components/Profile/Activity';
 
     // profile
     username: store.profile.username,
+    joined_date: store.profile.joined_date,
     name: store.profile.name,
     avatar: store.profile.avatar,
     description: store.profile.description,
@@ -75,7 +76,7 @@ export default class Profile extends React.Component {
             <Row type="flex" justify="start">
               <Col span={24}>
                 <h4> { this.props.name } </h4>
-                <p> joined since 12 Feb 2018 </p>
+                <p> joined since { this.props.joined_date } </p>
               </Col>
 
               { this.props.description ?
@@ -90,7 +91,7 @@ export default class Profile extends React.Component {
                 >
                   <p> { this.props.description } </p> 
                 </Col>
-              : <p> Profile description. Hello World. </p> }
+              : null }
             </Row>
 
             {/*
