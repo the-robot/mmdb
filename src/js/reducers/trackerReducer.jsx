@@ -1,3 +1,5 @@
+// get individual movie/show tracker status
+
 const INIT_STATE = {
   tracker_state: 'Tracker',
   error: null,

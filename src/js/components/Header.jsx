@@ -5,7 +5,7 @@ import React from 'react';
 
 import { login, logout,
          refresh_token, isTokenExpired } from '../actions/authentication/authAction';
-import { get_profile, reset_profile } from '../actions/authentication/profileAction';
+import { get_profile, reset_profile } from '../actions/profile/profileAction';
 
 @connect((store) => {
   return {

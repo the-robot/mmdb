@@ -4,6 +4,7 @@ import React from 'react';
 import withSizes from 'react-sizes';
 
 import Activity from '../components/Profile/Activity';
+import Library from '../components/Profile/Library';
 
 @withSizes(({ width }) => ({
   isTablet: width < 768,
@@ -123,7 +124,7 @@ export default class Profile extends React.Component {
               </Tabs.TabPane>
 
               <Tabs.TabPane tab="Library" key="2">
-                Tracker Library
+                <Library username={ this.state.current_username } />
               </Tabs.TabPane>
 
               <Tabs.TabPane tab="Favorite" key="3">
