@@ -5,7 +5,7 @@ import React from 'react';
 
 import { login, logout,
          refresh_token, isTokenExpired } from '../actions/authentication/authAction';
-import { get_profile, reset_profile } from '../actions/profile/profileAction';
+import { get_user_information } from '../actions/authentication/userAction';
 
 @connect((store) => {
   return {
@@ -13,18 +13,17 @@ import { get_profile, reset_profile } from '../actions/profile/profileAction';
     expire: store.auth.expire,
     loggedin: store.auth.loggedin,
 
-    // profile
-    username: store.profile.username,
-    name: store.profile.name,
-    avatar: store.profile.avatar,
-    description: store.profile.description,
-    profile_fetched: store.profile.fetched,
+    // user basic information
+    user_fetched: store.auth.user_fetched,
+    username: store.auth.username,
+    name: store.auth.name,
+    avatar: store.auth.avatar,
   };
 })
 export default class AppHeader extends React.Component {
   state = {
     login_popover_visible: false,
-    profile_popover_visible: false,
+    user_popover_visible: false,
     username: '',
     password: '',
   }
@@ -33,8 +32,8 @@ export default class AppHeader extends React.Component {
     this.setState({ login_popover_visible: visible });
   }
 
-  handleProfileVisibleChange = (visible) => {
-    this.setState({ profile_popover_visible: visible });
+  handleUserVisibleChange = (visible) => {
+    this.setState({ user_popover_visible: visible });
   }
 
   login = () => {
@@ -56,7 +55,6 @@ export default class AppHeader extends React.Component {
     // reset saved credentials in state
     this.setState({
       login_popover_visible: false,
-      username: '',
       password: '',
     });
   }
@@ -64,9 +62,9 @@ export default class AppHeader extends React.Component {
   logout = () => {
     this.props.dispatch(logout( this.props.token ));
 
-    // hide profile popover
+    // hide user popover
     this.setState({
-      profile_popover_visible: false,
+      user_popover_visible: false,
     });
   }
 
@@ -77,7 +75,7 @@ export default class AppHeader extends React.Component {
       marginBottom: '5px',
     }
 
-    var profile_popover_menu = [
+    var user_popover_menu = [
       {
         icon: 'user',
         menu: 'Profile',
@@ -109,9 +107,9 @@ export default class AppHeader extends React.Component {
       if ( isTokenExpired(this.props.expire) )
         this.props.dispatch(refresh_token(this.props.token));
 
-      // if profile is not fetched yet, get it
-      if ( !this.props.profile_fetched )
-        this.props.dispatch(get_profile(this.props.token));
+      // if user information is not fetched yet, get it
+      if ( !this.props.user_fetched )
+        this.props.dispatch(get_user_information(this.state.username));
     }
 
     return (
@@ -181,7 +179,7 @@ export default class AppHeader extends React.Component {
 
                 <List
                   itemLayout="horizontal"
-                  dataSource={profile_popover_menu}
+                  dataSource={ user_popover_menu }
 
                   renderItem={item => (
                     <List.Item style={{ border: 0, padding: 10 }}>
@@ -204,8 +202,8 @@ export default class AppHeader extends React.Component {
             }
 
             trigger='click'
-            visible={ this.state.profile_popover_visible }
-            onVisibleChange={ this.handleProfileVisibleChange }
+            visible={ this.state.user_popover_visible }
+            onVisibleChange={ this.handleUserVisibleChange }
             placement="topRight"
           >
 

@@ -6,45 +6,43 @@ import withSizes from 'react-sizes';
 import Activity from '../components/Profile/Activity';
 import Library from '../components/Profile/Library';
 
+import { get_profile, reset_profile } from '../actions/profile/profileAction';
+
 @withSizes(({ width }) => ({
   isTablet: width < 768,
 }))
 @connect((store) => {
   return {
-    loggedin: store.auth.loggedin,
+    // username of currently loggedin user
+    loggedin_username: store.auth.username,
 
-    // profile
+    // Profile
+    // username of currently viewing profile
     username: store.profile.username,
     joined_date: store.profile.joined_date,
     name: store.profile.name,
     avatar: store.profile.avatar,
     description: store.profile.description,
+
+    // Profile fetch state
+    profile_fetched: store.profile.fetched,
   };
 })
 export default class Profile extends React.Component {
-  constructor(props) {
-    super(props);
-  
-    this.state = {
-      current_username: props.match.params.username,
-    }
-  }
-
-  componentWillMount() {
-    this.setState({
-      joined_date: this.props.joined_date,
-      name: this.props.name,
-      avatar: this.props.avatar,
-      description: this.props.description,
-    })
-  }
-
   componentDidMount() {
     document.title = "MMDB - @" + this.props.match.params.username;
   }
 
+  componentWillUnmount() {
+    this.props.dispatch(reset_profile());
+  }
+
   render() {
     const element_position = ( this.props.isTablet ? 'center' : 'left' );
+
+    if ( !this.props.profile_fetched ) {
+      this.props.dispatch(get_profile( this.props.match.params.username ));
+    }
 
     return (
       <div>
@@ -59,7 +57,7 @@ export default class Profile extends React.Component {
 
             style={{ textAlign: element_position }}
           >
-            { this.state.current_username === this.props.username ?
+            { this.props.avatar ?
               <img src={ this.props.avatar }
                 style={{ borderRadius: '50%', borderColor: '#E8E4E2', borderWidth: 1, borderStyle: 'solid',
                         width: 120, height: 120 }}
@@ -68,8 +66,8 @@ export default class Profile extends React.Component {
               <Avatar style={{ backgroundColor: '#3E91F7', paddingTop: 40, 
                                height: 120, width: 120, borderRadius: '50%', fontSize: 50
                              }}>
-              { this.state.current_username != undefined
-              ? this.state.current_username.charAt(0).toUpperCase()
+              { this.props.username != undefined
+              ? this.props.username.charAt(0).toUpperCase()
               : '' 
               }
             </Avatar>
@@ -111,8 +109,7 @@ export default class Profile extends React.Component {
               Edit profile
               if user is loggedin and current viewing its profile
             */}
-            { this.props.loggedin &&
-              this.state.current_username === this.props.username ?
+            { this.props.loggedin_username == this.props.username ?
             <Row type="flex" justify="start">
               <Col
                 xs={{ span: 24, offset: 0 }}
@@ -136,7 +133,7 @@ export default class Profile extends React.Component {
               </Tabs.TabPane>
 
               <Tabs.TabPane tab="Library" key="2">
-                <Library username={ this.state.current_username } />
+                <Library username={ this.props.username } />
               </Tabs.TabPane>
 
               {/*

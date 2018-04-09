@@ -15,8 +15,11 @@ import ShowView from './ShowsView';
 }))
 @connect((store) => {
   return {
-    loggedin: store.auth.loggedini,
-    loggedin_username: store.profile.username,
+    // the username of currently loggedin user
+    loggedin_username: store.auth.username,
+
+    // username of currently viewing profile
+    username: store.profile.username,
 
     tracker_count: store.library.tracker_count,
     page: store.library.page,
@@ -29,7 +32,6 @@ export default class Library extends React.Component {
     super(props);
 
     this.state = {
-      username: this.props.username,
       tracker_status: 'all',
       tracker_type: 'movies',
     }
@@ -37,7 +39,7 @@ export default class Library extends React.Component {
   
   componentWillMount() {
     // get tracker count
-    this.props.dispatch(get_tracker_count(this.state.username, this.state.tracker_type));
+    this.props.dispatch(get_tracker_count(this.props.username, this.state.tracker_type));
 
     // on start, fetch data from all trackers
     // (by default tracker source is set to movies)
@@ -50,10 +52,10 @@ export default class Library extends React.Component {
 
   trackAll(tracker=this.state.tracker_type) {
     var get_tracker = (tracker == 'movies' ? get_movie_tracker : get_series_tracker);
-    this.props.dispatch(get_tracker(this.state.username, 'watching', 1));
-    this.props.dispatch(get_tracker(this.state.username, 'planning', 1));
-    this.props.dispatch(get_tracker(this.state.username, 'completed', 1));
-    this.props.dispatch(get_tracker(this.state.username, 'dropped', 1));
+    this.props.dispatch(get_tracker(this.props.username, 'watching', 1));
+    this.props.dispatch(get_tracker(this.props.username, 'planning', 1));
+    this.props.dispatch(get_tracker(this.props.username, 'completed', 1));
+    this.props.dispatch(get_tracker(this.props.username, 'dropped', 1));
   }
 
   trackShow(status) {
@@ -76,7 +78,7 @@ export default class Library extends React.Component {
     }
     else {
       let get_tracker = (this.state.tracker_type == 'movies' ? get_movie_tracker : get_series_tracker);
-      this.props.dispatch(get_tracker(this.state.username, status, 1));
+      this.props.dispatch(get_tracker(this.props.username, status, 1));
     }
   }
 
@@ -100,14 +102,14 @@ export default class Library extends React.Component {
     this.props.dispatch(reset_library());
 
     // reupdate tracker count for new tracker type
-    this.props.dispatch(get_tracker_count(this.state.username, tracker));
+    this.props.dispatch(get_tracker_count(this.props.username, tracker));
 
     if (this.state.tracker_status == 'all') {
       this.trackAll(tracker)
     }
     else {
       let get_tracker = (tracker == 'movies' ? get_movie_tracker : get_series_tracker);
-      this.props.dispatch(get_tracker(this.state.username, this.state.tracker_status, 1));
+      this.props.dispatch(get_tracker(this.props.username, this.state.tracker_status, 1));
     }
   }
 
@@ -223,8 +225,8 @@ export default class Library extends React.Component {
             </Col>
           </Button>
 
-          { this.state.username == this.props.loggedin_username
-          ? <div> 
+          { this.props.loggedin_username == this.props.username
+          ? <div>
               <Divider/>
 
               <div style={{ textAlign: 'center' }}>

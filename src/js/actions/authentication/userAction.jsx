@@ -1,8 +1,9 @@
+// get basic user information
 import axios from 'axios';
 
 import { getAPI } from '../../api';
 
-export const get_profile = (username) => {
+export const get_user_information = (username) => {
   return (dispatch) => {
     var data = {username: username}
 
@@ -16,17 +17,11 @@ export const get_profile = (username) => {
           data.avatar = getAPI() + data.avatar;
         }
 
-        dispatch({type: "PROFILE_GET_FULFILLED", payload: response.data});
+        dispatch({type: "AUTH_GET_USER_INFO_FULFILLED", payload: response.data});
       })
 
       .catch((err) => {
-        dispatch({type: "PROFILE_GET_REJECTED", payload: err});
+        dispatch({type: "AUTH_GET_USER_INFO_REJECTED", payload: err});
       })
-  }
-}
-
-export const reset_profile = () => {
-  return (dispatch) => {
-    dispatch({type: 'RESET_PROFILE'});
   }
 }

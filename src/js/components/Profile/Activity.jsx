@@ -6,10 +6,9 @@ import React from 'react';
   return {
     loggedin: store.auth.loggedin,
 
-    // profile
     gender: store.profile.gender,
     birthday: store.profile.birthday,
-    location: store.profile.location,
+    user_location: store.profile.location,
   };
 })
 export default class Activity extends React.Component {
@@ -33,8 +32,8 @@ export default class Activity extends React.Component {
             <p><b><Icon type="gift"/> Birthday: </b> { this.props.birthday } </p>
           : null }
 
-          { this.props.location ? 
-            <p><b><Icon type="environment"/> Location: </b> { this.props.location } </p>
+          { this.props.user_location ? 
+            <p><b><Icon type="environment"/> Location: </b> { this.props.user_location } </p>
           : null }
 
           <p><b><Icon type="facebook"/> Facebook: </b> <a href="#">fb.com/abc </a></p>

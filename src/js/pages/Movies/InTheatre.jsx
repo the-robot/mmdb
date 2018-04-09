@@ -38,8 +38,6 @@ export default class InTheater extends React.Component {
     // if fetched all hide load more else show
     const buttonVisibility = (this.props.fetched_all != true ? 'initial' : 'hidden');
 
-    console.log(movies);
-
     return(
       <div>
         <Row type="flex" justify="start" align="middle">
