@@ -1,6 +1,7 @@
 const INITIAL_STATE = {
   page: 1,
   data: [],
+  tracker_count: {},      // store how many data are in each tracker
 
   fetched_complete: false,
   error: null,
@@ -13,7 +14,7 @@ export default function reducer(state=INITIAL_STATE, action) {
     }
 
     case "PROFILE_LIBRARY_FULFILLED": {
-      var data = state.data.concat(action.payload.data);
+      var data = state.data.concat(action.payload);
       // sort in show title alphabatically from a-z
       data.sort((x, y) => (x.title < y.title ? -1 : 1))
 
@@ -24,11 +25,25 @@ export default function reducer(state=INITIAL_STATE, action) {
       }
     }
 
+    case "PROFILE_LIBRARY_TRACKER_COUNT": {
+      return {
+        ...state,
+        tracker_count: action.payload,
+      }
+    }
+
     // fetched all data
     case "PROFILE_LIBRARY_DONE": {
       return {
         ...state,
         fetched_complete: true,
+      }
+    }
+
+    case "RESET_PROFILE_LIBRARY_DATA": {
+      return {
+        ...state,
+        data: [],
       }
     }
 

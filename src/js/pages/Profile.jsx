@@ -30,6 +30,15 @@ export default class Profile extends React.Component {
     }
   }
 
+  componentWillMount() {
+    this.setState({
+      joined_date: this.props.joined_date,
+      name: this.props.name,
+      avatar: this.props.avatar,
+      description: this.props.description,
+    })
+  }
+
   componentDidMount() {
     document.title = "MMDB - @" + this.props.match.params.username;
   }
@@ -59,7 +68,10 @@ export default class Profile extends React.Component {
               <Avatar style={{ backgroundColor: '#3E91F7', paddingTop: 40, 
                                height: 120, width: 120, borderRadius: '50%', fontSize: 50
                              }}>
-              { this.state.current_username != undefined ? this.state.current_username.charAt(0) : '' }
+              { this.state.current_username != undefined
+              ? this.state.current_username.charAt(0).toUpperCase()
+              : '' 
+              }
             </Avatar>
             }
           </Col>
@@ -127,9 +139,11 @@ export default class Profile extends React.Component {
                 <Library username={ this.state.current_username } />
               </Tabs.TabPane>
 
+              {/*
               <Tabs.TabPane tab="Favorite" key="3">
                 Favorite Movie and TV Shows
               </Tabs.TabPane>
+              */}
             </Tabs>
           </Col>
         </Row>
