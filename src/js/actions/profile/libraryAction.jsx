@@ -6,6 +6,8 @@ export const get_tracker_count = (username, tracker_type) => {
   let data = {username: username, tracker_type: tracker_type};
 
   return (dispatch) => {
+    dispatch({type: 'PROFILE_LIBRARY_FETCHING'});
+
     const api = axios.create({baseURL: getAPI()});
     api.post('/users/tracker/count/', data)
       .then((response) => {

@@ -24,7 +24,9 @@ import ShowView from './ShowsView';
     tracker_count: store.library.tracker_count,
     page: store.library.page,
     data: store.library.data,
-    fetched_complete: store.library.fetched_complete,
+
+    // fetching states
+    fetching: store.library.fetching,
   };
 })
 export default class Library extends React.Component {
@@ -36,26 +38,18 @@ export default class Library extends React.Component {
       tracker_type: 'movies',
     }
   }
-  
+
   componentWillMount() {
     // get tracker count
     this.props.dispatch(get_tracker_count(this.props.username, this.state.tracker_type));
 
     // on start, fetch data from all trackers
     // (by default tracker source is set to movies)
-    this.trackAll();
+    this.props.dispatch(get_movie_tracker(this.props.username, 'all', 1));
   }
 
   componentWillUnmount() {
     this.props.dispatch(reset_library());
-  }
-
-  trackAll(tracker=this.state.tracker_type, page=this.props.page) {
-    var get_tracker = (tracker == 'movies' ? get_movie_tracker : get_series_tracker);
-    this.props.dispatch(get_tracker(this.props.username, 'watching', page));
-    this.props.dispatch(get_tracker(this.props.username, 'planning', page));
-    this.props.dispatch(get_tracker(this.props.username, 'completed', page));
-    this.props.dispatch(get_tracker(this.props.username, 'dropped', page));
   }
 
   trackShow(status) {
@@ -73,14 +67,14 @@ export default class Library extends React.Component {
     // only reset tracker movie/series data
     this.props.dispatch(reset_library_data());
 
-    // if tracker status changed, fetch from start of the page again (page=1)
-    if (status == 'all') {
-      this.trackAll(this.state.tracker_type, 1);
-    }
-    else {
-      let get_tracker = (this.state.tracker_type == 'movies' ? get_movie_tracker : get_series_tracker);
-      this.props.dispatch(get_tracker(this.props.username, status, 1));
-    }
+    let get_tracker = (this.state.tracker_type == 'movies' ? get_movie_tracker : get_series_tracker);
+    this.props.dispatch(get_tracker(this.props.username, status, 1));
+  }
+
+  loadMore() {
+    let status = this.state.tracker_status;
+    let get_tracker = (this.state.tracker_type == 'movies' ? get_movie_tracker : get_series_tracker);
+    this.props.dispatch(get_tracker(this.props.username, status, this.props.page));
   }
 
   updateTrackerType(tracker) {
@@ -105,13 +99,8 @@ export default class Library extends React.Component {
     // reupdate tracker count for new tracker type
     this.props.dispatch(get_tracker_count(this.props.username, tracker));
 
-    if (this.state.tracker_status == 'all') {
-      this.trackAll(tracker, 1)
-    }
-    else {
-      let get_tracker = (tracker == 'movies' ? get_movie_tracker : get_series_tracker);
-      this.props.dispatch(get_tracker(this.props.username, this.state.tracker_status, 1));
-    }
+    let get_tracker = (tracker == 'movies' ? get_movie_tracker : get_series_tracker);
+    this.props.dispatch(get_tracker(this.props.username, this.state.tracker_status, 1));
   }
 
   render() {
@@ -250,6 +239,14 @@ export default class Library extends React.Component {
             path={ this.state.tracker_type + '/calendar/' }
           />
 
+          { this.props.tracker_count[this.state.tracker_status] != this.props.data.length
+            && !this.props.fetching
+          ? <div style={{ textAlign: 'center' }}>
+              <Button type="primary" onClick={() => this.loadMore()}>
+                Load More
+              </Button>
+            </div>
+          : null }
 
         </Col>
       </Row>

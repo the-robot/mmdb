@@ -3,14 +3,17 @@ const INITIAL_STATE = {
   data: [],
   tracker_count: {},      // store how many data are in each tracker
 
-  fetched_complete: false,
+  fetching: false,
   error: null,
 }
 
 export default function reducer(state=INITIAL_STATE, action) {
   switch (action.type) {
-    case "PROFILE_LIBRARY_REJECTED": {
-      return {...state, error: action.payload}
+    case "PROFILE_LIBRARY_FETCHING": {
+      return {
+        ...state,
+        fetching: true,
+      }
     }
 
     case "PROFILE_LIBRARY_FULFILLED": {
@@ -22,6 +25,8 @@ export default function reducer(state=INITIAL_STATE, action) {
         ...state,
         data: data,
         page: state.page + 1,
+
+        fetching: false,
       }
     }
 
@@ -32,18 +37,15 @@ export default function reducer(state=INITIAL_STATE, action) {
       }
     }
 
-    // fetched all data
-    case "PROFILE_LIBRARY_DONE": {
-      return {
-        ...state,
-        fetched_complete: true,
-      }
+    case "PROFILE_LIBRARY_REJECTED": {
+      return {...state, error: action.payload, fetching: false}
     }
 
     case "RESET_PROFILE_LIBRARY_DATA": {
       return {
         ...state,
         data: [],
+        page: 1,
       }
     }
 
