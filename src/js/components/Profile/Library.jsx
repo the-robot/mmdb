@@ -50,12 +50,12 @@ export default class Library extends React.Component {
     this.props.dispatch(reset_library());
   }
 
-  trackAll(tracker=this.state.tracker_type) {
+  trackAll(tracker=this.state.tracker_type, page=this.props.page) {
     var get_tracker = (tracker == 'movies' ? get_movie_tracker : get_series_tracker);
-    this.props.dispatch(get_tracker(this.props.username, 'watching', 1));
-    this.props.dispatch(get_tracker(this.props.username, 'planning', 1));
-    this.props.dispatch(get_tracker(this.props.username, 'completed', 1));
-    this.props.dispatch(get_tracker(this.props.username, 'dropped', 1));
+    this.props.dispatch(get_tracker(this.props.username, 'watching', page));
+    this.props.dispatch(get_tracker(this.props.username, 'planning', page));
+    this.props.dispatch(get_tracker(this.props.username, 'completed', page));
+    this.props.dispatch(get_tracker(this.props.username, 'dropped', page));
   }
 
   trackShow(status) {
@@ -73,8 +73,9 @@ export default class Library extends React.Component {
     // only reset tracker movie/series data
     this.props.dispatch(reset_library_data());
 
+    // if tracker status changed, fetch from start of the page again (page=1)
     if (status == 'all') {
-      this.trackAll();
+      this.trackAll(this.state.tracker_type, 1);
     }
     else {
       let get_tracker = (this.state.tracker_type == 'movies' ? get_movie_tracker : get_series_tracker);
@@ -105,7 +106,7 @@ export default class Library extends React.Component {
     this.props.dispatch(get_tracker_count(this.props.username, tracker));
 
     if (this.state.tracker_status == 'all') {
-      this.trackAll(tracker)
+      this.trackAll(tracker, 1)
     }
     else {
       let get_tracker = (tracker == 'movies' ? get_movie_tracker : get_series_tracker);
@@ -247,7 +248,9 @@ export default class Library extends React.Component {
         >
           <ShowView shows={ this.props.data }
             path={ this.state.tracker_type + '/calendar/' }
-          /> 
+          />
+
+
         </Col>
       </Row>
     );

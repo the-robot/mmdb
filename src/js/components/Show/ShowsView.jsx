@@ -14,8 +14,8 @@ export default class ShowsView extends React.Component {
     if (data.poster === null)
       return false
   
-    if (data.summary === '')
-      return false
+    //if (data.summary === '')
+    //  return false
   
     // valid
     return true
