@@ -179,7 +179,7 @@ export default class MovieInformation extends React.Component {
             xl={{ span: 24, offset: 0 }}
           >
             <p style={{ textAlign: 'justify'}}>
-              { movie.summary }
+              { movie.summary ? movie.summary : 'No movie summary yet.' }
             </p>
           </Col>
         </Row>

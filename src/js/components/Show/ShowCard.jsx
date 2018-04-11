@@ -59,7 +59,9 @@ export default class ShowCard extends React.Component {
               style={{ width: 260, textAlign: 'justify' }}
               cover={<img alt="poster" height={ 360 } src={ showInfo.poster } />
         }>
-          <p style={{overflow: 'hidden', height: '210px' }}>{ showInfo.summary }</p>
+          <p style={{overflow: 'hidden', height: '210px' }}>
+            { showInfo.summary ? showInfo.summary : "No overview yet." }
+          </p>
           <Tag color={ rating.color }>Rating: { rating.value }</Tag>
         </Card>
 

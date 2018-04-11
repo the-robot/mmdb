@@ -36,6 +36,19 @@ export default function reducer(state=INITIAL_STATE, action) {
       }
     }
 
+    case "PROFILE_DATA_UPDATED": {
+      return {
+        ...state,
+         name: action.payload.name,
+         avatar: action.payload.avatar,
+         description: action.payload.description,
+         gender: action.payload.gender,
+         birthday: action.payload.birthday,
+         location: action.payload.location,
+         social_networks: action.payload.social_networks,
+      }
+    }
+
     case "RESET_PROFILE": {
       return INITIAL_STATE;
     }

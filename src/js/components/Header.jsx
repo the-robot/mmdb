@@ -97,7 +97,7 @@ export default class AppHeader extends React.Component {
       {
         icon: 'setting',
         menu: 'Settings',
-        link: '#',
+        link: '#/settings/',
       }
     ]
 

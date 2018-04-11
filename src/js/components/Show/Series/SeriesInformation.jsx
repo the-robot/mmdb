@@ -174,7 +174,7 @@ export default class SeriesInformation extends React.Component {
             lg={{ span: 24, offset: 0 }}
             xl={{ span: 24, offset: 0 }}
           >
-            { series.summary }
+            { series.summary ? series.summary : 'No plot summary yet.' }
           </Col>
         </Row>
       </Col>

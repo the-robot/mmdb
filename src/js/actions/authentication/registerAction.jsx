@@ -62,7 +62,7 @@ export const profile_setup = (values) => {
     }
 
     const api = axios.create({baseURL: getAPI()})
-    api.post('/users/registration/profile', data, config)
+    api.post('/users/registration/profile/', data, config)
       .then((response) => {
         dispatch({type: "REGISTRATION_PROFILE_SETUP_SUCCESS"});
       })

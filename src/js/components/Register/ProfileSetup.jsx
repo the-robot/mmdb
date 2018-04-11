@@ -188,8 +188,8 @@ class ProfileSetup extends React.Component {
           {...formItemLayout}
           label={(
             <span>
-              Description&nbsp;
-              <Tooltip title="Talk about yourself.">
+              Bio&nbsp;
+              <Tooltip title="Tell us about yourself">
                 <Icon type="question-circle-o" />
               </Tooltip>
             </span>

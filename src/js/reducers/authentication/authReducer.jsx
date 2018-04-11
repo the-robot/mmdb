@@ -60,6 +60,14 @@ export default function reducer(state=INIT_STATE, action) {
       }
     }
 
+    case "AUTH_UPDATE_USER_INFO_FULFILLED": {
+      return {
+        ...state,
+        name: action.payload.name,
+        avatar: action.payload.avatar,
+      }
+    }
+
     case "AUTH_TOKEN_REFRESH_REJECTED": {
       return {
         ...state,
