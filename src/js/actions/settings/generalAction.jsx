@@ -40,7 +40,7 @@ export const update_profile = (token, values) => {
       })
 
       .catch((err) => {
-        message.success('');
+        message.error(err.response.data);
       })
   }
 }

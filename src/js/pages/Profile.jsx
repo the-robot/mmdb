@@ -118,7 +118,10 @@ export default class Profile extends React.Component {
                 lg={{ span: 8, offset: 0 }}
                 xl={{ span: 6, offset: 0 }}
               >
-                <Button style={{ width: '100%' }} > Edit Profile </Button>
+                <Button
+                  style={{ width: '100%' }}
+                  onClick={() => window.location.href = '/#/settings'}
+                > Edit Profile </Button>
               </Col>
             </Row>
             : null }

@@ -36,7 +36,7 @@ export default class Activity extends React.Component {
             <p><b><Icon type="environment"/> Location: </b> { this.props.user_location } </p>
           : null }
 
-          <p><b><Icon type="facebook"/> Facebook: </b> <a href="#">fb.com/abc </a></p>
+          {/*<p><b><Icon type="facebook"/> Facebook: </b> <a href="#">fb.com/abc </a></p>*/}
         </Col>
 
         <Col

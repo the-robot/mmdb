@@ -1,9 +1,11 @@
-import { Row, Col, Tabs } from 'antd';
+import { Divider, Row, Col, Tabs } from 'antd';
 import { connect } from 'react-redux';
 import React from 'react';
 import withSizes from 'react-sizes';
 
 import General from '../components/Settings/General';
+import PasswordUpdate from '../components/Settings/PasswordUpdate';
+import AccountDelete from '../components/Settings/AccountDelete';
 
 @withSizes(({ width }) => ({
   isLargeTablet: width < 992
@@ -45,7 +47,13 @@ export default class Settings extends React.Component {
               </Tabs.TabPane>
 
               <Tabs.TabPane tab="Security" key="2">
-                <p>Content of Tab Pane 2</p>
+                <h5>Account Security</h5>
+                <Divider/>
+
+                <PasswordUpdate/>
+                <Divider/>
+
+                <AccountDelete/>
               </Tabs.TabPane>
 
               <Tabs.TabPane tab="Library" key="3">

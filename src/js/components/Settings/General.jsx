@@ -63,7 +63,6 @@ export default class General extends React.Component {
   }
 
   handleSubmit() {
-
     let values = {
       name: this.state.name,
       gender: this.state.gender,
