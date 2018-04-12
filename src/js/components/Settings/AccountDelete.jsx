@@ -51,7 +51,7 @@ export default class AccountDelete extends React.Component {
     }
     
     if ( !this.state.delete_verification || this.state.delete_verification.length === 0 ) {
-      this.setState({error_verification: 'Please enter `DELETE` below to verify.'});
+      this.setState({error_verification: 'Please enter DELETE to verify.'});
       error_verification = true;
     }
     
