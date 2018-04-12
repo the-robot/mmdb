@@ -3,12 +3,15 @@ import { connect } from 'react-redux';
 import React from 'react';
 import withSizes from 'react-sizes';
 
+import { delete_account } from '../../actions/settings/securityAction';
+
 @withSizes(({ width }) => ({
   isTablet: width < 768,
   isLargeTablet: width < 992,
 }))
 @connect((store) => {
   return {
+    token: store.auth.token,
     username: store.auth.username,
   };
 })
@@ -40,6 +43,7 @@ export default class AccountDelete extends React.Component {
   verifyForm() {
     let error_username = false;
     let error_verification = false;
+    let error_password = false;
 
     if ( !this.state.username || this.state.username.length === 0 ) {
       this.setState({error_username: 'Please enter the username.'});
@@ -53,15 +57,20 @@ export default class AccountDelete extends React.Component {
     
     if ( !error_username && this.state.username != this.props.username) {
       this.setState({error_username: 'Username is incorrect.'});
+      error_username = true;
     }
   
     if ( !error_verification && this.state.delete_verification != this.state.compare_verification) {
       this.setState({error_verification: 'Verification code is incorrect.'});
+      error_verification = true;
     }
 
     if ( !this.state.password || this.state.password.length === 0 ) {
       this.setState({error_password: 'Please enter the password.'})
+      error_password = true;
     }
+
+    return ( error_username || error_verification || error_password ? true : false );
   }
 
   clearErrors() {
@@ -75,15 +84,28 @@ export default class AccountDelete extends React.Component {
   handleDelete = (e) => {
     // clear error messages, and verify inputs again
     this.clearErrors();
-    this.verifyForm();
 
-    // this.setState({
-    //   visible: false,
-    // });
+    // do not submit, if there are errors in form
+    if (this.verifyForm())
+        return;
 
-    console.log(this.state.username);
-    console.log(this.state.password);
-    console.log(this.state.delete_verification);
+    let data = {
+      username: this.state.username,
+      password: this.state.password,
+    }
+
+    delete_account(this.props.token, data)
+    .then((response) => {
+      message.success('Deleted user');
+
+      // delete tokens on client side and redirect to homepage
+      this.props.dispatch({type: 'AUTH_DEL_TOKEN'});
+      window.location.replace('/');
+    })
+
+    .catch((err) => {
+      message.error(err.response.data);
+    })
   }
 
   handleCancel = (e) => {
