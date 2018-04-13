@@ -67,7 +67,7 @@ export default class LibraryReset extends React.Component {
 
     reset_library(this.props.token)
     .then((response) => {
-      message.success('All library data are removed.');
+      message.success('All tracked movies and shows are removed from your library.');
 
       // clear form and hide it
       this.setState({
