@@ -104,9 +104,6 @@ export default class General extends React.Component {
     if ( !this.props.profile_fetched ) {
       return (
         <div>
-          <h5> General Account Settings </h5>
-          <Divider/>
-          
           <div style={{ textAlign: 'center' }}>
             <Spin/>
           </div>
@@ -150,9 +147,6 @@ export default class General extends React.Component {
 
     return (
       <Row type="flex" justify="start">
-        <h5> General Account Settings </h5>
-        <Divider/>
-
         <Col 
           xs={{ span: 24, offset: 0 }}
           sm={{ span: 24, offset: 0 }}

@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import React from 'react';
 import withSizes from 'react-sizes';
 
-import { delete_account } from '../../actions/settings/securityAction';
+import { reset_library } from '../../actions/settings/libraryAction';
 
 @withSizes(({ width }) => ({
   isTablet: width < 768,
@@ -12,25 +12,20 @@ import { delete_account } from '../../actions/settings/securityAction';
 @connect((store) => {
   return {
     token: store.auth.token,
-    username: store.auth.username,
   };
 })
-export default class AccountDelete extends React.Component {
+export default class LibraryReset extends React.Component {
   constructor(props) {
     super(props);
     
     this.state = {
       visible: false,
 
-      username: null,
       delete_verification: null,
-      compare_verification: 'DELETE',
-      password: null,
+      compare_verification: 'RESET',
 
       // store error messages
-      error_username: null,
       error_verification: null,
-      error_password: null,
     }
   }
 
@@ -41,47 +36,28 @@ export default class AccountDelete extends React.Component {
   }
 
   verifyForm() {
-    let error_username = false;
     let error_verification = false;
-    let error_password = false;
 
-    if ( !this.state.username || this.state.username.length === 0 ) {
-      this.setState({error_username: 'Please enter the username.'});
-      error_username = true;
-    }
-    
     if ( !this.state.delete_verification || this.state.delete_verification.length === 0 ) {
       this.setState({error_verification: 'Please enter ' + this.state.compare_verification + ' to verify.'});
       error_verification = true;
     }
     
-    if ( !error_username && this.state.username != this.props.username) {
-      this.setState({error_username: 'Username is incorrect.'});
-      error_username = true;
-    }
-  
     if ( !error_verification && this.state.delete_verification != this.state.compare_verification) {
       this.setState({error_verification: 'Verification code is incorrect.'});
       error_verification = true;
     }
 
-    if ( !this.state.password || this.state.password.length === 0 ) {
-      this.setState({error_password: 'Please enter the password.'})
-      error_password = true;
-    }
-
-    return ( error_username || error_verification || error_password ? true : false );
+    return ( error_verification ? true : false );
   }
 
   clearErrors() {
     this.setState({
-      error_username: null,
       error_verification:  null,
-      error_password: null,
     });
   }
 
-  handleDelete = (e) => {
+  handleReset = (e) => {
     // clear error messages, and verify inputs again
     this.clearErrors();
 
@@ -89,18 +65,15 @@ export default class AccountDelete extends React.Component {
     if (this.verifyForm())
         return;
 
-    let data = {
-      username: this.state.username,
-      password: this.state.password,
-    }
-
-    delete_account(this.props.token, data)
+    reset_library(this.props.token)
     .then((response) => {
-      message.success('Deleted user');
+      message.success('All library data are removed.');
 
-      // delete tokens on client side and redirect to homepage
-      this.props.dispatch({type: 'AUTH_DEL_TOKEN'});
-      window.location.replace('/');
+      // clear form and hide it
+      this.setState({
+        delete_verification: null,
+        visible: false,
+      })
     })
 
     .catch((err) => {
@@ -121,9 +94,8 @@ export default class AccountDelete extends React.Component {
     return (
       <Row type="flex" justify="start">
         <Col span={24}>
-          <h6 style={{ color: 'red', fontWeight: 'bold', paddingBottom: 10 }}> Delete Account </h6>
-          <p> Once you delete your account, there is no going back. Please be certain. <br/>
-              We'll immediately delete all your data. </p>
+          <h6 style={{ color: 'red', fontWeight: 'bold', paddingBottom: 10 }}> Reset Library </h6>
+          <p> We'll immediately reset your library data. You will not be able to recover them. </p>
         </Col>
 
         <Col
@@ -136,32 +108,21 @@ export default class AccountDelete extends React.Component {
           <Button
             type="danger"
             onClick={ this.showModal }
-            style={{ width: '100%', fontWeight: 'bold' }}>Delete Account</Button>
+            style={{ width: '100%', fontWeight: 'bold' }}>Reset Library</Button>
         </Col>
 
         <Modal
           title="Are you sure you want to do this?"
           visible={ this.state.visible }
 
-          okText='Delete'
+          okText='Reset'
           okType='danger'
-          onOk={ this.handleDelete }
+          onOk={ this.handleReset }
 
           cancelText='Cancle'
           onCancel={ this.handleCancel }
         >
           <div>
-            <p style={{ fontWeight: 'bold', marginBottom: 5 }}> Username: </p>
-            <div style={{ paddingBottom: 5 }}>
-              <Input
-                type="text"
-                style={{ width: '100%' }}
-                value={ this.state.username }
-                onChange={evt => this.setState({username: evt.target.value})}
-              />
-            </div>
-            <p style={{ color: 'red' }}>{ this.state.error_username }</p>
-
             <p style={{ marginBottom: 5 }}>
               <b> To verify, type</b> <i>{ this.state.compare_verification }</i> <b>below:</b>
             </p>
@@ -174,17 +135,6 @@ export default class AccountDelete extends React.Component {
               />
             </div>
             <p style={{ color: 'red' }}>{ this.state.error_verification }</p>
-
-            <p style={{ fontWeight: 'bold', marginBottom: 5 }}> Password: </p>
-            <div>
-              <Input
-                type="password"
-                style={{ width: '100%' }}
-                value={ this.state.password }
-                onChange={evt => this.setState({password: evt.target.value})}
-              />
-            </div>
-            <p style={{ color: 'red' }}>{ this.state.error_password }</p>
           </div>
         </Modal>
       </Row>

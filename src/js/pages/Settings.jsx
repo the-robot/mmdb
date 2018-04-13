@@ -3,9 +3,10 @@ import { connect } from 'react-redux';
 import React from 'react';
 import withSizes from 'react-sizes';
 
-import General from '../components/Settings/General';
-import PasswordUpdate from '../components/Settings/PasswordUpdate';
 import AccountDelete from '../components/Settings/AccountDelete';
+import General from '../components/Settings/General';
+import LibraryReset from '../components/Settings/LibraryReset';
+import PasswordUpdate from '../components/Settings/PasswordUpdate';
 
 @withSizes(({ width }) => ({
   isLargeTablet: width < 992
@@ -43,6 +44,8 @@ export default class Settings extends React.Component {
           >
             <Tabs tabPosition={ tabPosition } size="small" defaultActiveKey="1">
               <Tabs.TabPane tab="General" key="1">
+                <h5> General Account Settings </h5>
+                <Divider/>
                 <General/>                
               </Tabs.TabPane>
 
@@ -57,7 +60,10 @@ export default class Settings extends React.Component {
               </Tabs.TabPane>
 
               <Tabs.TabPane tab="Library" key="3">
-                <p>Content of Tab Pane 3</p>
+                <h5> Library Management </h5>
+                <Divider/>
+
+                <LibraryReset/>
               </Tabs.TabPane>
             </Tabs>
           </Col>
