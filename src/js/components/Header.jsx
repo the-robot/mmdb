@@ -49,14 +49,26 @@ export default class AppHeader extends React.Component {
       return;
     }
 
-    this.props.dispatch(login(this.state.username, this.state.password));
+    this.props.dispatch({type: "AUTH_GET_TOKEN"});
 
-    // hide popover then
-    // reset saved credentials in state
-    this.setState({
-      login_popover_visible: false,
-      password: '',
-    });
+    login(this.state.username, this.state.password)
+      .then((response) => {
+        this.props.dispatch({type: "AUTH_GET_TOKEN_FULFILLED", payload: response.data});
+
+        // hide popover then
+        // reset saved credentials in state
+        this.setState({
+          login_popover_visible: false,
+          username: '',
+          password: '',
+        });
+      })
+
+      .catch((err) => {
+        // show error message to user
+        message.error("Username or password is incorrect")
+        this.props.dispatch({type: "AUTH_GET_TOKEN_REJECTED", payload: err});
+      })
   }
 
   logout = () => {
@@ -125,12 +137,14 @@ export default class AppHeader extends React.Component {
               <div>
                 <Input placeholder='username' style={ loginInputBoxStyle }
                   prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
+                  value={ this.state.username }
                   onChange={(evt) => {
                     this.setState({ username: evt.target.value, });
                   }}/>
 
                 <Input placeholder='password' style={ loginInputBoxStyle } type='password'
                   prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
+                  value={ this.state.password }
                   onChange={(evt) => {
                     this.setState({ password: evt.target.value, });
                   }}/>
@@ -183,12 +197,12 @@ export default class AppHeader extends React.Component {
 
                   renderItem={item => (
                     <List.Item style={{ border: 0, padding: 10 }}>
-                    <a href={ item.link } style={{ color: '#595959' }}>
-                      <Icon type={ item.icon }
-                        style={{ paddingRight: 16, fontSize: 18, color: '#888888' }}
-                      />
-                      { item.menu }
-                    </a>
+                      <a href={ item.link } style={{ color: '#595959' }}>
+                        <Icon type={ item.icon }
+                          style={{ paddingRight: 16, fontSize: 18, color: '#888888' }}
+                        />
+                        { item.menu }
+                      </a>
                     </List.Item>
                   )}
                 />

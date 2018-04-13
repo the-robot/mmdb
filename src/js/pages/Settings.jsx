@@ -25,12 +25,7 @@ export default class Settings extends React.Component {
     const tabPosition = (this.props.isLargeTablet ? 'top' : 'left');
 
     if (!this.props.loggedin)
-      return (
-        <div style={{ textAlign: 'center' }}>
-          <h6> You need to login to view this page </h6>
-          <a href="/"> Back to Home </a>
-        </div>
-      );
+      window.location.replace('#/404');
 
     return (
       <div>

@@ -11,21 +11,8 @@ export function isTokenExpired(expire) {
 
 
 export const login = (username, password) => {
-  return (dispatch) => {
-    dispatch({type: "AUTH_GET_TOKEN"});
-
-    const api = axios.create({baseURL: getAPI()});
-    api.post('/users/login/', {'username': username, 'password': password})
-      .then((response) => {
-        dispatch({type: "AUTH_GET_TOKEN_FULFILLED", payload: response.data});
-      })
-
-      .catch((err) => {
-        // show error message to user
-        message.error("Username or password is incorrect")
-        dispatch({type: "AUTH_GET_TOKEN_REJECTED", payload: err});
-      })
-  }
+  const api = axios.create({baseURL: getAPI()});
+  return api.post('/users/login/', {'username': username, 'password': password});
 }
 
 export const logout = (token) => {

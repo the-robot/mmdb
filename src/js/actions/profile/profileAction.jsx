@@ -20,7 +20,7 @@ export const get_profile = (username) => {
       })
 
       .catch((err) => {
-        dispatch({type: "PROFILE_GET_REJECTED", payload: err});
+        dispatch({type: "PROFILE_GET_REJECTED", payload: err.response});
       })
   }
 }

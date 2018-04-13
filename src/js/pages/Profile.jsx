@@ -26,6 +26,7 @@ import { get_profile, reset_profile } from '../actions/profile/profileAction';
 
     // Profile fetch state
     profile_fetched: store.profile.fetched,
+    error: store.profile.error,
   };
 })
 export default class Profile extends React.Component {
@@ -40,8 +41,19 @@ export default class Profile extends React.Component {
   render() {
     const element_position = ( this.props.isTablet ? 'center' : 'left' );
 
-    if ( !this.props.profile_fetched ) {
+    if ( !this.props.profile_fetched && !this.props.error )
       this.props.dispatch(get_profile( this.props.match.params.username ));
+
+    // if username from params not equal to username in props
+    // reload the webpage
+    if ( this.props.username != undefined && this.props.username != this.props.match.params.username )
+      window.location.reload();
+
+    if ( this.props.error ) {
+      // profile not found, redirect to 404 page
+      if ( this.props.error.status == 404 ) {
+        window.location.replace('#/404');
+      }
     }
 
     return (
