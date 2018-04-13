@@ -70,7 +70,7 @@ export default class Profile extends React.Component {
               ? this.props.username.charAt(0).toUpperCase()
               : '' 
               }
-            </Avatar>
+              </Avatar>
             }
           </Col>
 

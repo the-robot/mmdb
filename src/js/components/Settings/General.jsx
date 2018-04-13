@@ -1,4 +1,4 @@
-import { Button, Divider, Icon, Input, Row, Col, Select, DatePicker, Spin, Upload, message } from 'antd';
+import { Avatar, Button, Divider, Icon, Input, Row, Col, Select, DatePicker, Spin, Upload, message } from 'antd';
 import { connect } from 'react-redux'
 import React from 'react';
 import moment from 'moment';
@@ -157,11 +157,22 @@ export default class General extends React.Component {
           <div style={{ textAlign: (this.props.isTablet ? 'center' : 'left') }}>
             <h6 style={{ paddingBottom: 10 }}> Profile Picture </h6>
 
-            <div style={{ paddingLeft: (this.props.isTablet ? 0 : 20) }}>
-              <img
-                src={ this.props.avatar }
-                style={{ width: (this.props.isTablet ? '30%' : '80%') }}
-              />
+            <div style={{ paddingLeft: (this.props.isTablet ? 0 : 10) }}>
+              { this.props.avatar
+              ? <img
+                  src={ this.props.avatar }
+                  style={{ height: 135, width: 150, borderRadius: '50%' }}
+                />
+
+              : <Avatar style={{ backgroundColor: '#3E91F7', paddingTop: 50, 
+                  height: 135, width: 150, borderRadius: '50%', fontSize: 50
+                }}>
+                { this.state.name != null
+                ? this.state.name.charAt(0).toUpperCase()
+                : '' 
+                }
+                </Avatar>
+              }
 
               <div style={{ paddingTop: 10, paddingBottom: 20 }}>
                 <Upload {...upload_avatar_props}>
@@ -171,7 +182,6 @@ export default class General extends React.Component {
                 </Upload>
               </div>
             </div>
-
           </div>
         </Col>
 
