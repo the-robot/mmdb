@@ -10,6 +10,7 @@ import { reset } from '../actions/authentication/registerAction';
 
 @connect((store) => {
   return {
+    loggedin: store.auth.loggedin,
     register_step: store.register.registration_step,
   };
 })
@@ -22,33 +23,41 @@ export default class Register extends React.Component {
     const STEP_COMPONENTS = [<WrappedRegisterForm />, <WrappedProfileSetup />, <CompleteMessage/>];
     const Current_Component = STEP_COMPONENTS[this.props.register_step];
 
-    return (
-      <div style={{ textAlign: 'center'}}>
-        <h4> My Movie Database - Registration </h4>
+    // if user is already logged in, redirect to homepage
+    if ( this.props.loggedin ) {
+      window.location.replace('/');
+      return null;
+    }
 
-        <Row type="flex" justify="center" style={{ paddingTop: 24, paddingBottom: 42 }}>
-          <Col
-            xs={{ span: 24 }} 
-            sm={{ span: 20 }}
-            md={{ span: 16 }}
-            lg={{ span: 12 }}
-            xl={{ span: 10 }}
-          >
-            <Steps current={ this.props.register_step }>
-              <Steps.Step title="Sign up" />
-              {/* <Steps.Step title="Confirmation" /> */}
-              <Steps.Step title="Profile setup" />
-              <Steps.Step title="Complete" />
-            </Steps>
-          </Col>
-        </Row>
+    else {
+      return (
+        <div style={{ textAlign: 'center'}}>
+          <h4> My Movie Database - Registration </h4>
 
-        <Row type="flex" justify="center">
-          <Col span={24}>
-            { Current_Component }
-          </Col>
-        </Row>
-      </div>
-    );
+          <Row type="flex" justify="center" style={{ paddingTop: 24, paddingBottom: 42 }}>
+            <Col
+              xs={{ span: 24 }} 
+              sm={{ span: 20 }}
+              md={{ span: 16 }}
+              lg={{ span: 12 }}
+              xl={{ span: 10 }}
+            >
+              <Steps current={ this.props.register_step }>
+                <Steps.Step title="Sign up" />
+                {/* <Steps.Step title="Confirmation" /> */}
+                <Steps.Step title="Profile setup" />
+                <Steps.Step title="Complete" />
+              </Steps>
+            </Col>
+          </Row>
+
+          <Row type="flex" justify="center">
+            <Col span={24}>
+              { Current_Component }
+            </Col>
+          </Row>
+        </div>
+      );
+    }
   }
 }

@@ -22,7 +22,15 @@ export default class SideBar extends React.Component {
         collapsed={ this.state.collapsed }
         onCollapse={ this.onCollapse }>
 
-        <div className="logo" />
+        <div className="logo"
+             style={{
+               backgroundColor: '#041527',
+               textAlign: 'center',
+               color: '#FFFFFF',
+               fontSize: 24,
+               fontFamily: 'Do Hyeon' }}>
+         MMDB 
+        </div>
 
         <Menu theme="dark" defaultSelectedKeys={[ '1' ]} mode="inline">
           <Menu.Item key="1">
@@ -48,6 +56,7 @@ export default class SideBar extends React.Component {
             <Menu.Item key="7"><NavLink to='/series/calendar'>Calendar</NavLink></Menu.Item>
           </SubMenu>
 
+          {/*}
           <Menu.Item key="8">
             <Icon type="question-circle" />
             <span>FAQ</span>
@@ -57,6 +66,7 @@ export default class SideBar extends React.Component {
             <Icon type="mail" />
             <span>Feedback</span>
           </Menu.Item>
+          */}
 
           <Menu.Item key="10">
             <NavLink to='/about' className="nav-text">
