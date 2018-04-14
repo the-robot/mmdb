@@ -31,6 +31,7 @@ import TopRated from './pages/Movies/TopRated';
 import Season from './pages/Series/Season';
 import Series from './pages/Series/Series';
 import SeriesCalendar from './pages/Series/SeriesCalendar';
+import AiringToday from './pages/Series/AiringToday';
 import OnTv from './pages/Series/OnTv';
 
 import Register from './pages/Register';
@@ -82,6 +83,7 @@ class App extends React.Component {
             <AppRoute path="/series/calendar/:id(\d+)/:season(\d+)" layout={ MainLayout } component={ Season } />
             <AppRoute path="/series/calendar/:id(\d+)" layout={ MainLayout } component={ Series } />
             <AppRoute path="/series/calendar" layout={ MainLayout } component={ SeriesCalendar } />
+            <AppRoute path="/series/airing-today" layout={ MainLayout } component={ AiringToday } />
             <AppRoute path="/series/ontv" layout={ MainLayout } component={ OnTv } />
 
             <AppRoute path='/profile/:username' layout={ MainLayout } component={ Profile } />

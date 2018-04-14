@@ -11,7 +11,6 @@ import ShowsView from '../../components/Show/ShowsView';
     page: store.movies_in_theatre.page,
 
     fetched_all: store.movies_in_theatre.fetched_all,
-    
     fetching: store.movies_in_theatre.fetching,
   };
 })

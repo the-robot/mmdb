@@ -50,7 +50,6 @@ export default function reducer(state=initialState, action) {
       return {
         ...state,
         fetching: false,
-        fetched: true,
         seasons: sort([...state.seasons, action.payload]),
       }
     }

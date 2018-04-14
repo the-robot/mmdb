@@ -17,6 +17,7 @@ import movies_toprated from './movies/topRatedReducer';
 // TV Series
 import series from './series/seriesReducer';
 import series_calendar from './series/seriesCalendarReducer';
+import series_airing_today from './series/seriesAiringTodayReducer';
 import series_ontv from './series/seriesOnTvReducer';
 
 // Movie / TV Series Search
@@ -39,6 +40,7 @@ export default combineReducers({
 
   series,
   series_calendar,
+  series_airing_today,
   series_ontv,
 
   show_search,

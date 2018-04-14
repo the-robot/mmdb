@@ -47,6 +47,7 @@ export default class Activity extends React.Component {
           xl={{ span: 17, offset: 1 }}
         >
           <h6 style={{ paddingBottom: 10 }}> Activity Timeline </h6>
+          {/*
           <Timeline>
             <Timeline.Item color="green">
               <Row type="flex" justify="start">
@@ -80,6 +81,10 @@ export default class Activity extends React.Component {
               </Row>
             </Timeline.Item>
           </Timeline>
+          */}
+
+          
+          
         </Col>
       </Row>
     );

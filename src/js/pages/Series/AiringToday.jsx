@@ -2,25 +2,25 @@ import { Row, Col, Spin, Button } from 'antd';
 import { connect } from 'react-redux';
 import React from 'react';
 
-import { fetch, reset } from '../../actions/series/ontvAction';
+import { fetch, reset } from '../../actions/series/airingTodayAction';
 import ShowsView from '../../components/Show/ShowsView';
 
 @connect((store) => {
   return {
-    series: store.series_ontv.series,
-    page: store.series_ontv.page,
+    series: store.series_airing_today.series,
+    page: store.series_airing_today.page,
 
-    fetched_all: store.series_ontv.fetched_all,
-    fetching: store.series_ontv.fetching,
+    fetched_all: store.series_airing_today.fetched_all,
+    fetching: store.series_airing_today.fetching,
   };
 })
-export default class OnTv extends React.Component {
+export default class AiringToday extends React.Component {
   componentWillMount() {
     this.props.dispatch(fetch(this.props.page));
   }
 
   componentDidMount() {
-    document.title = "Series - On TV";
+    document.title = "Series - Airing Today";
   }
 
   componentWillUnmount() {
@@ -47,7 +47,7 @@ export default class OnTv extends React.Component {
             lg={{ span: 24 }}
             xl={{ span: 24 }}
           >
-            <h4>Currently Airing TV Series</h4>
+            <h4>Airing Today</h4>
           </Col>
         </Row>
 

@@ -43,21 +43,22 @@ export default class SideBar extends React.Component {
           <SubMenu
             key="sub2"
             title={<span><Icon type="switcher" /><span>TV Series</span></span>}>
-            <Menu.Item key="5"><NavLink to='/series/ontv'>On TV</NavLink></Menu.Item>
-            <Menu.Item key="6"><NavLink to='/series/calendar'>Calendar</NavLink></Menu.Item>
+            <Menu.Item key="5"><NavLink to='/series/airing-today'>Airing Today</NavLink></Menu.Item>
+            <Menu.Item key="6"><NavLink to='/series/ontv'>On TV</NavLink></Menu.Item>
+            <Menu.Item key="7"><NavLink to='/series/calendar'>Calendar</NavLink></Menu.Item>
           </SubMenu>
 
-          <Menu.Item key="7">
+          <Menu.Item key="8">
             <Icon type="question-circle" />
             <span>FAQ</span>
           </Menu.Item>
 
-          <Menu.Item key="8">
+          <Menu.Item key="9">
             <Icon type="mail" />
             <span>Feedback</span>
           </Menu.Item>
 
-          <Menu.Item key="9">
+          <Menu.Item key="10">
             <NavLink to='/about' className="nav-text">
               <Icon type="team" />
               <span>About</span>

@@ -63,6 +63,8 @@ export default class Seasons extends React.Component {
       );
     }
 
+    console.log("STATE: ", this.props.fetching);
+
     return (
       <div>
         <Row type="flex" justify="start" style={{ marginBottom: 20 }}>

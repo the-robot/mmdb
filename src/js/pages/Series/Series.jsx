@@ -18,6 +18,7 @@ import SeriesInformation from '../../components/Show/Series/SeriesInformation';
 
     // states
     fetching: store.series.fetching,
+    error: store.series.error,
   };
 })
 export default class Series extends React.Component {
@@ -49,6 +50,9 @@ export default class Series extends React.Component {
         <Loading />
       );
     }
+
+    if ( this.props.error )
+      window.location.replace('#/404');
 
     return (
       <div>

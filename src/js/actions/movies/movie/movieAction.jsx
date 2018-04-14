@@ -15,7 +15,7 @@ export const fetch = (id) => {
       })
 
       .catch((err) => {
-        dispatch({type: "FETCH_MOVIE_REJECTED", payload: err});
+        dispatch({type: "FETCH_MOVIE_REJECTED", payload: err.response});
       })
   }
 }

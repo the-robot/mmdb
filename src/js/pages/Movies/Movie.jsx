@@ -22,6 +22,7 @@ import Reviews from '../../components/Show/Movie/Reviews'
 
     // states
     fetching: store.movie.fetching,
+    error: store.movie.error,
   };
 })
 export default class Movie extends React.Component {
@@ -56,6 +57,10 @@ export default class Movie extends React.Component {
         <Loading showBackButton={ false } />
       );
     }
+    
+    // if movie not found redirect to 404 page
+    if ( this.props.error && this.props.error.status == 404 )
+      window.location.replace('#/404');
 
     return (
       <div>
