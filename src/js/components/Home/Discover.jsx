@@ -42,7 +42,7 @@ export default class Discover extends React.Component {
           lg={{ span: 11, offset: 1 }}
           xl={{ span: 11, offset: 1 }}
         >
-          <h5> Airing Today </h5>
+          <NavLink to="series/airing-today"><h5 style={{ cursor: 'pointer' }}> Airing Today </h5></NavLink>
           { this.props.series_fetching
           ? <div style={{ textAlign: 'center' }}><Spin/></div>
           : <div>
@@ -158,7 +158,7 @@ export default class Discover extends React.Component {
 
           style={{ paddingTop: (this.props.isLargeTablet ? 30 : 0 ) }}
         >
-          <h5> In Theatre </h5>
+          <NavLink to="movies/intheatres"><h5 style={{ cursor: 'pointer' }}> In Theatre </h5></NavLink>
           { this.props.movies_fetching
           ? <div style={{ textAlign: 'center' }}><Spin/></div>
           : <div>
