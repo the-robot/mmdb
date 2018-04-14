@@ -1,4 +1,5 @@
 import { Row, Col, Spin } from 'antd';
+import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
 import React from 'react';
 import withSizes from 'react-sizes';
@@ -52,24 +53,30 @@ export default class Discover extends React.Component {
                 lg={{ span: 12, offset: 0 }}
                 xl={{ span: 12, offset: 0 }}
               >
-                <div
-                  style={{ 
-                    backgroundImage: (this.props.series[0] != undefined ? 'url(' + this.props.series[0]['backcover']  + ')' : null),
-                    backgroundSize: 'cover',
-                    backgroundRepeat: 'no-repeat',
-                    width: '100%',
-                    height: 140,
-                    position: 'relative',
-                  }}
+                <NavLink
+                  to={(this.props.series[0] != undefined ? 'series/calendar/' + this.props.series[0].id : '#')}
+                  className="nav-text"
                 >
-                  <span style={{ position: 'absolute', bottom: -8, left: 8 }}>
-                    <p style={{
-                      color: '#FFFFFF',
-                      fontWeight: 'bold',
-                      textShadow: '-1px 0 black, 0 1px black, 1px 0 black, 0 -1px black',
-                      }}> { this.props.series[0] != undefined ? this.props.series[0].title : null } </p>
-                  </span>
-                </div>
+                  <div
+                    style={{ 
+                      backgroundImage: (this.props.series[0] != undefined ? 'url(' + this.props.series[0]['backcover']  + ')' : null),
+                      backgroundSize: 'cover',
+                      backgroundRepeat: 'no-repeat',
+                      width: '100%',
+                      height: 140,
+                      position: 'relative',
+                      cursor: 'pointer',
+                    }}
+                  >
+                    <span style={{ position: 'absolute', bottom: -8, left: 8 }}>
+                      <p style={{
+                        color: '#FFFFFF',
+                        fontWeight: 'bold',
+                        textShadow: '-1px 0 black, 0 1px black, 1px 0 black, 0 -1px black',
+                        }}> { this.props.series[0] != undefined ? this.props.series[0].title : null } </p>
+                    </span>
+                  </div>
+                </NavLink>
               </Col>
 
               <Col
@@ -79,24 +86,30 @@ export default class Discover extends React.Component {
                 lg={{ span: 12, offset: 0 }}
                 xl={{ span: 12, offset: 0 }}
               >
-                <div
-                  style={{ 
-                    backgroundImage: (this.props.series[1] != undefined ? 'url(' + this.props.series[1]['backcover']  + ')' : null),
-                    backgroundSize: 'cover',
-                    backgroundRepeat: 'no-repeat',
-                    width: '100%',
-                    height: 140,
-                    position: 'relative',
-                  }}
+                <NavLink
+                  to={(this.props.series[1] != undefined ? 'series/calendar/' + this.props.series[1].id : '#')}
+                  className="nav-text"
                 >
-                  <span style={{ position: 'absolute', bottom: -8, left: 8 }}>
-                    <p style={{
-                      color: '#FFFFFF',
-                      fontWeight: 'bold',
-                      textShadow: '-1px 0 black, 0 1px black, 1px 0 black, 0 -1px black',
-                      }}> { this.props.series[1] != undefined ? this.props.series[1].title : null } </p>
-                  </span>
-                </div>
+                  <div
+                    style={{ 
+                      backgroundImage: (this.props.series[1] != undefined ? 'url(' + this.props.series[1]['backcover']  + ')' : null),
+                      backgroundSize: 'cover',
+                      backgroundRepeat: 'no-repeat',
+                      width: '100%',
+                      height: 140,
+                      position: 'relative',
+                      cursor: 'pointer',
+                    }}
+                  >
+                    <span style={{ position: 'absolute', bottom: -8, left: 8 }}>
+                      <p style={{
+                        color: '#FFFFFF',
+                        fontWeight: 'bold',
+                        textShadow: '-1px 0 black, 0 1px black, 1px 0 black, 0 -1px black',
+                        }}> { this.props.series[1] != undefined ? this.props.series[1].title : null } </p>
+                    </span>
+                  </div>
+                </NavLink>
               </Col>
 
               <Col
@@ -106,24 +119,30 @@ export default class Discover extends React.Component {
                 lg={{ span: 24, offset: 0 }}
                 xl={{ span: 24, offset: 0 }}
               >
-                <div
-                  style={{ 
-                    backgroundImage: (this.props.series[2] != undefined ? 'url(' + this.props.series[2]['backcover']  + ')' : null),
-                    backgroundSize: 'cover',
-                    backgroundRepeat: 'no-repeat',
-                    width: '100%',
-                    height: (this.props.isTablet ? 140 : 280),
-                    position: 'relative',
-                  }}
+                <NavLink
+                  to={(this.props.series[2] != undefined ? 'series/calendar/' + this.props.series[2].id : '#')}
+                  className="nav-text"
                 >
-                  <span style={{ position: 'absolute', bottom: -8, left: 8 }}>
-                    <p style={{
-                      color: '#FFFFFF',
-                      fontWeight: 'bold',
-                      textShadow: '-1px 0 black, 0 1px black, 1px 0 black, 0 -1px black',
-                      }}> { this.props.series[2] != undefined ? this.props.series[2].title : null } </p>
-                  </span>
-                </div>
+                  <div
+                    style={{ 
+                      backgroundImage: (this.props.series[2] != undefined ? 'url(' + this.props.series[2]['backcover']  + ')' : null),
+                      backgroundSize: 'cover',
+                      backgroundRepeat: 'no-repeat',
+                      width: '100%',
+                      height: (this.props.isTablet ? 140 : 280),
+                      position: 'relative',
+                      cursor: 'pointer',
+                    }}
+                  >
+                    <span style={{ position: 'absolute', bottom: -8, left: 8 }}>
+                      <p style={{
+                        color: '#FFFFFF',
+                        fontWeight: 'bold',
+                        textShadow: '-1px 0 black, 0 1px black, 1px 0 black, 0 -1px black',
+                        }}> { this.props.series[2] != undefined ? this.props.series[2].title : null } </p>
+                    </span>
+                  </div>
+                </NavLink>
               </Col>
             </div>
           }
@@ -150,24 +169,30 @@ export default class Discover extends React.Component {
                 lg={{ span: 24, offset: 0 }}
                 xl={{ span: 24, offset: 0 }}
               >
-                <div
-                  style={{ 
-                    backgroundImage: (this.props.movies[0] != undefined ? 'url(' + this.props.movies[0]['backcover']  + ')' : null),
-                    backgroundSize: 'cover',
-                    backgroundRepeat: 'no-repeat',
-                    width: '100%',
-                    height: (this.props.isTablet ? 140 : 280),
-                    position: 'relative',
-                  }}
+                <NavLink
+                  to={(this.props.movies[0] != undefined ? 'movies/calendar/' + this.props.movies[0].id : '#')}
+                  className="nav-text"
                 >
-                  <span style={{ position: 'absolute', bottom: -8, left: 8 }}>
-                    <p style={{
-                      color: '#FFFFFF',
-                      fontWeight: 'bold',
-                      textShadow: '-1px 0 black, 0 1px black, 1px 0 black, 0 -1px black',
-                      }}> { this.props.movies[0] != undefined ? this.props.movies[0].title : null } </p>
-                  </span>
-                </div>
+                  <div
+                    style={{ 
+                      backgroundImage: (this.props.movies[0] != undefined ? 'url(' + this.props.movies[0]['backcover']  + ')' : null),
+                      backgroundSize: 'cover',
+                      backgroundRepeat: 'no-repeat',
+                      width: '100%',
+                      height: (this.props.isTablet ? 140 : 280),
+                      position: 'relative',
+                      cursor: 'pointer',
+                    }}
+                  >
+                    <span style={{ position: 'absolute', bottom: -8, left: 8 }}>
+                      <p style={{
+                        color: '#FFFFFF',
+                        fontWeight: 'bold',
+                        textShadow: '-1px 0 black, 0 1px black, 1px 0 black, 0 -1px black',
+                        }}> { this.props.movies[0] != undefined ? this.props.movies[0].title : null } </p>
+                    </span>
+                  </div>
+                </NavLink>
               </Col>
 
               <Col
@@ -177,24 +202,30 @@ export default class Discover extends React.Component {
                 lg={{ span: 12, offset: 0 }}
                 xl={{ span: 12, offset: 0 }}
               >
-                <div
-                  style={{ 
-                    backgroundImage: (this.props.movies[1] != undefined ? 'url(' + this.props.movies[1]['backcover']  + ')' : null),
-                    backgroundSize: 'cover',
-                    backgroundRepeat: 'no-repeat',
-                    width: '100%',
-                    height: 140,
-                    position: 'relative',
-                  }}
+                <NavLink
+                  to={(this.props.movies[1] != undefined ? 'movies/calendar/' + this.props.movies[1].id : '#')}
+                  className="nav-text"
                 >
-                  <span style={{ position: 'absolute', bottom: -8, left: 8 }}>
-                    <p style={{
-                      color: '#FFFFFF',
-                      fontWeight: 'bold',
-                      textShadow: '-1px 0 black, 0 1px black, 1px 0 black, 0 -1px black',
-                      }}> { this.props.movies[1] != undefined ? this.props.movies[1].title : null } </p>
-                  </span>
-                </div>
+                  <div
+                    style={{ 
+                      backgroundImage: (this.props.movies[1] != undefined ? 'url(' + this.props.movies[1]['backcover']  + ')' : null),
+                      backgroundSize: 'cover',
+                      backgroundRepeat: 'no-repeat',
+                      width: '100%',
+                      height: 140,
+                      position: 'relative',
+                      cursor: 'pointer',
+                    }}
+                  >
+                    <span style={{ position: 'absolute', bottom: -8, left: 8 }}>
+                      <p style={{
+                        color: '#FFFFFF',
+                        fontWeight: 'bold',
+                        textShadow: '-1px 0 black, 0 1px black, 1px 0 black, 0 -1px black',
+                        }}> { this.props.movies[1] != undefined ? this.props.movies[1].title : null } </p>
+                    </span>
+                  </div>
+                </NavLink>
               </Col>
 
               <Col
@@ -204,24 +235,30 @@ export default class Discover extends React.Component {
                 lg={{ span: 12, offset: 0 }}
                 xl={{ span: 12, offset: 0 }}
               >
-                <div
-                  style={{ 
-                    backgroundImage:  (this.props.movies[2] != undefined ? 'url(' + this.props.movies[2]['backcover']  + ')' : null),
-                    backgroundSize: 'cover',
-                    backgroundRepeat: 'no-repeat',
-                    width: '100%',
-                    height: 140,
-                    position: 'relative',
-                  }}
+                <NavLink
+                  to={(this.props.movies[2] != undefined ? 'movies/calendar/' + this.props.movies[2].id : '#')}
+                  className="nav-text"
                 >
-                  <span style={{ position: 'absolute', bottom: -8, left: 8 }}>
-                    <p style={{
-                      color: '#FFFFFF',
-                      fontWeight: 'bold',
-                      textShadow: '-1px 0 black, 0 1px black, 1px 0 black, 0 -1px black',
-                      }}> { this.props.movies[2] != undefined ? this.props.movies[2].title : null } </p>
-                  </span>
-                </div>
+                  <div
+                    style={{ 
+                      backgroundImage:  (this.props.movies[2] != undefined ? 'url(' + this.props.movies[2]['backcover']  + ')' : null),
+                      backgroundSize: 'cover',
+                      backgroundRepeat: 'no-repeat',
+                      width: '100%',
+                      height: 140,
+                      position: 'relative',
+                      cursor: 'pointer',
+                    }}
+                  >
+                    <span style={{ position: 'absolute', bottom: -8, left: 8 }}>
+                      <p style={{
+                        color: '#FFFFFF',
+                        fontWeight: 'bold',
+                        textShadow: '-1px 0 black, 0 1px black, 1px 0 black, 0 -1px black',
+                        }}> { this.props.movies[2] != undefined ? this.props.movies[2].title : null } </p>
+                    </span>
+                  </div>
+                </NavLink>
               </Col>
             </div>
           }

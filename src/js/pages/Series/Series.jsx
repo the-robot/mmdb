@@ -52,7 +52,7 @@ export default class Series extends React.Component {
     }
 
     if ( this.props.error )
-      window.location.replace('#/404');
+      ;//window.location.replace('#/404');
 
     return (
       <div>
