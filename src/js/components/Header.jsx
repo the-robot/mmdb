@@ -95,18 +95,6 @@ export default class AppHeader extends React.Component {
       },
 
       {
-        icon: 'question-circle',
-        menu: 'FAQ',
-        link: '#',
-      },
-
-      {
-        icon: 'smile',
-        menu: 'Feedback',
-        link: '#',
-      },
-
-      {
         icon: 'setting',
         menu: 'Settings',
         link: '#/settings/',
