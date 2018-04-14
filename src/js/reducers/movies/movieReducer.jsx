@@ -26,6 +26,8 @@ const initialState = {
 
   // states
   fetching: false,
+  fetching_reviews: false,
+  fetching_casts: false,
   fetched: false,
   error: null,
 }
@@ -37,7 +39,13 @@ export default function reducer(state=initialState, action) {
     }
 
     case "FETCH_MOVIE_REJECTED": {
-      return {...state, fetching: false, error: action.payload}
+      return {
+        ...state,
+        fetching: false,
+        fetching_reviews: false,
+        fetching_casts: false,
+        error: action.payload
+      }
     }
 
     // Fetching Success States
@@ -57,10 +65,25 @@ export default function reducer(state=initialState, action) {
       }
     }
 
+    case "FETCH_MOVIE_CAST": {
+      return {
+        ...state,
+        fetching_casts: true,
+      }
+    }
+
     case "FETCH_MOVIE_CAST_FULFILLED": {
       return {
         ...state,
         cast: action.payload,
+        fetching_casts: false,
+      }
+    }
+
+    case "FETCH_MOVIE_REVIEWS": {
+      return {
+        ...state,
+        fetching_reviews: true,
       }
     }
 
@@ -70,7 +93,8 @@ export default function reducer(state=initialState, action) {
         reviews: {
           results: state.reviews.results.concat(action.payload),
           next: state.reviews.next + 1,
-        }
+        },
+        fetching_reviews: false,
       }
     }
 
@@ -81,7 +105,8 @@ export default function reducer(state=initialState, action) {
         reviews: {
           results: state.reviews.results,
           next: null,
-        }
+        },
+        fetching_reviews: false,
       }
     }
 

@@ -1,4 +1,4 @@
-import { Row } from 'antd';
+import { Row, Spin } from 'antd';
 import { connect } from 'react-redux';
 import React from 'react';
 
@@ -8,6 +8,7 @@ import CastCard from './CastCard';
 @connect((store) => {
   return {
     cast: store.movie.cast,
+    fetching: store.movie.fetching_casts,
   };
 })
 export default class Casts extends React.Component {
@@ -39,6 +40,14 @@ export default class Casts extends React.Component {
 
   render() {
     const cast = this.getCast(this.props.cast);
+
+    if ( this.props.fetching ) {
+      return (
+        <div style={{ textAlign: 'center' }}>
+          <Spin/>
+        </div>
+      );
+    }
 
     return (
       <Row type="flex" justify="center" gutter={24}>

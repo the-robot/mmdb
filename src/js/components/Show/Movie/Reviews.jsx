@@ -1,4 +1,4 @@
-import { List, Modal, Button } from 'antd';
+import { List, Modal, Button, Spin } from 'antd';
 import { Markdown } from 'react-showdown';
 import { connect } from 'react-redux';
 import React from 'react';
@@ -8,6 +8,7 @@ import { getReviews } from '../../../actions/movies/movie/reviewsAction';
 @connect((store) => {
   return {
     reviews: store.movie.reviews,
+    fetching: store.movie.fetching_reviews,
   };
 })
 export default class Reviews extends React.Component {
@@ -71,6 +72,14 @@ export default class Reviews extends React.Component {
 
   render() {
     const reviews = this.props.reviews.results;
+
+    if ( this.props.fetching ) {
+      return (
+        <div style={{ textAlign: 'center' }}>
+          <Spin/>
+        </div>
+      );
+    }
 
     return (
       <div>

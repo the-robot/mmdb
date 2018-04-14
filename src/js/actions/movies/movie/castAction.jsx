@@ -4,6 +4,8 @@ import { getAPI } from '../../../api';
 
 export const getCast = (id) => {
   return (dispatch) => {
+    dispatch({type: "FETCH_MOVIE_CAST"});
+
     const url = getAPI() + '/movies/cast/' + id;
 
     axios.get(url)

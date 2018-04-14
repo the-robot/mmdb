@@ -4,6 +4,8 @@ import { getAPI } from "../../../api";
 
 export const getReviews = (id, page) => {
   return (dispatch) => {
+    dispatch({type: "FETCH_MOVIE_REVIEWS"});
+
     const url = getAPI() + '/movies/reviews/' + id + '/' + page;
     
     axios.get(url)

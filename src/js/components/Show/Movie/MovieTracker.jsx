@@ -64,13 +64,8 @@ export default class MovieTracker extends React.Component {
       </Menu>
     );
 
-
-    // return null if not loggedin
-    if ( !this.props.loggedin )
-      return ( null );
-
     return (
-      <Dropdown overlay={ trackerMenu } trigger={ ['click']}>
+      <Dropdown overlay={ trackerMenu } trigger={ ['click']} disabled={ this.props.loggedin ? false : true }>
         <a className="ant-dropdown-link" href="#">
           { this.props.tracker_state } <Icon type="down" />
         </a>
