@@ -70,7 +70,7 @@ export default class Activity extends React.Component {
                     <h6 style={{ color: '#3E91F7' }}>{ activity.title }</h6>
                   </NavLink>
                   <p>{ activity.date }</p>
-                  <p><font style={{ color: '#417FB4' }}>newuser3</font> saved this to { activity.status }</p>
+                  <p><font style={{ color: '#417FB4' }}>{ this.props.username }</font> saved this to { activity.status }</p>
                 </Col>
               </Row>
             </Timeline.Item>
