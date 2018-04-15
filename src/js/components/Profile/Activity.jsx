@@ -19,7 +19,7 @@ import { get_recent_shows } from '../../actions/profile/profileAction';
     user_location: store.profile.location,
   };
 })
-export default class About extends React.Component {
+export default class Activity extends React.Component {
   constructor(props) {
     super(props);
 

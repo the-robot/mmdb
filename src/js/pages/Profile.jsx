@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import React from 'react';
 import withSizes from 'react-sizes';
 
-import About from '../components/Profile/About';
+import Activity from '../components/Profile/Activity';
 import Library from '../components/Profile/Library';
 
 import { get_profile, reset_profile } from '../actions/profile/profileAction';
@@ -144,7 +144,7 @@ export default class Profile extends React.Component {
           <Col span={ 24 }>
             <Tabs defaultActiveKey="1" type="card">
               <Tabs.TabPane tab="Activity" key="1">
-                <About/>
+                <Activity/>
               </Tabs.TabPane>
 
               <Tabs.TabPane tab="Library" key="2">
