@@ -108,8 +108,11 @@ export default class AppHeader extends React.Component {
         this.props.dispatch(refresh_token(this.props.token));
 
       // if user information is not fetched yet, get it
-      if ( !this.props.user_fetched )
-        this.props.dispatch(get_user_information(this.state.username));
+      if ( !this.props.user_fetched && this.props.token ) {
+        console.log("THIS IS CALLEd");
+        console.log(this.props.token);
+        this.props.dispatch(get_user_information(this.props.token));
+      }
     }
 
     return (

@@ -1,14 +1,16 @@
 // get basic user information
 import axios from 'axios';
 
-import { getAPI } from '../../api';
+import { getAPI, getAPIAuthPrefix } from '../../api';
 
-export const get_user_information = (username) => {
+export const get_user_information = (token) => {
   return (dispatch) => {
-    var data = {username: username}
+    let config = {
+      headers: {'Authorization': getAPIAuthPrefix() + token}
+    };
 
     const api = axios.create({baseURL: getAPI()})
-    api.post('/users/profile/', data)
+    api.post('/users/profile/self/', {}, config)
       .then((response) => {
         var data = response.data;
 
