@@ -1,6 +1,9 @@
 const INIT_STATE = {
   registration_step: 0,  // stages of registration process
-  username: '',
+
+  // token require for profile setup and store temporarily
+  // remove after successfully setup profile
+  token: undefined,
   
   sending: false,
   error: null,
@@ -17,8 +20,21 @@ export default function reducer(state=INIT_STATE, action) {
       return {
         ...state,
         sending: false,
-        username: action.payload,
         registration_step: state.registration_step + 1,
+      }
+    }
+
+    case "REGISTRATION_SAVE_TOKEN": {
+      return {
+        ...state,
+        token: action.payload.token,
+      }
+    }
+
+    case "REGISTRATION_REMOVE_TOKEN": {
+      return {
+        ...state,
+        token: undefined,
       }
     }
 

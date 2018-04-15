@@ -3,11 +3,11 @@ import { DatePicker, Form, Input, Select, Tooltip, Icon,
 import { connect } from 'react-redux';
 import React from 'react';
 
-import { profile_setup } from '../../actions/authentication/registerAction';
+import { profile_setup, remove_token } from '../../actions/authentication/registerAction';
 
 @connect((store) => {
   return {
-    username: store.register.username,
+    token: store.register.token,
   };
 })
 class ProfileSetup extends React.Component {
@@ -15,12 +15,14 @@ class ProfileSetup extends React.Component {
     avatar_uploaded: [],
   }
 
+  componentWillUnmount() {
+    this.props.dispatch(remove_token(this.props.token));
+  }
+
   handleSubmit = (e) => {
     e.preventDefault();
     this.props.form.validateFieldsAndScroll((err, values) => {
       if (!err) {
-        values['username'] = this.props.username;
-
         // get image file object
         if (this.state.avatar_uploaded.length != 0) {
           values['avatar'] = this.state.avatar_uploaded[0]
@@ -29,7 +31,7 @@ class ProfileSetup extends React.Component {
           delete values['avatar']
         }
 
-        this.props.dispatch(profile_setup(values));
+        this.props.dispatch(profile_setup(this.props.token, values));
       }
     });
   }

@@ -2,16 +2,21 @@
 import { connect } from 'react-redux';
 import React from 'react';
 
+import { reset } from '../../actions/authentication/registerAction';
+
 @connect((store) => {
   return {
-    username: store.register.username,
   };
 })
 export default class CompleteMessage extends React.Component {
+  componentWillUnmount() {
+    this.props.dispatch(reset());
+  }
+
   render() {
     return (
       <div>
-        <h6> { this.props.username } is successfully created. <br/>
+        <h6> Account is successfully created. <br/>
           You can now login with your username and password.</h6>
         
         <div style={{ paddingTop: 24 }}>

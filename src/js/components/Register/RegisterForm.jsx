@@ -1,8 +1,8 @@
-import { Form, Input, Tooltip, Icon, Checkbox, Button } from 'antd';
+import { Form, Input, Tooltip, Icon, Checkbox, Button, message } from 'antd';
 import { connect } from 'react-redux';
 import React from 'react';
 
-import { signup } from '../../actions/authentication/registerAction';
+import { signup, get_token } from '../../actions/authentication/registerAction';
 
 @connect((store) => {
   return {
@@ -25,7 +25,38 @@ class RegisterForm extends React.Component {
         delete values.confirm_password;
         delete values.agreement;
 
-        this.props.dispatch(signup(values));
+        this.props.dispatch({type: "REGISTRATION_SENDING"});
+
+        // chain axios calls
+        signup(values)
+          .then((response) => {
+            this.props.dispatch({ type: "REGISTRATION_SIGNUP_SUCCESS" });
+
+            // if registration successful
+            // get token for profile setup
+            get_token(values.username, values.password)
+              .then((response) => {
+                this.props.dispatch({type: "REGISTRATION_SAVE_TOKEN", payload: response.data});
+              })
+
+              .catch((err) => {
+                this.props.dispatch({type: "REGISTRATION_SIGNUP_REJECTED", payload: err.response});
+              })
+          })
+    
+          .catch((err) => {
+            // show error message to user
+            if ('email' in err.response.data)
+              message.error(err.response.data['email'][0])
+    
+            else if ('username' in err.response.data)
+              message.error(err.response.data['username'][0])
+    
+            else if ('password' in err.response.data)
+              message.error(err.response.data['password'][0])
+    
+            this.props.dispatch({type: "REGISTRATION_SIGNUP_REJECTED", payload: err.response.data});
+          })
       }
     });
   }
