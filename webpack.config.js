@@ -1,44 +1,46 @@
-var debug = process.env.NODE_ENV !== "production";
-var JavaScriptObfuscator = require('webpack-obfuscator');
-var webpack = require('webpack');
-var path = require('path');
+const HtmlWebPackPlugin = require("html-webpack-plugin");
+const path = require('path');
+
+//When I wrote this, only God and I understood what I was doing
+//Now, God only knows
 
 const config = {
   context: path.join(__dirname, "src"),
-  devtool: debug ? "inline-sourcemap" : null,
   entry: "./js/app.jsx",
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: "app.min.js"
   },
   module: {
-    loaders: [
-      {
-        test: /\.jsx?$/,
-        exclude: /(node_modules|bower_components)/,
-        loader: 'babel-loader',
-        query: {
-          presets: ['react', 'es2015', 'stage-0'],
-          plugins: ['react-html-attrs', 'transform-class-properties', 'transform-decorators-legacy'],
-        }
+    rules: [{
+      test: /\.jsx?$/,
+      exclude: /(node_modules|bower_components)/,
+      use: {
+        loader: 'babel-loader'
       }
-    ]
+    },
+    {
+      test: /\.html$/,
+      use: [
+        {
+          loader: "html-loader"
+        }
+      ]
+    },
+    { 
+      test: /\.css$/,
+      loader: "style-loader!css-loader"
+    }]
   },
-  plugins: debug ? [] : [
-    new webpack.optimize.DedupePlugin(),
-    new webpack.optimize.OccurenceOrderPlugin(),
-    new webpack.optimize.UglifyJsPlugin({ mangle: false, sourcemap: false }),
-    new JavaScriptObfuscator ({
-      rotateUnicodeArray: true
-    }, ['excluded_bundle_name.js'])
-  ],
   resolve: {
-    extensions: ['*', '.js', '.jsx'],
+    extensions: ['*', '.js', '.jsx', '.css', '.less']
   },
-  devServer: {
-    historyApiFallback: true,
-    disableHostCheck: true
-  },
+  plugins: [
+    new HtmlWebPackPlugin({
+      template: "./index.html",
+      filename: "./index.html"
+    }),
+  ]
 };
 
 module.exports = config;

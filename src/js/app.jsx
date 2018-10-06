@@ -4,7 +4,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 // Redux Persist and store
-import { persistStore, LocalForageStorage } from 'redux-persist';
+import {PersistGate} from 'redux-persist/lib/integration/react';
+import { persistStore } from 'redux-persist';
 import store from './store';
 
 // Layouts
@@ -46,55 +47,37 @@ const AppRoute = ({ component: Component, layout: Layout, ...rest }) => (
   )} />
 )
 
+
 class App extends React.Component {
-  state = {
-    isReady: false,
-  }
-
-  componentDidMount() {
-    persistStore(store, {
-        storage: LocalForageStorage,
-        whitelist: ['auth'],
-      },
-      () => {
-        this.setState({ isReady: true });
-      }
-    )
-  }
-
   render() {
-    if ( this.state.isReady ) {
-      //console.log("READY");
-    }
-
     return (
       <Provider store={ store }>
-        <Router>
-          <Switch>
-            <AppRoute exact path="/" layout={ MainLayout } component={ Home } />
+          <Router>
+            <Switch>
+              <AppRoute exact path="/" layout={ MainLayout } component={ Home } />
 
-            {/* Movies */}
-            <AppRoute path="/movies/intheatres" layout={ MainLayout } component={ InTheatre } />
-            <AppRoute path="/movies/toprated" layout={ MainLayout } component={ TopRated } />
-            <AppRoute path="/movies/calendar/:id(\d+)" layout={ MainLayout } component={ Movie } />
-            <AppRoute path="/movies/calendar" layout={ MainLayout } component={ MovieCalendar } />
+              {/* Movies */}
+              <AppRoute path="/movies/intheatres" layout={ MainLayout } component={ InTheatre } />
+              <AppRoute path="/movies/toprated" layout={ MainLayout } component={ TopRated } />
+              <AppRoute path="/movies/calendar/:id(\d+)" layout={ MainLayout } component={ Movie } />
+              <AppRoute path="/movies/calendar" layout={ MainLayout } component={ MovieCalendar } />
 
-            {/* TV Series */}
-            <AppRoute path="/series/calendar/:id(\d+)/:season(\d+)" layout={ MainLayout } component={ Season } />
-            <AppRoute path="/series/calendar/:id(\d+)" layout={ MainLayout } component={ Series } />
-            <AppRoute path="/series/calendar" layout={ MainLayout } component={ SeriesCalendar } />
-            <AppRoute path="/series/airing-today" layout={ MainLayout } component={ AiringToday } />
-            <AppRoute path="/series/ontv" layout={ MainLayout } component={ OnTv } />
+              {/* TV Series */}
+              <AppRoute path="/series/calendar/:id(\d+)/:season(\d+)" layout={ MainLayout } component={ Season } />
+              <AppRoute path="/series/calendar/:id(\d+)" layout={ MainLayout } component={ Series } />
+              <AppRoute path="/series/calendar" layout={ MainLayout } component={ SeriesCalendar } />
+              <AppRoute path="/series/airing-today" layout={ MainLayout } component={ AiringToday } />
+              <AppRoute path="/series/ontv" layout={ MainLayout } component={ OnTv } />
 
-            <AppRoute path='/profile/:username' layout={ MainLayout } component={ Profile } />
-            <AppRoute path="/about" layout={ MainLayout } component={ About } />
+              <AppRoute path='/profile/:username' layout={ MainLayout } component={ Profile } />
+              <AppRoute path="/about" layout={ MainLayout } component={ About } />
 
-            <AppRoute path="/settings" layout={ EmptyLayoutWithHeader } component={ Settings } />
+              <AppRoute path="/settings" layout={ EmptyLayoutWithHeader } component={ Settings } />
 
-            <AppRoute path="/register" layout={ EmptyLayout } component={ Register } />
-            <AppRoute path="*" layout={ EmptyLayout } component={ NotFound } />
-          </Switch>
-        </Router>
+              <AppRoute path="/register" layout={ EmptyLayout } component={ Register } />
+              <AppRoute path="*" layout={ EmptyLayout } component={ NotFound } />
+            </Switch>
+          </Router>
       </Provider>
     );
   }
